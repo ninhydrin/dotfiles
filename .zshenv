@@ -12,3 +12,4 @@ export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:/usr/local/bin
 export DYLD_FALLBACK_LIBRARY_PATH=$ANACONDA_HOME/lib:/usr/local/lib:/usr/lib
 export DYLD_FALLBACK_LIBRARY_PATH=~/.pyenv/versions/anaconda-2.3.0/lib:$DYLD_FALLBACK_LIBRARY_PATH
 export LIBRARY_DIRS=/opt/local/lib
+export ZSHHOME="${HOME}/.zsh.d"

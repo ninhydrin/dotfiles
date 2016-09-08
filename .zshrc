@@ -34,6 +34,12 @@ case ${OSTYPE} in
 esac
 
 #任意のエイリアス
+if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
+    for i in $ZSHHOME/*; do
+        [[ ${i##*/} = *.zsh ]] &&
+            [ \( -f $i -o -h $i \) -a -r $i ] && . $i
+    done
+fi
 
 #alias gccgl='gcc -I$HOME/include -framework OpenGL -framework GLUT -framework Foundation -o' 
 #function javasql() {java -cp postgresql.jar: $1 softeng}
@@ -464,11 +470,13 @@ if [[ "$TERM" == "dumb" ]]; then
 	PS1='$ '
 fi
 
+
+
 if [[ -f ~/.zplug/init.zsh ]]; then
-    export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"
+    #export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"
     source ~/.zplug/init.zsh
     #source ~/src/github.com/zplug/zplug/init.zsh
-
+	zplug 'zsh-users/zsh-autosuggestions'
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
         if read -q; then

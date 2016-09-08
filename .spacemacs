@@ -485,3 +485,9 @@ layers configuration. You are free to put any user code."
 ;;
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+;(require 'smartrep)
+(declare-function smartrep-define-key "smartrep")
+
+(global-set-key (kbd "C-M-c") 'mc/edit-lines)
+(global-set-key (kbd "C-M-r") 'mc/mark-all-in-region)
+(global-set-key (kbd "C-:") 'mc/mark-next-like-this)
