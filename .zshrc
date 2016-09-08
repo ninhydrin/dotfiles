@@ -3,6 +3,7 @@
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
 export PATH=~/python/pylearn2/pylearn2/scripts:${PATH}
 export PATH=/usr/local/go/bin:${PATH}
+export PATH=/usr/local/cuda/bin:${PATH}
 
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export PYLEARN2_DATA_PATH=~/python/pylearn2_data #データの置き場所、好きに変えていい
@@ -10,7 +11,7 @@ export PYTHONPATH=~/caffe/python:$PYTHONPATH
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:/usr/local/bin
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/bin
 export DYLD_FALLBACK_LIBRARY_PATH=$ANACONDA_HOME/lib:/usr/local/lib:/usr/lib
 export LIBRARY_DIRS=/opt/local/lib
 
@@ -47,15 +48,12 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv init -)"
 fi
 
-<<COMMENT
+
 function runcpp () { g++ -O2 $1; ./a.out }
 alias -s cpp=runcpp
 function runc () { gcc -O2 $1; ./a.out }
 alias -s c=runcpp
-COMMENT
 
-# キーバインド
-## Emacsキーバインドを使う。
 bindkey -e
 
 # ディレクトリ移動
@@ -464,4 +462,20 @@ if [[ "$TERM" == "dumb" ]]; then
 	unfunction precmd
 	unfunction preexec
 	PS1='$ '
+fi
+
+if [[ -f ~/.zplug/init.zsh ]]; then
+    export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"
+    source ~/.zplug/init.zsh
+    #source ~/src/github.com/zplug/zplug/init.zsh
+
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        else
+            echo
+        fi
+    fi
+    zplug load --verbose
 fi
