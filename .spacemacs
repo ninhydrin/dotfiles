@@ -151,7 +151,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Hiragino Kaku Gothic ProN";"Source Code Pro"
-							   :size 17
+							   :size 19
                                :weight normal
                                :width normal
                                :powerline-scale 1.9)

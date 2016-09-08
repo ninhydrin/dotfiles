@@ -1,0 +1,8 @@
+*.dat
+*~
+*.jpeg
+*.jpg
+*.elc
+*#
+%*
+__pycache__
