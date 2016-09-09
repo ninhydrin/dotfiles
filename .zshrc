@@ -19,24 +19,25 @@ export LIBRARY_DIRS=/opt/local/lib
 case ${OSTYPE} in
     darwin*)
         #ここにMac向けの設定
-	export PYLEARN2_VIEWER_COMMAND="open -Wn"
+	#export PYLEARN2_VIEWER_COMMAND="open -Wn"
 	function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
 	alias imgcat='~/.imgcat'
 	alias imgls='~/.imgls'
 	alias chrome='google-chrome'
 	alias -s html=chrome
+	alias google-chrome='open -a Google\ Chrome'
 	;;
     linux*)
         #ここにLinux向けの設定
-	export PYLEARN2_VIEWER_COMMAND="eog --new-instance"
-	function emacs () { /usr/bin/emacs $1 &}
+		#export PYLEARN2_VIEWER_COMMAND="eog --new-instance"
+		function emacs () { /usr/bin/emacs $1 &}
         ;;
 esac
 
 #任意のエイリアス
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in $ZSHHOME/*; do
-        [[ ${i##*/} = *.zsh ]] &&
+        [[ ${i##*/} = *.sh ]] &&
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
 fi
@@ -44,22 +45,10 @@ fi
 #alias gccgl='gcc -I$HOME/include -framework OpenGL -framework GLUT -framework Foundation -o' 
 #function javasql() {java -cp postgresql.jar: $1 softeng}
 
-if [ `uname` = "Darwin" ]; then
-  alias google-chrome='open -a Google\ Chrome'
-fi
-
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-fi
-
-
-function runcpp () { g++ -O2 $1; ./a.out }
-alias -s cpp=runcpp
-function runc () { gcc -O2 $1; ./a.out }
-alias -s c=runcpp
-
+#function runcpp () { g++ -O2 $1; ./a.out }
+#alias -s cpp=runcpp
+#function runc () { gcc -O2 $1; ./a.out }
+#alias -s c=runcpp
 bindkey -e
 
 # ディレクトリ移動
@@ -328,7 +317,6 @@ setopt extended_glob
 ## globでパスを生成したときに、パスがディレクトリだったら最後に「/」をつける。
 setopt mark_dirs
 
-
 # ジョブ
 ## jobsでプロセスIDも出力する。
 setopt long_list_jobs
@@ -360,60 +348,9 @@ WORDCHARS="${WORDCHARS}|"
 # alias
 ## ページャーを使いやすくする。
 ### grep -r def *.rb L -> grep -r def *.rb |& lv
-alias -g L="|& $PAGER"
-## grepを使いやすくする。
-alias -g G='| grep'
-## 後はおまけ。
-alias -g H='| head'
-alias -g T='| tail'
-alias -g S='| sed'
-
-## 完全に削除。
-alias rr="command rm -rf"
-## ファイル操作を確認する。
-alias rm="rm -i"
-alias cp="cp -i"
-alias mv="mv -i"
-
-## pushd/popdのショートカット。
-alias pd="pushd"
-alias po="popd"
-
-## lsとpsの設定
-### ls: できるだけGNU lsを使う。
-### ps: 自分関連のプロセスのみ表示。
-case $(uname) in
-    *BSD|Darwin)
-	if [ -x "$(which gnuls)" ]; then
-	    alias s="gnuls"
-	    alias la="ls -lhAF --color=auto"
-	else
-	    alias la="ls -lhAFG"
-	fi
-	alias ps="ps -fU$(whoami)"
-	;;
-    SunOS)
-	if [ -x "`which gls`" ]; then
-	    alias ls="gls"
-	    alias la="ls -lhAF --color=auto"
-	else
-	    alias la="ls -lhAF"
-	fi
-	alias ps="ps -fl -u$(/usr/xpg4/bin/id -un)"
-	;;
-    *)
-	alias la="ls -lhAF --color=auto"
-	alias ps="ps -fU$(whoami) --forest"
-	;;
-esac
 
 #alias e=emacsshort
 #alias e 'emacs \!* &'
-### -nw: ターミナル内でEmacsを起動する。
-### 2011-11-06
-alias enw="emacs -nw"
-
-alias x="exit"
 
 ## カスタムaliasの設定
 ### ~/.zsh.d/zshalias → ~/.zshaliasの順に探して
@@ -424,7 +361,6 @@ alias x="exit"
 ###               globがマッチしなかったり存在しないパスを無視する。
 ###            -: シンボリックリンク先のパスを評価。
 ###            .: 通常のファイルのみ残す。
-### 2011-11-06
 alais_files=(~/.zsh.d/zshalias(N-.)
              ~/.zshalias(N-.))
 for alias_file in ${alias_files}; do
@@ -453,14 +389,6 @@ if [ -n "$DISPLAY" ]; then
     preexec_functions=($preexec_functions update_title)
 fi
 
-alias platex=/usr/local/texlive/2015/bin/x86_64-darwin/platex 
-alias dvipdfmx=/usr/local/texlive/2015/bin/x86_64-darwin/dvipdfmx
-
-alias sl='la'
-alias ks='la'
-alias l='la'
-alias al='la'
-
 if [[ "$TERM" == "dumb" ]]; then
 	unsetopt zle
 	unsetopt prompt_cr
@@ -469,8 +397,6 @@ if [[ "$TERM" == "dumb" ]]; then
 	unfunction preexec
 	PS1='$ '
 fi
-
-
 
 if [[ -f ~/.zplug/init.zsh ]]; then
     #export ZPLUG_LOADFILE="$HOME/.zsh/zplug.zsh"

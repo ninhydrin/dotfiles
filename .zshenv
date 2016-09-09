@@ -1,13 +1,14 @@
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
-export PATH=~/python/pylearn2/pylearn2/scripts:${PATH}
-export PATH=/usr/local/go/bin:${PATH}
-export PATH=/usr/local/go/bin:${PATH}
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
-export PYLEARN2_DATA_PATH=~/python/pylearn2_data #データの置き場所、好きに変えていい
-export PYTHONPATH=/path/to/caffe/python:$PYTHONPATH
+
+#export PATH=~/python/pylearn2/pylearn2/scripts:${PATH}
+#export PYLEARN2_DATA_PATH=~/python/pylearn2_data
+#export PYTHONPATH=~/caffe/python:$PYTHONPATH
+
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
 export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:/usr/local/bin
 export DYLD_FALLBACK_LIBRARY_PATH=$ANACONDA_HOME/lib:/usr/local/lib:/usr/lib
 export DYLD_FALLBACK_LIBRARY_PATH=~/.pyenv/versions/anaconda-2.3.0/lib:$DYLD_FALLBACK_LIBRARY_PATH
