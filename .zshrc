@@ -33,7 +33,7 @@ case ${OSTYPE} in
 		function emacs () { /usr/bin/emacs $1 &}
         ;;
 esac
-
+source ~/.zsh.d/.zshalias
 #任意のエイリアス
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in $ZSHHOME/*; do
@@ -403,6 +403,7 @@ if [[ -f ~/.zplug/init.zsh ]]; then
     source ~/.zplug/init.zsh
     #source ~/src/github.com/zplug/zplug/init.zsh
 	zplug 'zsh-users/zsh-autosuggestions'
+	zplug "b4b4r07/zsh-gomi", if:"which fzf"
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
         if read -q; then
