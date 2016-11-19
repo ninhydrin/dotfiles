@@ -50,7 +50,7 @@ values."
      javascript
      go
      elixir
-	 django
+     django
      (ruby :variables
            ruby-enable-ruby-on-rails-support t
            ruby-enable-enh-ruby-mode t
@@ -74,6 +74,7 @@ values."
      eyebrowse
      php
 	 tabbar
+	 dotspacemacs-configuration-layers
      ;; version-control
 
      )
@@ -137,7 +138,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(monokai
-						 spacemacs-dark
+                         spacemacs-dark
                          spacemacs-light
                          solarized-light
                          solarized-dark
@@ -491,3 +492,5 @@ layers configuration. You are free to put any user code."
 (global-set-key (kbd "C-M-c") 'mc/edit-lines)
 (global-set-key (kbd "C-M-r") 'mc/mark-all-in-region)
 (global-set-key (kbd "C-:") 'mc/mark-next-like-this)
+
+(setq magit-repository-directories '("~/repos/"))

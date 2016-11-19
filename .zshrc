@@ -7,7 +7,8 @@ export PATH=/usr/local/cuda/bin:${PATH}
 
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export PYLEARN2_DATA_PATH=~/python/pylearn2_data #データの置き場所、好きに変えていい
-export PYTHONPATH=~/caffe/python:$PYTHONPATH
+export PYTHONPATH=./pyenv/python:$PYTHONPATH
+#export PYTHONPATH=~/caffe/python:$PYTHONPATH
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
