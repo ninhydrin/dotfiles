@@ -69,8 +69,8 @@ values."
                                       rotate
                                       matlab-mode
                                       py-autopep8
-                                      Icomp
-                                      mwin
+                                      ;Icomp
+                                      mwim
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -158,7 +158,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Hiragino Kaku Gothic ProN";"Source Code Pro"
-                               :size 14
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.9)
@@ -344,7 +344,11 @@ you should place your code here."
   (set-face-attribute 'linum nil
                       :foreground "#800"
                       :height 0.9)
-
+  ;;------------------------------------------------------------------------------
+  ;; tabbar
+  ;;------------------------------------------------------------------------------
+	(global-set-key (kbd "M-}") 'tabbar-forward-tab)
+	(global-set-key (kbd "M-{") 'tabbar-backward-tab)
 
   ;;------------------------------------------------------------------------------
   ;; mwin
