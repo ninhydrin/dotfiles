@@ -54,7 +54,7 @@ values."
      ;eyebrowse
      osx
      spacemacs-layouts
-     ;tabbar
+     tabbar
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -69,6 +69,8 @@ values."
                                       rotate
                                       matlab-mode
                                       py-autopep8
+                                      Icomp
+                                      mwin
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -343,10 +345,19 @@ you should place your code here."
                       :foreground "#800"
                       :height 0.9)
 
+
+  ;;------------------------------------------------------------------------------
+  ;; mwin
+  ;;------------------------------------------------------------------------------
+  (global-set-key (kbd "C-a") 'mwim-beginning-of-code-or-line)
+  (global-set-key (kbd "C-e") 'mwim-end-of-code-or-line)
   ;;------------------------------------------------------------------------------
   ;; company
   ;;------------------------------------------------------------------------------
   (with-eval-after-load 'company
+    (setq company-idle-delay 0) ; デフォルトは0.5
+    (setq company-minimum-prefix-length 2) ; デフォルトは4
+    (setq company-selection-wrap-around t)
     (define-key company-active-map (kbd "C-n") nil)
     (define-key company-active-map (kbd "C-p") nil)
     (define-key company-active-map (kbd "C-h") nil)
@@ -355,6 +366,42 @@ you should place your code here."
     (define-key company-active-map (kbd "C-j") 'company-select-next)
     (define-key company-active-map (kbd "C-k") 'company-select-previous)
     )
+
+  ;;------------------------------------------------------------------------------
+  ;; persp-mode
+  ;;------------------------------------------------------------------------------
+  (defun persp-next ()
+    "Switch to next perspective (to the right)."
+    (interactive)
+    (let* ((persp-list (persp-names-current-frame-fast-ordered))
+           (persp-list-length (length persp-list))
+           (only-perspective? (equal persp-list-length 1))
+           (pos (position (safe-persp-name (get-current-persp)) persp-list)))
+      (cond
+       ((null pos) (persp-switch (nth 1 persp-list)))
+       (only-perspective? nil)
+       ((= pos (1- persp-list-length))
+        (if persp-switch-wrap (persp-switch (nth 0 persp-list))))
+       (t (persp-switch (nth (1+ pos) persp-list)))))
+    )
+  (defun persp-prev ()
+    "Switch to previous perspective (to the left)."
+    (interactive)
+    (let* ((persp-list (persp-names-current-frame-fast-ordered))
+           (persp-list-length (length persp-list))
+           (only-perspective? (equal persp-list-length 1))
+           (pos (position (safe-persp-name (get-current-persp)) persp-list)))
+      (cond
+       ((null pos) (persp-switch (nth (- persp-list-length 1) persp-list)))
+       ;((null pos) nil)
+       (only-perspective? nil)
+       ((= pos 0)
+        (if persp-switch-wrap
+            (persp-switch (nth (1- persp-list-length) persp-list))))
+       (t (persp-switch (nth (1- pos) persp-list))))))
+
+  (global-set-key "\M-[" 'persp-prev)
+  (global-set-key "\M-]" 'persp-next)
 
   )
 ;; Do not write anything past this comment. This is where Emacs will
