@@ -69,8 +69,10 @@ values."
                                       rotate
                                       matlab-mode
                                       py-autopep8
-                                      ;Icomp
+                                        ;Icomp
+                                      multiple-cursors
                                       mwim
+                                      smartrep
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -355,6 +357,7 @@ you should place your code here."
   ;;------------------------------------------------------------------------------
   (global-set-key (kbd "C-a") 'mwim-beginning-of-code-or-line)
   (global-set-key (kbd "C-e") 'mwim-end-of-code-or-line)
+
   ;;------------------------------------------------------------------------------
   ;; company
   ;;------------------------------------------------------------------------------
@@ -374,39 +377,74 @@ you should place your code here."
   ;;------------------------------------------------------------------------------
   ;; persp-mode
   ;;------------------------------------------------------------------------------
-  (defun persp-next ()
-    "Switch to next perspective (to the right)."
-    (interactive)
-    (let* ((persp-list (persp-names-current-frame-fast-ordered))
-           (persp-list-length (length persp-list))
-           (only-perspective? (equal persp-list-length 1))
-           (pos (position (safe-persp-name (get-current-persp)) persp-list)))
-      (cond
-       ((null pos) (persp-switch (nth 1 persp-list)))
-       (only-perspective? nil)
-       ((= pos (1- persp-list-length))
-        (if persp-switch-wrap (persp-switch (nth 0 persp-list))))
-       (t (persp-switch (nth (1+ pos) persp-list)))))
+  (with-eval-after-load 'persp-mode
+    (defun persp-next ()
+      "Switch to next perspective (to the right)."
+      (interactive)
+      (let* ((persp-list (persp-names-current-frame-fast-ordered))
+             (persp-list-length (length persp-list))
+             (only-perspective? (equal persp-list-length 1))
+             (pos (position (safe-persp-name (get-current-persp)) persp-list)))
+        (cond
+         ((null pos) (persp-switch (nth 1 persp-list)))
+         (only-perspective? nil)
+         ((= pos (1- persp-list-length))
+          (if persp-switch-wrap (persp-switch (nth 0 persp-list))))
+         (t (persp-switch (nth (1+ pos) persp-list)))))
+      )
+    (defun persp-prev ()
+      "Switch to previous perspective (to the left)."
+      (interactive)
+      (let* ((persp-list (persp-names-current-frame-fast-ordered))
+             (persp-list-length (length persp-list))
+             (only-perspective? (equal persp-list-length 1))
+             (pos (position (safe-persp-name (get-current-persp)) persp-list)))
+        (cond
+         ((null pos) (persp-switch (nth (- persp-list-length 1) persp-list)))
+                                        ;((null pos) nil)
+         (only-perspective? nil)
+         ((= pos 0)
+          (if persp-switch-wrap
+              (persp-switch (nth (1- persp-list-length) persp-list))))
+         (t (persp-switch (nth (1- pos) persp-list))))))
+
+    (global-set-key "\M-[" 'persp-prev)
+    (global-set-key "\M-]" 'persp-next)
+    (global-set-key (kbd "C-c RET") 'persp-switch)
+
+    ;;------------------------------------------------------------------------------
+    ;; multiple-cusor
+    ;;------------------------------------------------------------------------------
+    (require 'multiple-cursors)
+    (require 'smartrep)
+
+                                        ;(autoload 'mc/mark-next-like-this "multiple-cursors" )
+                                        ;(autoload 'mc/mark-next-like-this "smartrep")
+
+    (declare-function smartrep-define-key "smartrep")
+
+
+    (global-set-key (kbd "C-M-c") 'mc/edit-lines)
+    (global-set-key (kbd "C-M-r") 'mc/mark-all-in-region)
+
+                                        ;(global-unset-key "\C-:")
+
+    (smartrep-define-key global-map "C-:"
+                         '(("C-:"      . 'mc/mark-next-like-this)
+                           ("n"        . 'mc/mark-next-like-this)
+                           ("p"        . 'mc/mark-previous-like-this)
+                           ("m"        . 'mc/mark-more-like-this-extended)
+                           ("u"        . 'mc/unmark-next-like-this)
+                           ("U"        . 'mc/unmark-previous-like-this)
+                           ("s"        . 'mc/skip-to-next-like-this)
+                           ("S"        . 'mc/skip-to-previous-like-this)
+                           ("*"        . 'mc/mark-all-like-this)
+                           ("d"        . 'mc/mark-all-like-this-dwim)
+                           ("i"        . 'mc/insert-numbers)
+                           ("o"        . 'mc/sort-regions)
+                           ("O"        . 'mc/reverse-regions)))
     )
-  (defun persp-prev ()
-    "Switch to previous perspective (to the left)."
-    (interactive)
-    (let* ((persp-list (persp-names-current-frame-fast-ordered))
-           (persp-list-length (length persp-list))
-           (only-perspective? (equal persp-list-length 1))
-           (pos (position (safe-persp-name (get-current-persp)) persp-list)))
-      (cond
-       ((null pos) (persp-switch (nth (- persp-list-length 1) persp-list)))
-       ;((null pos) nil)
-       (only-perspective? nil)
-       ((= pos 0)
-        (if persp-switch-wrap
-            (persp-switch (nth (1- persp-list-length) persp-list))))
-       (t (persp-switch (nth (1- pos) persp-list))))))
-
-  (global-set-key "\M-[" 'persp-prev)
-  (global-set-key "\M-]" 'persp-next)
-
   )
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
