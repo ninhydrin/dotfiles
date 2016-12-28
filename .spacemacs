@@ -33,6 +33,7 @@ values."
    '(
      octave
      python
+     ipython-notebook
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -51,7 +52,8 @@ values."
      spell-checking
      syntax-checking
      ;; version-control
-     ;eyebrowse
+                                        ;eyebrowse
+
      osx
      spacemacs-layouts
      tabbar
@@ -73,6 +75,7 @@ values."
                                       multiple-cursors
                                       mwim
                                       smartrep
+                                      emacs-ipython-notebook
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -330,7 +333,7 @@ you should place your code here."
   ;;------------------------------------------------------------------------------
   ;; 基本設定
   ;;------------------------------------------------------------------------------
-
+  (global-set-key [f5] 'dotspacemacs/sync-configuration-layers)
   (define-key global-map (kbd "C-o") 'other-window)
   (define-key global-map (kbd "C-s") 'helm-swoop)
   (global-set-key "\C-h" 'delete-backward-char)
@@ -349,8 +352,8 @@ you should place your code here."
   ;;------------------------------------------------------------------------------
   ;; tabbar
   ;;------------------------------------------------------------------------------
-	(global-set-key (kbd "M-}") 'tabbar-forward-tab)
-	(global-set-key (kbd "M-{") 'tabbar-backward-tab)
+	;(global-set-key (kbd "M-}") 'tabbar-forward-tab)
+	;(global-set-key (kbd "M-{") 'tabbar-backward-tab)
 
   ;;------------------------------------------------------------------------------
   ;; mwin
@@ -411,6 +414,7 @@ you should place your code here."
     (global-set-key "\M-[" 'persp-prev)
     (global-set-key "\M-]" 'persp-next)
     (global-set-key (kbd "C-c RET") 'persp-switch)
+    (global-set-key (kbd "C-c C-k") 'persp-kill)
 
     ;;------------------------------------------------------------------------------
     ;; multiple-cusor

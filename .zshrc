@@ -27,6 +27,7 @@ case ${OSTYPE} in
 	alias chrome='google-chrome'
 	alias -s html=chrome
 	alias google-chrome='open -a Google\ Chrome'
+  alias lsusb='system_profiler SPUSBDataType'
 	;;
     linux*)
         #ここにLinux向けの設定
