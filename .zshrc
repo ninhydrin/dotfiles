@@ -1,14 +1,10 @@
 # -*- sh -*-
-
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
-export PATH=~/python/pylearn2/pylearn2/scripts:${PATH}
 export PATH=/usr/local/go/bin:${PATH}
 export PATH=/usr/local/cuda/bin:${PATH}
 
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
-export PYLEARN2_DATA_PATH=~/python/pylearn2_data #データの置き場所、好きに変えていい
 export PYTHONPATH=./pyenv/python:$PYTHONPATH
-#export PYTHONPATH=~/caffe/python:$PYTHONPATH
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -44,12 +40,6 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     done
 fi
 
-#alias gccgl='gcc -I$HOME/include -framework OpenGL -framework GLUT -framework Foundation -o' 
-#function javasql() {java -cp postgresql.jar: $1 softeng}
-
-#function runcpp () { g++ -O2 $1; ./a.out }
-#alias -s cpp=runcpp
-#function runc () { gcc -O2 $1; ./a.out }
 #alias -s c=runcpp
 bindkey -e
 
