@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     markdown
      octave
      python
      ipython-notebook
@@ -53,10 +54,9 @@ values."
      syntax-checking
      ;; version-control
                                         ;eyebrowse
-
      osx
      spacemacs-layouts
-     tabbar
+     ;; tabbar
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -75,7 +75,9 @@ values."
                                       multiple-cursors
                                       mwim
                                       smartrep
-                                      emacs-ipython-notebook
+                                      hlinum
+                                      perspeen
+                                        ;emacs-ipython-notebook
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -279,7 +281,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'emacs
@@ -344,8 +346,7 @@ you should place your code here."
   (global-set-key "\M-n" 'forward-paragraph)
   (show-paren-mode 1)
   (smartparens-global-mode)
-  (global-linum-mode t)
-                                        ;(hlinum-activate)
+  (hlinum-activate)
   (set-face-attribute 'linum nil
                       :foreground "#800"
                       :height 0.9)
