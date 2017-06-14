@@ -1,22 +1,4 @@
 # -*- sh -*-
-
-export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
-export PATH=~/python/pylearn2/pylearn2/scripts:${PATH}
-export PATH=/usr/local/go/bin:${PATH}
-export PATH=/usr/local/cuda/bin:${PATH}
-
-export PATH=${HOME}/.nodebrew/current/bin:${PATH}
-export PYLEARN2_DATA_PATH=~/python/pylearn2_data #データの置き場所、好きに変えていい
-export PYTHONPATH=./pyenv/python:$PYTHONPATH
-#export PYTHONPATH=~/caffe/python:$PYTHONPATH
-export GOROOT=/usr/local/go/
-export GOPATH=~/dev/go-workspace
-export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/bin
-export DYLD_FALLBACK_LIBRARY_PATH=$ANACONDA_HOME/lib:/usr/local/lib:/usr/lib
-export LIBRARY_DIRS=/opt/local/lib
-
-#学習用pythonのためのパス
 case ${OSTYPE} in
     darwin*)
         #ここにMac向けの設定
@@ -27,10 +9,10 @@ case ${OSTYPE} in
 	alias chrome='google-chrome'
 	alias -s html=chrome
 	alias google-chrome='open -a Google\ Chrome'
-  alias lsusb='system_profiler SPUSBDataType'
+    alias lsusb='system_profiler SPUSBDataType'
 	;;
     linux*)
-        #ここにLinux向けの設定
+            #ここにLinux向けの設定
 		#export PYLEARN2_VIEWER_COMMAND="eog --new-instance"
 		function emacs () { /usr/bin/emacs $1 &}
         ;;
@@ -39,23 +21,15 @@ source ~/.zsh.d/.zshalias
 #任意のエイリアス
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in $ZSHHOME/*; do
-        [[ ${i##*/} = *.sh ]] &&
+        [[ ${i##*/} = *.zsh ]] &&
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
 fi
 
-#alias gccgl='gcc -I$HOME/include -framework OpenGL -framework GLUT -framework Foundation -o' 
-#function javasql() {java -cp postgresql.jar: $1 softeng}
-
-#function runcpp () { g++ -O2 $1; ./a.out }
-#alias -s cpp=runcpp
-#function runc () { gcc -O2 $1; ./a.out }
-#alias -s c=runcpp
 bindkey -e
-
 # ディレクトリ移動
 ## ディレクトリ名だけでcdする。
-setopt auto_cd
+#setopt auto_cd
 ## cdで移動してもpushdと同じようにディレクトリスタックに追加する。
 setopt auto_pushd
 ## カレントディレクトリ中に指定されたディレクトリが見つからなかった場合に
@@ -156,7 +130,7 @@ prompt_bar_left="-${prompt_bar_left_self}-${prompt_bar_left_status}-${prompt_bar
 ###   %{%B%K{magenta}%F{white}%}...%{%f%k%b%}:
 ###       「...」を太字のマゼンタ背景の白文字にする。
 ###   %d: カレントディレクトリのフルパス（省略しない）
-prompt_bar_right="-[%{%B%K{magenta}%F{white}%}%d%{%f%k%b%}]-"
+prompt_bar_right="-[%{%B%K{blue}%F{white}%}%d%{%f%k%b%}]-"
 
 ### 2行目左にでるプロンプト。
 ###   %h: ヒストリ数。
@@ -233,7 +207,7 @@ update_prompt()
     #   %{%B%F{white}%K{green}}...%{%k%f%b%}:
     #       「...」を太字で緑背景の白文字にする。
     #   %~: カレントディレクトリのフルパス（可能なら「~」で省略する）
-    RPROMPT="[%{%B%F{white}%K{magenta}%}%~%{%k%f%b%}]"
+    RPROMPT="[%{%B%F{white}%K{blue}%}%~%{%k%f%b%}]"
     case "$TERM_PROGRAM" in
 	Apple_Terminal)
 	    # Mac OS Xのターミナルでは$COLUMNSに右余白が含まれていないので
