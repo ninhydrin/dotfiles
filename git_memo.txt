@@ -1,0 +1,8 @@
+# remoteブランチを単純参照
+git remote show origin
+
+# remoteブランチでは削除されているが、ローカルに参照が残っているブランチを表示
+git remote prune --dry-run origin
+
+# すでに削除されているremoteブランチのローカル参照を削除してきれいにする
+git remote prune origin
