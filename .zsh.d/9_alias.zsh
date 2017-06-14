@@ -10,7 +10,7 @@ alias -g H='| head'
 alias -g T='| tail'
 alias -g S='| sed'
 
-alias platex=/usr/local/texlive/2015/bin/x86_64-darwin/platex 
+alias platex=/usr/local/texlive/2016/bin/x86_64-darwin/platex 
 alias dvipdfmx=/usr/local/texlive/2015/bin/x86_64-darwin/dvipdfmx
 
 alias sl='la'
