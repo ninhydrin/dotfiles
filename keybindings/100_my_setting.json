@@ -1,0 +1,70 @@
+[
+    {
+        "key": "shift+enter",
+        "command": "extension.jumpy-word",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "Escape",
+        "command": "extension.jumpy-exit",
+        "when": "editorTextFocus && jumpy.isJumpyMode"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "selectNextSuggestion",
+        "when": "ditorTextFocus && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+[BracketLeft]",
+        "command": "emacs.enterMarkMode",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+w",
+        "command": "workbench.action.terminal.kill",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "cmd+t",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+f",
+        "command": "editor.action.formatSelection",
+        "when": "editorHasDocumentFormattingProvider && editorHasSelection && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateEditorGroups",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl-m",
+        "command": "emacs.C-m",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "f5",
+        "command": "workbench.action.reloadWindow"
+    }
+]

@@ -1,0 +1,7 @@
+[
+    {
+        "key": "ctrl+i",
+        "command": "jumpToNextSnippetPlaceholder",
+        "when": "editorTextFocus && inSnippetMode"
+    }
+]
