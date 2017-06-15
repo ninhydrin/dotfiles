@@ -31,10 +31,15 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     ruby
+     sql
+     javascript
      markdown
+     html
      octave
      python
      ipython-notebook
+     scala
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -45,7 +50,6 @@ values."
      ;; better-defaults
      emacs-lisp
      ;; git
-     ;; markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -76,8 +80,10 @@ values."
                                       mwim
                                       smartrep
                                       hlinum
+                                      google-maps
                                       perspeen
-                                        ;emacs-ipython-notebook
+                                      helm-perspeen
+                                      ;emacs-ipython-notebook
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -357,6 +363,21 @@ you should place your code here."
 	;(global-set-key (kbd "M-{") 'tabbar-backward-tab)
 
   ;;------------------------------------------------------------------------------
+  ;; perspeen
+  ;;------------------------------------------------------------------------------
+  (perspeen-mode t)
+  (setq perspeen-use-tab t)
+  ;; (global-set-key (kbd "C-x b") 'helm-perspeen)
+  ;; プレフィクスキー
+  (setq perspeen-keymap-prefix (kbd "C-c C-c"))
+  (define-key perspeen-command-map (kbd "h") 'perspeen-tab-prev)
+  (define-key perspeen-command-map (kbd "l") 'perspeen-tab-next)
+  (define-key perspeen-command-map (kbd "C-d") 'perspeen-tab-del)
+  (global-set-key (kbd "C-c C-c") 'perspeen-create-ws)
+  (global-set-key (kbd "C-c C-f") 'perspeen-tab-start)
+  (global-set-key (kbd "C-c C-l") 'perspeen-tab-create-tab)
+
+  ;;------------------------------------------------------------------------------
   ;; mwin
   ;;------------------------------------------------------------------------------
   (global-set-key (kbd "C-a") 'mwim-beginning-of-code-or-line)
@@ -448,6 +469,7 @@ you should place your code here."
                            ("i"        . 'mc/insert-numbers)
                            ("o"        . 'mc/sort-regions)
                            ("O"        . 'mc/reverse-regions)))
+
     )
   )
 
@@ -460,10 +482,11 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (perspeen yapfify ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org tabbar spacemacs-theme spaceline smartrep rotate reveal-in-osx-finder restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-isort py-autopep8 popwin pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file neotree mwim multiple-cursors move-text monokai-theme mmm-mode matlab-mode markdown-toc macrostep lorem-ipsum live-py-mode linum-relative link-hint launchctl jedi info+ indent-guide ido-vertical-mode hy-mode hungry-delete hlinum hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-ls-git helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gh-md flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav ein dumb-jump cython-mode company-statistics company-anaconda column-enforce-mode clean-aindent-mode bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby sql-indent helm-perspeen perspeen noflet ensime sbt-mode scala-mode web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor js2-mode js-doc dash-functional coffee-mode mmm-mode markdown-toc markdown-mode gh-md google-maps web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data hlinum yapfify ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smartrep rotate reveal-in-osx-finder restart-emacs rainbow-delimiters pyvenv pytest pyenv-mode py-isort py-autopep8 popwin pip-requirements persp-mode pcre2el pbcopy paradox spinner osx-trash osx-dictionary org-plus-contrib org-bullets open-junk-file neotree mwim multiple-cursors move-text matlab-mode macrostep lorem-ipsum live-py-mode linum-relative link-hint launchctl jedi jedi-core python-environment info+ indent-guide hydra hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-ls-git helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight epc ctable concurrent deferred elisp-slime-nav ein request websocket dumb-jump diminish cython-mode company-statistics company-anaconda company column-enforce-mode clean-aindent-mode bind-map bind-key auto-yasnippet yasnippet auto-highlight-symbol auto-dictionary auto-compile packed anaconda-mode pythonic f dash s aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core async ac-ispell auto-complete popup monokai-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+
+ '(default ((((class color) (min-colors 257)) (:foreground "#F8F8F2" :background "#272822")) (((class color) (min-colors 89)) (:foreground "#F5F5F5" :background "#1B1E1C")))))

@@ -1,0 +1,6 @@
+[
+    {
+        "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.files.openFileFolder"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+        "key": "ctrl+d",
+        "command": "deleteRight",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "deleteLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+d",
+        "command": "deleteWordRight",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+h",
+        "command": "deleteWordLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "emacs.C-k",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+w",
+        "command": "emacs.M-w",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+w",
+        "command": "emacs.C-w",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+y",
+        "command": "emacs.C-y",
+        "when": "editorTextFocus"
+    }
+]

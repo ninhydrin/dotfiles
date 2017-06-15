@@ -4,7 +4,6 @@ export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export LIBRARY_DIRS=/opt/local/lib
 
-#go関連
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -19,7 +18,12 @@ export ZSHHOME="${HOME}/.zsh.d"
 
 export PYTHONPATH=./pyenv/python:$PYTHONPATH
 export PYENV_ROOT="${HOME}/.pyenv"
+export NANDEMONAI="${HOME}/.pyenv"
+
+export PYTHONPATH=./pyenv/python:$PYTHONPATH
+
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
+eval "$(rbenv init -)"

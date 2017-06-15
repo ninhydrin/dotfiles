@@ -1,0 +1,12 @@
+[
+    {
+        "key": "ctrl+[IntlRo]",
+        "command": "undo",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+[IntlRo]",
+        "command": "redo",
+        "when": "editorTextFocus"
+    }
+]

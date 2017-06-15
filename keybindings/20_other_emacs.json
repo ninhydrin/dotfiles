@@ -1,0 +1,7 @@
+[
+    {
+        "command": "center-editor-window.center",
+        "key": "ctrl+l",
+        "when": "editorTextFocus"
+    }
+]

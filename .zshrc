@@ -24,13 +24,11 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
 fi
 
 bindkey -e
-
 ## カレントディレクトリ中に指定されたディレクトリが見つからなかった場合に
 ## 移動先を検索するリスト。
 cdpath=(~)
 ## ディレクトリが変わったらディレクトリスタックを表示。
 chpwd_functions=($chpwd_functions dirs)
-
 
 # 展開
 ## --prefix=~/localというように「=」の後でも
