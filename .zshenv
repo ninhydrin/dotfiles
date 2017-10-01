@@ -16,14 +16,24 @@ export DYLD_FALLBACK_LIBRARY_PATH=~/.pyenv/versions/anaconda-2.3.0/lib:$DYLD_FAL
 
 export ZSHHOME="${HOME}/.zsh.d"
 
-export PYTHONPATH=./pyenv/python:$PYTHONPATH
-export PYENV_ROOT="${HOME}/.pyenv"
-export NANDEMONAI="${HOME}/.pyenv"
 
-export PYTHONPATH=./pyenv/python:$PYTHONPATH
+case ${OSTYPE} in
+    darwin*)
+        export PYENV_ROOT=/usr/local/var/pyenv
+        export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+        if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+        ;;
+    linux*)
+        export PYENV_ROOT="${HOME}/.pyenv"
+        export PYTHONPATH=./pyenv/python:$PYTHONPATH
+        ;;
+esac
+
 
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
 fi
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
+
