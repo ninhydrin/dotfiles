@@ -41,6 +41,10 @@
         "key": "ctrl+x k",
         "command": "workbench.action.closeActiveEditor",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[Quote]",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
     }
-
 ]
