@@ -24,6 +24,7 @@ case ${OSTYPE} in
         if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
         if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         export RBENV_ROOT=/usr/local/var/rbenv
+        export LSCOLORS=xefxcxdxbxegedabagacad
         ;;
     linux*)
         export PYENV_ROOT=${HOME}/.pyenv
