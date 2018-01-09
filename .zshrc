@@ -14,7 +14,7 @@ case ${OSTYPE} in
         function emacs () { /usr/bin/emacs $1 &}
         ;;
 esac
-source ~/.zsh.d/.zshalias
+
 #任意のエイリアス
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in $ZSHHOME/*; do

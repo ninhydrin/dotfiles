@@ -1,0 +1,11 @@
+[user]
+	name = ninhydrin
+	email = the.nocturne.of.daybreak@gmail.com
+
+[alias]
+  st = status
+  ch = checkout
+  br = branch
+  co = commit
+[core]
+	editor = vim

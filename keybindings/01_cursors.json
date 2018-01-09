@@ -60,7 +60,7 @@
         "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+shift+2",
+        "key": "ctrl+[BracketLeft]",
         "command": "extension.setMark",
         "when": "editorTextFocus"
     }

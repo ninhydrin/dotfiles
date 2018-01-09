@@ -10,6 +10,11 @@
         "when": "editorFocus && findWidgetVisible"
     },
     {
+        "key": "cmd+g",
+        "command": "-editor.action.nextMatchFindAction",
+        "when": "editorFocus"
+    },
+    {
         "key": "ctrl+r",
         "command": "actions.find",
         "when": "editorTextFocus"

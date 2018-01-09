@@ -41,6 +41,27 @@
         "key": "ctrl+x k",
         "command": "workbench.action.closeActiveEditor",
         "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[Quote]",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.fold",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.unfold",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+g g",
+        "command": "workbench.action.gotoLine",
+        "when": "editorTextFocus"
     }
+
 
 ]

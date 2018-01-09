@@ -20,7 +20,7 @@
         "when": "editorTextFocus && suggestWidgetVisible"
     },
     {
-        "key": "ctrl+[BracketLeft]",
+        "key": "ctrl+shift+2",
         "command": "emacs.enterMarkMode",
         "when": "editorTextFocus"
     },

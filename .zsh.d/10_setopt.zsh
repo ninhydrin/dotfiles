@@ -1,6 +1,5 @@
 # ディレクトリ移動
 ## ディレクトリ名だけでcdする。
-print "hoge"
 setopt auto_cd
 ## cdで移動してもpushdと同じようにディレクトリスタックに追加する。
 setopt auto_pushd
