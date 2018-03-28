@@ -71,8 +71,8 @@ zplug "stedolan/jq", \
     from:gh-r, \
     as:command, \
     rename-to:jq
-zplug "b4b4r07/emoji-cli", \
-    on:"stedolan/jq"
+# zplug "b4b4r07/emoji-cli", \
+    # on:"stedolan/jq"
 
 # Install zsh-gomi with fzf
 zplug "junegunn/fzf-bin", \
