@@ -53,4 +53,6 @@ if [ -d ${PYENV_ROOT} ]; then
     eval "$(rbenv init -)"
 fi
 
+# ZPLUG
+export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
