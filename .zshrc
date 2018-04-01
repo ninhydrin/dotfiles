@@ -11,7 +11,7 @@ case ${OSTYPE} in
         alias lsusb='system_profiler SPUSBDataType'
         ;;
     linux*)
-        function emacs () { /usr/bin/emacs $1 &}
+        # function emacs () { /usr/bin/emacs $1 &}
         ;;
 esac
 
