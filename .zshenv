@@ -23,8 +23,8 @@ export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-8.0/lib64:/usr/loca
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib:/usr/local/cuda-8.0/lib:$LD_LIBRARY_PATH
 export CPATH=/usr/local/cuda/include:/usr/local/cuda-8.0/include:$CPATH
 export LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LIBRARY_PATH
-export CFLAGS=-I/usr/local/cudnn-8.0-v6.0/include
-export LDFLAGS=-L/usr/local/cudnn-8.0-v6.0/lib64
+# export CFLAGS=-I/usr/local/cudnn-8.0-v6.0/include
+# export LDFLAGS=-L/usr/local/cudnn-8.0-v6.0/lib64
 export LD_LIBRARY_PATH=/usr/local/cudnn-8.0-v6.0/lib64:$LD_LIBRARY_PATH
 
 case ${OSTYPE} in
