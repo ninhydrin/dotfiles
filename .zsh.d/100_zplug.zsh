@@ -1,3 +1,11 @@
+if [ ! -e $HOME/.zplug ]; then
+    echo "There is not .zplug. Do you clone .zplug ? [y/n]"
+    read ANSWER
+    case $ANSWER in
+        "" | "Y" | "y" | "yes" | "Yes" | "YES" ) git clone https://github.com/zplug/zplug $ZPLUG_HOME;;
+        * ) ;;
+    esac
+fi
 source ~/.zplug/init.zsh
 
 # Make sure to use double quotes
