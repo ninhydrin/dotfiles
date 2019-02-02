@@ -36,6 +36,9 @@ alias mv="mv -i"
 alias pd="pushd"
 alias po="popd"
 
+alias tmuxa="tmux a -t"
+alias jn="jupyter-notebook"
+
 ## lsとpsの設定
 ### ls: できるだけGNU lsを使う。
 ### ps: 自分関連のプロセスのみ表示。
@@ -63,8 +66,5 @@ case $(uname) in
 		alias ps="ps -fU$(whoami) --forest"
 		;;
 esac
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-fi
+
+

@@ -1,4 +1,5 @@
 # -*- sh -*-
+# git clone https://github.com/syl20bnr/spacemacs .emacs.d
 
 case ${OSTYPE} in
     darwin*)
@@ -9,7 +10,7 @@ case ${OSTYPE} in
         alias -s html=chrome
         alias google-chrome='open -a Google\ Chrome'
         alias lsusb='system_profiler SPUSBDataType'
-        ;;
+            ;;
     linux*)
         # function emacs () { /usr/bin/emacs $1 &}
         ;;
