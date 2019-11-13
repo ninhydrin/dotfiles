@@ -1,13 +1,17 @@
 # -*- sh -*-
 
+# brew tap homebrew/science;brew install openblas # openblas for numpy
+# conda install -c conda-forge numpy
+
+
 case ${OSTYPE} in
     darwin*)
         function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
         alias imgcat='~/.imgcat'
         alias imgls='~/.imgls'
-        alias chrome='google-chrome'
+        # alias chrome='google-chrome'
         alias -s html=chrome
-        alias google-chrome='open -a Google\ Chrome'
+        # alias google-chrome='open -a Google\ Chrome'
         alias lsusb='system_profiler SPUSBDataType'
         ;;
     linux*)
@@ -91,4 +95,19 @@ if [[ "$TERM" == "dumb" ]]; then
     unfunction precmd
     unfunction preexec
     PS1='$ '
+fi
+export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
+
+which xonsh
+if [ $? = 0  ]; then
+    # xonsh
+else
+    echo "not installed xonsh. install? [Y/n]"
+    read ANSWER
+    case $ANSWER in "" | "Y" | "y" | "yes" | "Yes" | "YES" )
+        pip install xonsh
+        # xonsh
+        ;;
+        * ) echo "start zsh";;
+    esac
 fi
