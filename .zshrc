@@ -1,4 +1,5 @@
 # -*- sh -*-
+# git clone https://github.com/syl20bnr/spacemacs .emacs.d
 
 # brew tap homebrew/science;brew install openblas # openblas for numpy
 # conda install -c conda-forge numpy
@@ -13,9 +14,9 @@ case ${OSTYPE} in
         alias -s html=chrome
         # alias google-chrome='open -a Google\ Chrome'
         alias lsusb='system_profiler SPUSBDataType'
-        ;;
+            ;;
     linux*)
-        function emacs () { /usr/bin/emacs $1 &}
+        # function emacs () { /usr/bin/emacs $1 &}
         ;;
 esac
 

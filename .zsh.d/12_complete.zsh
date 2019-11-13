@@ -1,8 +1,16 @@
 # 補完
 ## 初期化
+plugins=( zsh-completions)
 autoload -U compinit
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin �
+                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin �
+                             /usr/local/git/bin
 compinit
+# dockerの補完
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
+zplug "tcnksm/docker-alias"
 ## 補完方法毎にグループ化する。
 ### 補完方法の表示方法
 ###   %B...%b: 「...」を太字にする。

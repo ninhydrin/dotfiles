@@ -4,6 +4,7 @@ export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export LIBRARY_DIRS=/opt/local/lib
 
+# Go lang
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
@@ -22,6 +23,7 @@ export CUDA_ROOT=/usr/local/cuda:/usr/local/cuda-9.0
 export CUDA_PATH=/usr/local/cuda-9.0
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/lib
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib:/usr/local/cuda-8.0/lib:$LD_LIBRARY_PATH
+
 export CPATH=/usr/local/cuda/include:/usr/local/cuda-9.0/include:$CPATH
 export LIBRARY_PATH=/usr/local/cuda-9.0/lib64:$LIBRARY_PATH
 export CFLAGS=-I/usr/local/cudnn-9.0/include
@@ -51,15 +53,17 @@ case ${OSTYPE} in
         ;;
 esac
 
-
 if [ -d ${PYENV_ROOT} ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     export PYTHONPATH=./pyenv/python:$PYTHONPATH
     eval "$(pyenv init -)"
 fi
-if [ -d ${PYENV_ROOT} ]; then
+
+if [ -d ${RBENV_ROOT} ]; then
     export PATH=${RBENV_ROOT}/bin:$PATH
     eval "$(rbenv init -)"
 fi
 
+# ZPLUG
+export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 

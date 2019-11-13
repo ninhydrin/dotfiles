@@ -14,10 +14,15 @@ alias -g S='| sed'
 alias platex=/usr/local/texlive/2016/bin/x86_64-darwin/platex
 alias dvipdfmx=/usr/local/texlive/2015/bin/x86_64-darwin/dvipdfmx
 
+alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
+
 alias sl='la'
 alias ks='la'
 alias l='la'
 alias al='la'
+
+### brew doctor時のpyenvのwarning対策
+alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:?/} brew"
 
 ### -nw: ターミナル内でEmacsを起動する。
 alias enw="emacs -nw"
@@ -49,6 +54,9 @@ alias smi="nvidia-smi"
 alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
 
+alias tmuxa="tmux a -t"
+alias jn="jupyter-notebook"
+
 ## lsとpsの設定
 ### ls: できるだけGNU lsを使う。
 ### ps: 自分関連のプロセスのみ表示。
@@ -76,6 +84,7 @@ case $(uname) in
 		alias ps="ps -fU$(whoami) --forest"
 		;;
 esac
+
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH

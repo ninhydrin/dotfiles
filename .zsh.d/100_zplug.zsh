@@ -1,7 +1,17 @@
+if [ ! -e $HOME/.zplug ]; then
+    echo "There is not .zplug. Do you clone .zplug ? [y/n]"
+    read ANSWER
+    case $ANSWER in
+        "" | "Y" | "y" | "yes" | "Yes" | "YES" ) git clone https://github.com/zplug/zplug $ZPLUG_HOME;;
+        * ) ;;
+    esac
+fi
 source ~/.zplug/init.zsh
 
 # Make sure to use double quotes
 zplug "zsh-users/zsh-history-substring-search"
+
+zplug 'zsh-users/zsh-completions'
 
 # Use the package as a command
 # And accept glob patterns (e.g., brace, wildcard, ...)
@@ -9,6 +19,9 @@ zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
 
 # Can manage everything e.g., other person's zshrc
 zplug "tcnksm/docker-alias", use:zshrc
+
+# dockerの補完
+zplug "felixr/docker-zsh-completion"
 
 # Disable updates using the "frozen" tag
 zplug "k4rthik/git-cal", as:command, frozen:1
@@ -66,8 +79,8 @@ zplug "stedolan/jq", \
     from:gh-r, \
     as:command, \
     rename-to:jq
-zplug "b4b4r07/emoji-cli", \
-    on:"stedolan/jq"
+# zplug "b4b4r07/emoji-cli", \
+    # on:"stedolan/jq"
 
 # Install zsh-gomi with fzf
 zplug "junegunn/fzf-bin", \
