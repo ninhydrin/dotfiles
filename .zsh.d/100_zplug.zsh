@@ -73,14 +73,14 @@ zplug "b4b4r07/emoji-cli", \
 zplug "junegunn/fzf-bin", \
     as:command, \
     from:gh-r, \
-    rename-to:"fzf", \
+    rename-to:fzf, \
     frozen:1
 
 zplug "b4b4r07/zsh-gomi", \
     as:command, \
     use:bin/gomi, \
-    on:junegunn/fzf-bin    
-    
+    on:junegunn/fzf-bin
+
 # Note: To specify the order in which packages should be loaded, use the defer
 #       tag described in the next section
 
