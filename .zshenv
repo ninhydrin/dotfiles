@@ -17,15 +17,24 @@ export DYLD_FALLBACK_LIBRARY_PATH=~/.pyenv/versions/anaconda-2.3.0/lib:$DYLD_FAL
 export ZSHHOME="${HOME}/.zsh.d"
 
 # CUDA
-export PATH=/usr/local/cuda/bin:/usr/local/cuda-8.0/bin:$PATH
-export CUDA_ROOT=/usr/local/cuda:/usr/local/cuda-8.0
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-8.0/lib64:/usr/local/cuda-8.0/lib
+export PATH=/usr/local/cuda/bin:/usr/local/cuda-9.0/bin:$PATH
+export CUDA_ROOT=/usr/local/cuda:/usr/local/cuda-9.0
+export CUDA_PATH=/usr/local/cuda-9.0
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/lib
 # export LD_LIBRARY_PATH=/usr/local/cuda/lib:/usr/local/cuda-8.0/lib:$LD_LIBRARY_PATH
-export CPATH=/usr/local/cuda/include:/usr/local/cuda-8.0/include:$CPATH
-export LIBRARY_PATH=/usr/local/cuda-7.5/lib64:$LIBRARY_PATH
-export CFLAGS=-I/usr/local/cudnn-8.0-v6.0/include
-export LDFLAGS=-L/usr/local/cudnn-8.0-v6.0/lib64
-export LD_LIBRARY_PATH=/usr/local/cudnn-8.0-v6.0/lib64:$LD_LIBRARY_PATH
+export CPATH=/usr/local/cuda/include:/usr/local/cuda-9.0/include:$CPATH
+export LIBRARY_PATH=/usr/local/cuda-9.0/lib64:$LIBRARY_PATH
+export CFLAGS=-I/usr/local/cudnn-9.0/include
+export LDFLAGS=-L/usr/local/cudnn-9.0/lib64
+export LD_LIBRARY_PATH=/usr/local/cudnn-9.0/lib64:$LD_LIBRARY_PATH
+
+
+# OpenMPI
+# CentOS7ならhttps://labo.utsubo.tokyo/2017/09/22/post-1212/ を参考に
+export PATH=$PATH:/usr/lib64/openmpi/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi/lib
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/include/openmpi-x86_64
+export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 
 case ${OSTYPE} in
     darwin*)
