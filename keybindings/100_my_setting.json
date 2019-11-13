@@ -25,26 +25,6 @@
         "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+t",
-        "command": "workbench.action.terminal.focus",
-        "when": "editorFocus"
-    },
-    {
-        "key": "ctrl+t",
-        "command": "workbench.action.terminal.toggleTerminal",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "cmd+w",
-        "command": "workbench.action.terminal.kill",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "cmd+t",
-        "command": "workbench.action.terminal.new",
-        "when": "terminalFocus"
-    },
-    {
         "key": "ctrl+k ctrl+f",
         "command": "editor.action.formatSelection",
         "when": "editorHasDocumentFormattingProvider && editorHasSelection && editorTextFocus && !editorReadonly"
@@ -59,12 +39,44 @@
         "command": "workbench.action.togglePanel"
     },
     {
-        "key": "ctrl-m",
-        "command": "emacs.C-m",
-        "when": "editorTextFocus"
+        "key": "ctrl+m",
+        "command": "type",
+        "args": { "text": "\n" },
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "f5",
         "command": "workbench.action.reloadWindow"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "cursorEndSelect & editor.action.clipboardCutAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+cmd+n",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+down",
+        "command": "-editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+cmd+p",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "-editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[IntlRo]",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus",
+        "args": { "text": "\u001f" }
     }
 ]
