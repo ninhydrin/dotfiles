@@ -44,7 +44,6 @@ alias fetch-pr="!f() { git fetch origin pull/$1/head:$1; }; f"
 alias tmuxa="tmux a -t"
 alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
 
-alias newenv="echo pyenv not installed!!"
 function tensorboard(){
   command docker run -p 6006:6006 -v @$1:/mounted tensorboard --logger /mounted
 }
@@ -84,22 +83,3 @@ case $(uname) in
 		alias ps="ps -fU$(whoami) --forest"
 		;;
 esac
-
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    eval "$(pyenv init -)"
-	alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
-	if [ ! -d ${PYENV_ROOT}/versions/miniconda3-latest ]; then
-		echo "not installed miniconda3-latest. install? [Y/n]"
-		read ANSWER
-		case $ANSWER in "" | "Y" | "y" | "yes" | "Yes" | "YES" )
-		pyenv install miniconda3
-		# conda install -y -c conda-forge opencv
-		pip install opencv-python
-		alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
-		;;
-		* ) echo "miniconda not installed";;
-		esac
-	fi
-fi
