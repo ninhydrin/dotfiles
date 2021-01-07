@@ -44,7 +44,7 @@ alias fetch-pr="!f() { git fetch origin pull/$1/head:$1; }; f"
 alias tmuxa="tmux a -t"
 alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
 
-function tensorboard(){
+function tensorboard-docker(){
   command docker run -p 6006:6006 -v @$1:/mounted tensorboard --logger /mounted
 }
 
