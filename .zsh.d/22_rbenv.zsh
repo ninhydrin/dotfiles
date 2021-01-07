@@ -1,4 +1,4 @@
-if [ ! -e $HOME/.rbenv ]; then
+if [ ! -e $HOME/.rbenv -a ! -f $HOME/.zsh_variables/no_rbenv ]; then
     echo "There is not .rbenv. Do you clone rbenv ? [y/n]"
     read -k 1 ANSWER
     case $ANSWER in
@@ -12,6 +12,8 @@ if [ ! -e $HOME/.rbenv ]; then
                 ;;
             esac
             ;;
+        "N" | "No")
+            touch $HOME/.zsh_variables/no_rbenv ;;
         * ) ;;
     esac
 fi

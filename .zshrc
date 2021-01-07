@@ -21,6 +21,9 @@ case ${OSTYPE} in
 esac
 
 #任意のエイリアス
+if [ ! -d $HOME/.zsh_variables ]; then
+    mkdir $HOME/.zsh_variables
+fi
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in $ZSHHOME/*; do
         [[ ${i##*/} = *.zsh ]] &&
@@ -110,6 +113,8 @@ else
         pip install xonsh
         xonsh
         ;;
+        "N" | "No")
+        touch $HOME/.zsh_variables/no_xonsh ;;
         * ) echo "start zsh";;
     esac
 fi
