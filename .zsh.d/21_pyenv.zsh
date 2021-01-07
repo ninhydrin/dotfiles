@@ -29,9 +29,9 @@ if [ -d "${PYENV_ROOT}" ]; then
 		echo "not installed miniconda3-latest. install? [Y/n]"
 		read -k 1 ANSWER
 		case $ANSWER in "Y" | "y" | "yes" | "Yes" | "YES" )
-		pyenv install miniconda3
+		pyenv install miniconda3-latest
 		# conda install -y -c conda-forge opencv
-		pip install opencv-python
+		# pip install opencv-python
 		alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
 		;;
 		* ) echo "miniconda not installed";;
