@@ -1,4 +1,4 @@
-which peco
+which peco > /dev/null
 if [ $? = 0  ]; then
 
 else
@@ -9,7 +9,7 @@ else
         ;;
     esac
 fi
-which peco
+which peco > /dev/null
 if [ $? = 0  ]; then
     function peco-select-history() {
         local tac
