@@ -104,7 +104,7 @@ export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
 export NODE_PATH=`npm root -g`
 
 which xonsh
-if [ $? = 0  ]; then
+if [ $? = 0 -o -f $ZSH_VARIABLES/no_xonsh ]; then
     # xonsh
 else
     echo "not installed xonsh. install? [Y/n]"
@@ -114,7 +114,7 @@ else
         xonsh
         ;;
         "N" | "No")
-        touch $HOME/.zsh_variables/no_xonsh ;;
+        touch $ZSH_VARIABLES/no_xonsh ;;
         * ) echo "start zsh";;
     esac
 fi

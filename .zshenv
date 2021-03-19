@@ -58,3 +58,5 @@ fi
 # ZPLUG
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
+
+export ZSH_VARIABLES=${HOME}/.zsh_variables

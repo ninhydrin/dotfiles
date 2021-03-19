@@ -1,6 +1,6 @@
 export PYENV_ROOT="${HOME}/.pyenv"
 
-if [ ! -e ${PYENV_ROOT} ]; then
+if [ ! -e ${PYENV_ROOT} -a ! -f $ZSH_VARIABLES/no_pyenv ]; then
     echo "There is not .pyenv. Do you clone pyenv ? [y/n]"
     read -k 1 ANSWER
     case $ANSWER in
@@ -16,6 +16,8 @@ if [ ! -e ${PYENV_ROOT} ]; then
                 ;;
             esac
             ;;
+        "N" )
+            touch $ZSH_VARIABLES/no_pyenv ;;
         * ) ;;
     esac
 fi

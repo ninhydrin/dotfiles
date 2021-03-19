@@ -1,8 +1,11 @@
-if [ ! -e $HOME/.zplug ]; then
+if [ ! -e $HOME/.zplug -a ! -f $ZSH_VARIABLES/no_zplug ]; then
     echo "There is not .zplug. Do you clone .zplug ? [y/n]"
     read ANSWER
     case $ANSWER in
-        "" | "Y" | "y" | "yes" | "Yes" | "YES" ) git clone https://github.com/zplug/zplug $ZPLUG_HOME;;
+        "" | "Y" | "y" | "yes" | "Yes" | "YES" )
+            git clone https://github.com/zplug/zplug $ZPLUG_HOME ;;
+        "N" | "No")
+            touch $ZSH_VARIABLES/no_zplug ;;
         * ) ;;
     esac
 fi
