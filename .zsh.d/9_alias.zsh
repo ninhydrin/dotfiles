@@ -17,7 +17,6 @@ alias dvipdfmx=/usr/local/texlive/2015/bin/x86_64-darwin/dvipdfmx
 alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
 
 alias sl='la'
-alias ks='la'
 alias l='la'
 alias al='la'
 
