@@ -6,5 +6,5 @@
 *#
 %*
 __pycache__
-/.zplug/
+.zplug
 .zsh_variables/*
