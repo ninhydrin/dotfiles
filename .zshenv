@@ -29,6 +29,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/include/openmpi-x86_64
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
 case ${OSTYPE} in
     darwin*)
         export PYENV_ROOT=/usr/local/var/pyenv
