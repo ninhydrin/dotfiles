@@ -30,14 +30,17 @@ export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/include/openmpi-x86_64
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 
 # Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+export RUSTUP_DIR="${HOME}/.rustup/"
+export CARGO_DIR="${HOME}/.cargo/"
+export PATH="$CARGO_DIR/bin:$PATH"
 
 case ${OSTYPE} in
     darwin*)
-        export PYENV_ROOT=/usr/local/var/pyenv
+        # export PYENV_ROOT=/usr/local/var/pyenv
+        export PYENV_ROOT=${HOME}/.pyenv
         export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-        if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+        # if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+        # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         export RBENV_ROOT=/usr/local/var/rbenv
         export LSCOLORS=xefxcxdxbxegedabagacad
         ;;
@@ -63,3 +66,4 @@ export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
 
 export ZSH_VARIABLES=${HOME}/.zsh_variables
+# . "$HOME/.cargo/env"
