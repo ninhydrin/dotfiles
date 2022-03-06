@@ -33,7 +33,7 @@ export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 export RUSTUP_DIR="${HOME}/.rustup/"
 export CARGO_DIR="${HOME}/.cargo/"
 export PATH="$CARGO_DIR/bin:$PATH"
-
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
 case ${OSTYPE} in
     darwin*)
         # export PYENV_ROOT=/usr/local/var/pyenv
