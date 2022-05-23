@@ -17,7 +17,7 @@ alias dvipdfmx=/usr/local/texlive/2015/bin/x86_64-darwin/dvipdfmx
 alias tree="pwd;find . | sort | sed '1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/| /g'"
 
 alias sl='la'
-alias ks='la'
+# alias ks='la'
 alias l='la'
 alias al='la'
 
@@ -55,6 +55,12 @@ alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
 alias tmuxa="tmux a -t"
 alias jn="jupyter-notebook"
+
+#amadeus
+alias amadeus="python ~/amadeus/job.py"
+alias ks="kubectl get svc"
+alias kj="kubectl get jobs"
+alias kp="kubectl get pods"
 
 ## lsとpsの設定
 ### ls: できるだけGNU lsを使う。
