@@ -100,21 +100,26 @@ fi
 export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
 export NODE_PATH=`npm root -g`
 
-which xonsh
-if [ $? = 0  ]; then
-    # xonsh
-else
-    echo "not installed xonsh. install? [Y/n]"
-    read -k 1 ANSWER
-    case $ANSWER in "Y" | "y" | "yes" | "Yes" | "YES" )
-        pip install xonsh
-        xonsh
-        ;;
-        * ) echo "start zsh";;
-    esac
-fi
-
 fpath=(~/.zsh/completion $fpath)
 
 # シェル関数`compinit`の自動読み込み
-autoload -Uz compinit && compinit -i
+# autoload -Uz compinit && compinit -i
+autoload -Uz compinit
+compinit
+alias k=kubectl
+source <(kubectl completion zsh)
+# complete -F __start_kubectl k
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+_kssh(){
+    COMPREPLY=( $( kubectl get pods | awk '{print $1}') )
+    COMPREPLY=( $(compgen -W "$(kubectl get pods | awk '{print $1}')" ${COMP_WORDS[COMP_CWORD]}  ) )
+}
+
+function kssh() {
+    kubectl exec -it $1 -- /bin/zsh
+}
+
+complete -F _kssh kssh
+
+alias ke="kssh"

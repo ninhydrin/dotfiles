@@ -21,7 +21,8 @@ export CUDA_PATH=/usr/local/cuda
 export LD_LIBRARY_PATH=/usr/local/cuda/lib64
 export CPATH=/usr/local/cuda/include:$CPATH
 
-
+# JAVA
+export PATH=$PATH:/usr/local/opt/openjdk/bin/java
 # OpenMPI
 # CentOS7ならhttps://labo.utsubo.tokyo/2017/09/22/post-1212/ を参考に
 export PATH=$PATH:/usr/lib64/openmpi/bin
@@ -58,3 +59,4 @@ fi
 # ZPLUG
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
+. "$HOME/.cargo/env"
