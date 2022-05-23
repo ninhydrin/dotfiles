@@ -26,7 +26,7 @@ alias newenv="echo pyenv not installed!!"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
-	alias newenv="pyenv virtualenv --python 3.8.5 miniconda3-latest "
+	alias newenv="pyenv virtualenv --python 3.10.4 miniconda3-latest "
 	if [ ! -d ${PYENV_ROOT}/versions/miniconda3-latest ]; then
 		echo "not installed miniconda3-latest. install? [Y/n]"
 		read -k 1 ANSWER
@@ -34,7 +34,7 @@ if [ -d "${PYENV_ROOT}" ]; then
 		pyenv install miniconda3-latest
 		# conda install -y -c conda-forge opencv
 		# pip install opencv-python
-		alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
+		alias newenv="pyenv virtualenv --python 3.10.4 miniconda3-latest "
 		;;
 		* ) echo "miniconda not installed";;
 		esac
