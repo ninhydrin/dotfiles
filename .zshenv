@@ -60,3 +60,4 @@ fi
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
 . "$HOME/.cargo/env"
+export ZSH_VARIABLES=${HOME}/.zsh_variables

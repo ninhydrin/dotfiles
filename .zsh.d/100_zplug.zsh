@@ -1,121 +1,127 @@
-if [ ! -e $HOME/.zplug ]; then
+if [ ! -e $HOME/.zplug -a ! -f $ZSH_VARIABLES/no_zplug ]; then
     echo "There is not .zplug. Do you clone .zplug ? [y/n]"
     read ANSWER
     case $ANSWER in
-        "" | "Y" | "y" | "yes" | "Yes" | "YES" ) git clone https://github.com/zplug/zplug $ZPLUG_HOME;;
+        "" | "Y" | "y" | "yes" | "Yes" | "YES" )
+            git clone https://github.com/zplug/zplug $ZPLUG_HOME ;;
+        "N" | "No")
+            touch $ZSH_VARIABLES/no_zplug ;;
         * ) ;;
     esac
 fi
-source ~/.zplug/init.zsh
 
-# Make sure to use double quotes
-zplug "zsh-users/zsh-history-substring-search"
+if [ -e $HOME/.zplug ]; then
+    source ~/.zplug/init.zsh
 
-zplug 'zsh-users/zsh-completions'
+    # Make sure to use double quotes
+    zplug "zsh-users/zsh-history-substring-search"
 
-# Use the package as a command
-# And accept glob patterns (e.g., brace, wildcard, ...)
-zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+    zplug 'zsh-users/zsh-completions'
 
-# Can manage everything e.g., other person's zshrc
-zplug "tcnksm/docker-alias", use:zshrc
+    # Use the package as a command
+    # And accept glob patterns (e.g., brace, wildcard, ...)
+    zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
 
-# dockerの補完
-zplug "felixr/docker-zsh-completion"
+    # Can manage everything e.g., other person's zshrc
+    zplug "tcnksm/docker-alias", use:zshrc
 
-# Disable updates using the "frozen" tag
-zplug "k4rthik/git-cal", as:command, frozen:1
+    # dockerの補完
+    zplug "felixr/docker-zsh-completion"
 
-# Grab binaries from GitHub Releases
-# and rename with the "rename-to:" tag
-zplug "junegunn/fzf-bin", \
-    from:gh-r, \
-    as:command, \
-    rename-to:fzf, \
-    use:"*darwin*amd64*"
+    # Disable updates using the "frozen" tag
+    zplug "k4rthik/git-cal", as:command, frozen:1
 
-# Supports oh-my-zsh plugins and the like
-zplug "plugins/git",   from:oh-my-zsh
+    # Grab binaries from GitHub Releases
+    # and rename with the "rename-to:" tag
+    zplug "junegunn/fzf-bin", \
+        from:gh-r, \
+        as:command, \
+        rename-to:fzf, \
+        use:"*darwin*amd64*"
 
-# Also prezto
-zplug "modules/prompt", from:prezto
+    # Supports oh-my-zsh plugins and the like
+    zplug "plugins/git",   from:oh-my-zsh
 
-# Load if "if" tag returns true
-zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
+    # Also prezto
+    zplug "modules/prompt", from:prezto
 
-# Run a command after a plugin is installed/updated
-# Provided, it requires to set the variable like the following:
-# ZPLUG_SUDO_PASSWORD="********"
-zplug "jhawthorn/fzy", \
-    as:command, \
-    rename-to:fzy, \
-    hook-build:"make && sudo make install"
+    # Load if "if" tag returns true
+    zplug "lib/clipboard", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 
-# Supports checking out a specific branch/tag/commit
-zplug "b4b4r07/enhancd", at:v1
-zplug "mollifier/anyframe", at:4c23cb60
+    # Run a command after a plugin is installed/updated
+    # Provided, it requires to set the variable like the following:
+    # ZPLUG_SUDO_PASSWORD="********"
+    zplug "jhawthorn/fzy", \
+        as:command, \
+        rename-to:fzy, \
+        hook-build:"make && sudo make install"
 
-# Can manage gist file just like other packages
-zplug "b4b4r07/79ee61f7c140c63d2786", \
-    from:gist, \
-    as:command, \
-    use:get_last_pane_path.sh
+    # Supports checking out a specific branch/tag/commit
+    zplug "b4b4r07/enhancd", at:v1
+    zplug "mollifier/anyframe", at:4c23cb60
 
-# Support bitbucket
-zplug "b4b4r07/hello_bitbucket", \
-    from:bitbucket, \
-    as:command, \
-    use:"*.sh"
+    # Can manage gist file just like other packages
+    zplug "b4b4r07/79ee61f7c140c63d2786", \
+        from:gist, \
+        as:command, \
+        use:get_last_pane_path.sh
 
-# Rename a command with the string captured with `use` tag
-zplug "b4b4r07/httpstat", \
-    as:command, \
-    use:'(*).sh', \
-    rename-to:'$1'
+    # Support bitbucket
+    zplug "b4b4r07/hello_bitbucket", \
+        from:bitbucket, \
+        as:command, \
+        use:"*.sh"
 
-# Group dependencies
-# Load "emoji-cli" if "jq" is installed in this example
-zplug "stedolan/jq", \
-    from:gh-r, \
-    as:command, \
-    rename-to:jq
-# zplug "b4b4r07/emoji-cli", \
-    # on:"stedolan/jq"
+    # Rename a command with the string captured with `use` tag
+    zplug "b4b4r07/httpstat", \
+        as:command, \
+        use:'(*).sh', \
+        rename-to:'$1'
 
-# Install zsh-gomi with fzf
-zplug "junegunn/fzf-bin", \
-    as:command, \
-    from:gh-r, \
-    rename-to:fzf, \
-    frozen:1
+    # Group dependencies
+    # Load "emoji-cli" if "jq" is installed in this example
+    zplug "stedolan/jq", \
+        from:gh-r, \
+        as:command, \
+        rename-to:jq
+    # zplug "b4b4r07/emoji-cli", \
+        # on:"stedolan/jq"
 
-zplug "b4b4r07/zsh-gomi", \
-    as:command, \
-    use:bin/gomi, \
-    on:junegunn/fzf-bin
+    # Install zsh-gomi with fzf
+    zplug "junegunn/fzf-bin", \
+        as:command, \
+        from:gh-r, \
+        rename-to:fzf, \
+        frozen:1
 
-# Note: To specify the order in which packages should be loaded, use the defer
-#       tag described in the next section
+    zplug "b4b4r07/zsh-gomi", \
+        as:command, \
+        use:bin/gomi, \
+        on:junegunn/fzf-bin
 
-# Set the priority when loading
-# e.g., zsh-syntax-highlighting must be loaded
-# after executing compinit command and sourcing other plugins
-# (If the defer tag is given 2 or above, run after compinit command)
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+    # Note: To specify the order in which packages should be loaded, use the defer
+    #       tag described in the next section
 
-# Can manage local plugins
-zplug "~/.zsh", from:local
+    # Set the priority when loading
+    # e.g., zsh-syntax-highlighting must be loaded
+    # after executing compinit command and sourcing other plugins
+    # (If the defer tag is given 2 or above, run after compinit command)
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
-# Load theme file
-zplug 'dracula/zsh', as:theme
+    # Can manage local plugins
+    zplug "~/.zsh", from:local
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
+    # Load theme file
+    zplug 'dracula/zsh', as:theme
+
+    # Install plugins if there are plugins that have not been installed
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo; zplug install
+        fi
     fi
-fi
 
-# Then, source plugins and add commands to $PATH
-zplug load --verbose
+    # Then, source plugins and add commands to $PATH
+    zplug load --verbose
+fi

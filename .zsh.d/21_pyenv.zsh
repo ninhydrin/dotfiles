@@ -1,6 +1,6 @@
 export PYENV_ROOT="${HOME}/.pyenv"
 
-if [ ! -e ${PYENV_ROOT} ]; then
+if [ ! -e ${PYENV_ROOT} -a ! -f $ZSH_VARIABLES/no_pyenv ]; then
     echo "There is not .pyenv. Do you clone pyenv ? [y/n]"
     read -k 1 ANSWER
     case $ANSWER in
@@ -16,6 +16,8 @@ if [ ! -e ${PYENV_ROOT} ]; then
                 ;;
             esac
             ;;
+        "N" )
+            touch $ZSH_VARIABLES/no_pyenv ;;
         * ) ;;
     esac
 fi
@@ -24,14 +26,14 @@ alias newenv="echo pyenv not installed!!"
 if [ -d "${PYENV_ROOT}" ]; then
     export PATH=${PYENV_ROOT}/bin:$PATH
     eval "$(pyenv init -)"
-	alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
+	alias newenv="pyenv virtualenv --python 3.8.5 miniconda3-latest "
 	if [ ! -d ${PYENV_ROOT}/versions/miniconda3-latest ]; then
 		echo "not installed miniconda3-latest. install? [Y/n]"
 		read -k 1 ANSWER
 		case $ANSWER in "Y" | "y" | "yes" | "Yes" | "YES" )
-		pyenv install miniconda3
+		pyenv install miniconda3-latest
 		# conda install -y -c conda-forge opencv
-		pip install opencv-python
+		# pip install opencv-python
 		alias newenv="pyenv virtualenv --python 3.7.4 miniconda3-latest "
 		;;
 		* ) echo "miniconda not installed";;
