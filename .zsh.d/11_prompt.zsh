@@ -39,7 +39,7 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' formats \
     '(%{%F{white}%K{green}%}%s%{%f%k%}:`git config user.name`)-[%{%F{white}%K{blue}%}%b%{%f%k%}]'
 zstyle ':vcs_info:*' actionformats \
-    '(%{%F{white}%K{green}%}%s%{%f%k%})-[%{%F{white}%K{blue}%}%b%{%f%k%}|%{%F{white}%K{red}%}%a%{%f%k%}]'
+    '(%{%F{white}%K{green}%}%s%{%f%k%}:`git config user.name`)-[%{%F{white}%K{blue}%}%b%{%f%k%}|%{%F{white}%K{red}%}%a%{%f%k%}]'
 
 ### プロンプトバーの左側
 ###   %{%B%}...%{%b%}: 「...」を太字にする。

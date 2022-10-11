@@ -30,18 +30,27 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/openmpi/lib
 export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/include/openmpi-x86_64
 export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
 
+# Rust
+export RUSTUP_DIR="${HOME}/.rustup/"
+export CARGO_DIR="${HOME}/.cargo/"
+export PATH="$CARGO_DIR/bin:$PATH"
+export CARGO_NET_GIT_FETCH_WITH_CLI=true
 case ${OSTYPE} in
     darwin*)
-        export PYENV_ROOT=/usr/local/var/pyenv
+        # export PYENV_ROOT=/usr/local/var/pyenv
+        export PYENV_ROOT=${HOME}/.pyenv
         export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-        if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-        if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+        # if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+        # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         export RBENV_ROOT=/usr/local/var/rbenv
+        # export NODENV_ROOT=/usr/local/var/nodenv
+        export NODENV_ROOT=${HOME}/.nodenv
         export LSCOLORS=xefxcxdxbxegedabagacad
         ;;
     linux*)
         export PYENV_ROOT=${HOME}/.pyenv
         export RBENV_ROOT=${HOME}/.rbenv
+        export NODENV_ROOT=${HOME}/.nodenv
         ;;
 esac
 
@@ -56,8 +65,21 @@ if [ -d ${RBENV_ROOT} ]; then
     eval "$(rbenv init -)"
 fi
 
+if [ -d ${NODENV_ROOT} ]; then
+    export PATH=${NODENV_ROOT}/bin:$PATH
+    eval "$(nodenv init -)"
+fi
+
 # ZPLUG
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
+<<<<<<< HEAD
 . "$HOME/.cargo/env"
+export ZSH_VARIABLES=${HOME}/.zsh_variables
+=======
+
+export ZSH_VARIABLES=${HOME}/.zsh_variables
+# . "$HOME/.cargo/env"
+>>>>>>> 9fcbf4fce0feb74c2eba7e0b7b98aadd616b9ee7
+
 export ZSH_VARIABLES=${HOME}/.zsh_variables

@@ -1,11 +1,31 @@
-# ZSHHOME(.zsh.d)直下の.zshファイルを数字順に実行する
-if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
-    for i in `ls $ZSHHOME| sort -n |grep -E "^\d+_.+\.zsh$"`; do
-        i="$ZSHHOME/$i"
-        [[ ${i##*/} = *.zsh ]] &&
-            [ \( -f $i -o -h $i \) -a -r $i ] && . $i
-    done
+
+# -*- sh -*-
+# git clone https://github.com/syl20bnr/spacemacs .emacs.d
+
+# brew tap homebrew/science;brew install openblas # openblas for numpy
+# conda install -c conda-forge numpy
+export PATH="/usr/local/opt/ncurses/bin:$PATH"
+
+case ${OSTYPE} in
+    darwin*)
+        function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
+        alias imgcat='~/.imgcat'
+        alias imgls='~/.imgls'
+        # alias chrome='google-chrome'
+        alias -s html=chrome
+        # alias google-chrome='open -a Google\ Chrome'
+        alias lsusb='system_profiler SPUSBDataType'
+            ;;
+    linux*)
+        # function emacs () { /usr/bin/emacs $1 &}
+        ;;
+esac
+
+#任意のエイリアス
+if [ ! -d $HOME/.zsh_variables ]; then
+    mkdir $HOME/.zsh_variables
 fi
+
 
 bindkey -e
 ## カレントディレクトリ中に指定されたディレクトリが見つからなかった場合に
@@ -79,26 +99,8 @@ fi
 export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
 export NODE_PATH=`npm root -g`
 
+
 fpath=(~/.zsh/completion $fpath)
 
 # シェル関数`compinit`の自動読み込み
-# autoload -Uz compinit && compinit -i
-autoload -Uz compinit
-compinit
-alias k=kubectl
-source <(kubectl completion zsh)
-# complete -F __start_kubectl k
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-
-_kssh(){
-    COMPREPLY=( $( kubectl get pods | awk '{print $1}') )
-    COMPREPLY=( $(compgen -W "$(kubectl get pods | awk '{print $1}')" ${COMP_WORDS[COMP_CWORD]}  ) )
-}
-
-function kssh() {
-    kubectl exec -it $1 -- /bin/zsh
-}
-
-complete -F _kssh kssh
-
-alias ke="kssh"
+autoload -Uz compinit && compinit -i
