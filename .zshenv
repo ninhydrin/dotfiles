@@ -42,11 +42,14 @@ case ${OSTYPE} in
         # if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
         # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         export RBENV_ROOT=/usr/local/var/rbenv
+        # export NODENV_ROOT=/usr/local/var/nodenv
+        export NODENV_ROOT=${HOME}/.nodenv
         export LSCOLORS=xefxcxdxbxegedabagacad
         ;;
     linux*)
         export PYENV_ROOT=${HOME}/.pyenv
         export RBENV_ROOT=${HOME}/.rbenv
+        export NODENV_ROOT=${HOME}/.nodenv
         ;;
 esac
 
@@ -59,6 +62,11 @@ fi
 if [ -d ${RBENV_ROOT} ]; then
     export PATH=${RBENV_ROOT}/bin:$PATH
     eval "$(rbenv init -)"
+fi
+
+if [ -d ${NODENV_ROOT} ]; then
+    export PATH=${NODENV_ROOT}/bin:$PATH
+    eval "$(nodenv init -)"
 fi
 
 # ZPLUG
