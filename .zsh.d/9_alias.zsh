@@ -61,6 +61,7 @@ alias amadeus="python ~/amadeus/job.py"
 alias ks="kubectl get svc"
 alias kj="kubectl get jobs"
 alias kp="kubectl get pods"
+alias kr='kubectl get ResourceQuota --all-namespaces'
 
 ## lsとpsの設定
 ### ls: できるだけGNU lsを使う。
