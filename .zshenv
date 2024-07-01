@@ -70,16 +70,11 @@ if [ -d ${NODENV_ROOT} ]; then
     eval "$(nodenv init -)"
 fi
 
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
 # ZPLUG
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 
-<<<<<<< HEAD
-. "$HOME/.cargo/env"
 export ZSH_VARIABLES=${HOME}/.zsh_variables
-=======
+export PATH="/opt/homebrew/bin:$PATH"
 
-export ZSH_VARIABLES=${HOME}/.zsh_variables
-# . "$HOME/.cargo/env"
->>>>>>> 9fcbf4fce0feb74c2eba7e0b7b98aadd616b9ee7
-
-export ZSH_VARIABLES=${HOME}/.zsh_variables

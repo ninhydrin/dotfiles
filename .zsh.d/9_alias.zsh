@@ -51,6 +51,7 @@ alias smi="nvidia-smi"
 # brew のpyenvでのwarning対策
 alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
+alias rmds="find . -name '*.DS_Store' -type f -ls -delete"
 
 alias tmuxa="tmux a -t"
 alias jn="jupyter-notebook"
