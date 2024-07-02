@@ -20,16 +20,16 @@ if [ -e $HOME/.zplug ]; then
 
     # Use the package as a command
     # And accept glob patterns (e.g., brace, wildcard, ...)
-    zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
+    # zplug "Jxck/dotfiles", as:command, use:"bin/{histuniq,color}"
 
     # Can manage everything e.g., other person's zshrc
-    zplug "tcnksm/docker-alias", use:zshrc
+    # zplug "tcnksm/docker-alias", use:zshrc
 
     # dockerの補完
     zplug "felixr/docker-zsh-completion"
 
     # Disable updates using the "frozen" tag
-    zplug "k4rthik/git-cal", as:command, frozen:1
+    # zplug "k4rthik/git-cal", as:command, frozen:1
 
     # Grab binaries from GitHub Releases
     # and rename with the "rename-to:" tag
@@ -57,47 +57,47 @@ if [ -e $HOME/.zplug ]; then
         hook-build:"make && sudo make install"
 
     # Supports checking out a specific branch/tag/commit
-    zplug "b4b4r07/enhancd", at:v1
-    zplug "mollifier/anyframe", at:4c23cb60
+    # zplug "b4b4r07/enhancd", at:v1
+    # zplug "mollifier/anyframe", at:4c23cb60
 
     # Can manage gist file just like other packages
-    zplug "b4b4r07/79ee61f7c140c63d2786", \
-        from:gist, \
-        as:command, \
-        use:get_last_pane_path.sh
-
+    # zplug "b4b4r07/79ee61f7c140c63d2786", \
+        # from:gist, \
+        # as:command, \
+        # use:get_last_pane_path.sh
+#
     # Support bitbucket
-    zplug "b4b4r07/hello_bitbucket", \
-        from:bitbucket, \
-        as:command, \
-        use:"*.sh"
+    # zplug "b4b4r07/hello_bitbucket", \
+        # from:bitbucket, \
+        # as:command, \
+        # use:"*.sh"
 
     # Rename a command with the string captured with `use` tag
-    zplug "b4b4r07/httpstat", \
-        as:command, \
-        use:'(*).sh', \
-        rename-to:'$1'
+    # zplug "b4b4r07/httpstat", \
+        # as:command, \
+        # use:'(*).sh', \
+        # rename-to:'$1'
 
     # Group dependencies
     # Load "emoji-cli" if "jq" is installed in this example
-    zplug "stedolan/jq", \
-        from:gh-r, \
-        as:command, \
-        rename-to:jq
+    # zplug "stedolan/jq", \
+        # from:gh-r, \
+        # as:command, \
+        # rename-to:jq
     # zplug "b4b4r07/emoji-cli", \
         # on:"stedolan/jq"
 
     # Install zsh-gomi with fzf
-    zplug "junegunn/fzf-bin", \
-        as:command, \
-        from:gh-r, \
-        rename-to:fzf, \
-        frozen:1
+    # zplug "junegunn/fzf-bin", \
+        # as:command, \
+        # from:gh-r, \
+        # rename-to:fzf, \
+        # frozen:1
 
-    zplug "b4b4r07/zsh-gomi", \
-        as:command, \
-        use:bin/gomi, \
-        on:junegunn/fzf-bin
+    # zplug "b4b4r07/zsh-gomi", \
+        # as:command, \
+        # use:bin/gomi, \
+        # on:junegunn/fzf-bin
 
     # Note: To specify the order in which packages should be loaded, use the defer
     #       tag described in the next section
@@ -113,6 +113,7 @@ if [ -e $HOME/.zplug ]; then
 
     # Load theme file
     zplug 'dracula/zsh', as:theme
+    # zplug "tcnksm/docker-alias"
 
     # Install plugins if there are plugins that have not been installed
     if ! zplug check --verbose; then

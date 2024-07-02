@@ -1,3 +1,12 @@
+
+fpath=(~/.zsh/completion $fpath)
+
+# シェル関数`compinit`の自動読み込み
+# autoload -Uz compinit && compinit -i
+autoload -Uz compinit && compinit
+autoload -U bashcompinit && bashcompinit
+
+
 # ZSHHOME(.zsh.d)直下の.zshファイルを数字順に実行する
 if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
     for i in `ls $ZSHHOME| sort -n |grep -E "^\d+_.+\.zsh$"`; do
@@ -79,20 +88,15 @@ fi
 export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
 export NODE_PATH=`npm root -g`
 
-fpath=(~/.zsh/completion $fpath)
 
-# シェル関数`compinit`の自動読み込み
-# autoload -Uz compinit && compinit -i
-autoload -Uz compinit
-compinit
 alias k=kubectl
 source <(kubectl completion zsh)
 # complete -F __start_kubectl k
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
 _kssh(){
-    COMPREPLY=( $( kubectl get pods | awk '{print $1}') )
-    COMPREPLY=( $(compgen -W "$(kubectl get pods | awk '{print $1}')" ${COMP_WORDS[COMP_CWORD]}  ) )
+    # COMPREPLY=( $( kubectl get pods | awk '{print $1}') )
+    COMPREPLY=( $(compgen -W "$(kubectl get pods | awk 'NR>1 {print $1}')" ${COMP_WORDS[COMP_CWORD]}  ) )
 }
 
 function kssh() {

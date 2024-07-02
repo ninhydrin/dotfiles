@@ -5,7 +5,8 @@ setopt auto_cd
 setopt auto_pushd
 # ヒストリ
 ## ヒストリを保存するファイル
-HISTFILE=~/.zsh_history
+HISTFILE=${HOME}/dotfiles/.zsh_history
+# HISTFILE=~/.zsh_history
 ## メモリ上のヒストリ数。
 ## 大きな数を指定してすべてのヒストリを保存するようにしている。
 HISTSIZE=10000000

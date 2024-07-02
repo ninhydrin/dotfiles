@@ -1,0 +1,14 @@
+[user]
+	email = the.nocturne.of.daybreak@gmail.com
+	name = ninhydrin
+[alias]
+  st = status
+  ch = checkout
+  br = branch
+  co = commit
+[core]
+	editor = vim
+
+[url "github-private:"]
+    InsteadOf = https://github.com
+    InsteadOf = git@github.com
