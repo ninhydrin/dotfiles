@@ -1,6 +1,6 @@
 setopt no_global_rcs
 
-export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:
+export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/local/sbin:
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export LIBRARY_DIRS=/opt/local/lib
 
