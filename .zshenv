@@ -67,7 +67,7 @@ fi
 
 if [ -d ${NODENV_ROOT} ]; then
     export PATH=${NODENV_ROOT}/bin:$PATH
-    eval "$(nodenv init -)"
+    eval "$(nodenv init - zsh)"
 fi
 
 export PATH=$HOME/.nodebrew/current/bin:$PATH
