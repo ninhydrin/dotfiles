@@ -4,6 +4,9 @@ export PATH=/usr/local/bin:/bin:/sbin:/usr/sbin:/usr/bin:/usr/local/sbin:
 export PATH=${HOME}/.nodebrew/current/bin:${PATH}
 export LIBRARY_DIRS=/opt/local/lib
 
+#conda
+export PATH=$PATH:/opt/conda/bin:
+
 # Go lang
 export GOROOT=/usr/local/go/
 export GOPATH=~/dev/go-workspace
