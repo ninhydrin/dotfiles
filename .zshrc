@@ -1,5 +1,5 @@
 
-fpath=(~/.zsh/completion $fpath)
+fpath=(~/.zsh/completions $fpath)
 
 # シェル関数`compinit`の自動読み込み
 # autoload -Uz compinit && compinit -i

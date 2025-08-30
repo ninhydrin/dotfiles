@@ -98,9 +98,3 @@ if [[ "$TERM" == "dumb" ]]; then
 fi
 export PATH=$PATH:/Users/kura_yokoshima/.nodebrew/current/bin
 export NODE_PATH=`npm root -g`
-
-
-fpath=(~/.zsh/completion $fpath)
-
-# シェル関数`compinit`の自動読み込み
-autoload -Uz compinit && compinit -i

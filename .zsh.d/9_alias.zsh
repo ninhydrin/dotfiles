@@ -90,3 +90,10 @@ case $(uname) in
 		alias ps="ps -fU$(whoami) --forest"
 		;;
 esac
+
+
+# プルリクをローカルに持ってくる
+# https://qiita.com/great084/items/ad74dd064a2c2bc47cff
+function gfp() {
+    command git fetch origin pull/$1/head:PR-$1
+}

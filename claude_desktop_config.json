@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "claude_code": {
+      "command": "/Users/tmp_kura_yokoshima/.nodenv/shims/claude",
+      "args": ["mcp", "serve"],
+      "env": {}
+    },
+    "git-github": {
+      "command": "git-github",
+      "env": {
+        "GITHUB_TOKEN": "your-github-token-here"
+      },
+      "disabled": false,
+      "alwaysAllow": []
+    }
+  }
+}
