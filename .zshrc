@@ -106,3 +106,11 @@ function kssh() {
 complete -F _kssh kssh
 
 alias ke="kssh"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# fnm
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ -d "$FNM_PATH" ]; then
+  eval "`fnm env`"
+fi
