@@ -57,16 +57,20 @@ case ${OSTYPE} in
         ;;
 esac
 
-if [ -d ${PYENV_ROOT} ]; then
-    export PATH=${PYENV_ROOT}/bin:$PATH
-    export PYTHONPATH=./pyenv/python:$PYTHONPATH
-    eval "$(pyenv init -)"
-fi
+# uv
+export PATH=$HOME/.local/bin:$PATH
 
-if [ -d ${RBENV_ROOT} ]; then
-    export PATH=${RBENV_ROOT}/bin:$PATH
-    eval "$(rbenv init -)"
-fi
+
+# if [ -d ${PYENV_ROOT} ]; then
+    # export PATH=${PYENV_ROOT}/bin:$PATH
+    # export PYTHONPATH=./pyenv/python:$PYTHONPATH
+    # eval "$(pyenv init -)"
+# fi
+
+# if [ -d ${RBENV_ROOT} ]; then
+    # export PATH=${RBENV_ROOT}/bin:$PATH
+    # eval "$(rbenv init -)"
+# fi
 
 if [ -d ${NODENV_ROOT} ]; then
     export PATH=${NODENV_ROOT}/bin:$PATH
@@ -81,3 +85,5 @@ export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 export ZSH_VARIABLES=${HOME}/.zsh_variables
 export PATH="/opt/homebrew/bin:$PATH"
 
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
