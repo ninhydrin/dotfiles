@@ -1,0 +1,17 @@
+[
+    {
+        "command": "explorer.newFile",
+        "key": "cmd+n",
+        "when": "explorerViewletFocus && explorerViewletVisible"
+    },
+    {
+        "command": "explorer.newFolder",
+        "key": "cmd+shift+n",
+        "when": "explorerViewletFocus && explorerViewletVisible"
+    },
+    {
+        "command": "cursorRight",
+        "key": "cmd+f",
+        "when": "explorerViewletFocus && explorerViewletVisible"
+    }
+]

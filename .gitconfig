@@ -1,0 +1,28 @@
+[include]
+	path = ~/dotfiles/.gitconfig.local
+
+# [user] section moved to .gitconfig.local (not tracked in git)
+# This allows you to keep personal information private
+
+[alias]
+	st = status
+	ch = checkout
+	br = branch
+	co = commit
+	permission-reset = "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply"
+
+[core]
+  editor = vim
+
+[url "github:"]
+    InsteadOf = https://github.com/
+    InsteadOf = git@github.com:
+
+[gpg]
+	format = ssh
+# commit.gpgsign moved to .gitconfig.local (can be overridden per-directory)
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

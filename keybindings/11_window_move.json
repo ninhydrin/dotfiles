@@ -1,0 +1,28 @@
+[
+    {
+        "key": "shift+cmd+]",
+        "command": "workbench.action.nextEditorInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+[",
+        "command": "workbench.action.previousEditorInGroup",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+cmd+]",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "shift+cmd+[",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+       {
+        "key": "ctrl+x o",
+        "command": "workbench.view.explorer",
+        "when": "editorTextFocus"
+    }
+
+]

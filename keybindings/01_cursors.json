@@ -1,0 +1,67 @@
+[
+    {
+        "key": "ctrl+f",
+        "command": "cursorRight",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "cursorLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "cursorDown",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "cursorUp",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+a",
+        "command": "cursorHome",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "cursorEnd",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+f",
+        "command": "cursorWordRight",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+b",
+        "command": "cursorWordLeft",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+shift+,",
+        "command": "cursorTop",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+shift+.",
+        "command": "cursorBottom",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "cursorPageDown",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+v",
+        "command": "cursorPageUp",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[BracketLeft]",
+        "command": "extension.setMark",
+        "when": "editorTextFocus"
+    }
+]

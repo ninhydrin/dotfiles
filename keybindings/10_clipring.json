@@ -1,0 +1,17 @@
+[
+    {
+        "key": "cmd+shift+v",
+        "command": "clipring.pasteRingItem",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+shift+c",
+        "command": "clipring.copyToRing",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+shift+x",
+        "command": "clipring.cutToRing",
+        "when": "editorTextFocus"
+    }
+]

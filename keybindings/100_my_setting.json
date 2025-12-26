@@ -1,0 +1,82 @@
+[
+    {
+        "key": "shift+enter",
+        "command": "extension.jumpy-word",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "Escape",
+        "command": "extension.jumpy-exit",
+        "when": "editorTextFocus && jumpy.isJumpyMode"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "selectNextSuggestion",
+        "when": "ditorTextFocus && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+shift+2",
+        "command": "emacs.enterMarkMode",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+k ctrl+f",
+        "command": "editor.action.formatSelection",
+        "when": "editorHasDocumentFormattingProvider && editorHasSelection && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "workbench.action.navigateEditorGroups",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+cmd+t",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "type",
+        "args": { "text": "\n" },
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "f5",
+        "command": "workbench.action.reloadWindow"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "cursorEndSelect & editor.action.clipboardCutAction",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+cmd+n",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+down",
+        "command": "-editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+cmd+p",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "-editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+[IntlRo]",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus",
+        "args": { "text": "\u001f" }
+    }
+]

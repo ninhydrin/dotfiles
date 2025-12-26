@@ -1,0 +1,11 @@
+[
+    {
+        "command": "center-editor-window.center",
+        "key": "ctrl+l",
+        "when": "editorTextFocus"
+    },
+    {
+        "command": "workbench.action.quit",
+        "key": "ctrl+x ctrl+c"
+    }
+]

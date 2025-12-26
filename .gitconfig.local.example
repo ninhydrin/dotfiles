@@ -1,0 +1,8 @@
+[user]
+	name = Your Name
+	email = your.email@example.com
+	signingkey = /path/to/your/ssh/signing_key.pub
+
+# Project-specific configurations (optional)
+# [includeIf "gitdir:~/your-project-dir/"]
+#     path = ~/.gitconfig-alternative

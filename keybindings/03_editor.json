@@ -1,0 +1,67 @@
+[
+    {
+        "key": "ctrl+x ctrl+f",
+        "command": "workbench.action.files.openFileFolder"
+    },
+    {
+        "key": "ctrl+x ctrl+s",
+        "command": "workbench.action.files.save"
+    },
+    {
+        "key": "ctrl+x s",
+        "command": "workbench.action.files.saveAs"
+    },
+    {
+        "key": "ctrl+x 0",
+        "command": "workbench.action.closeActiveEditor"
+    },
+    {
+        "key": "ctrl+x 3",
+        "command": "workbench.action.splitEditor"
+    },
+    {
+        "key": "ctrl+x o",
+        "command": "workbench.action.navigateEditorGroups"
+    },
+    {
+        "key": "ctrl+x b",
+        "command": "workbench.action.quickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+x k",
+        "command": "workbench.action.closeActiveEditor",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[Quote]",
+        "command": "editor.action.insertCursorBelow",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+[",
+        "command": "editor.fold",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+]",
+        "command": "editor.unfold",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "cmd+g g",
+        "command": "workbench.action.gotoLine",
+        "when": "editorTextFocus"
+    }
+
+
+]
