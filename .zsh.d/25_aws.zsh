@@ -10,7 +10,7 @@ alias awsl="aws elbv2 describe-listeners --load-balancer-arn"
 alias awslr="aws elbv2 describe-rules --listener-arn"
 
 aws-ssh() {
-    instance_id=`aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' \
+    instance_id=$(aws ec2 describe-instances --filters 'Name=instance-state-code,Values=16' \
         | jq -r '[.Reservations[].Instances[] | select(.PlatformDetails? != "Windows")
             | {
                 id: .InstanceId,
@@ -20,15 +20,15 @@ aws-ssh() {
                 }] | sort_by(.name) | .[] | .name + "\t" + .id  + "\t" + .private_dns + "\t" + .az' \
         | column -t \
         | peco \
-        | awk '{print $2}'`
+        | awk '{print $2}')
 
     if [ -n "$instance_id" ]; then
         aws ec2-instance-connect send-ssh-public-key \
-                    --instance-id $instance_id \
-                    --instance-os-user ${SSH_USER:-ec2-user} \
-                    --ssh-public-key file://~/.ssh/id_rsa.pub > /dev/null
+                    --instance-id "$instance_id" \
+                    --instance-os-user "${SSH_USER:-ec2-user}" \
+                    --ssh-public-key "file://$HOME/.ssh/id_rsa.pub" > /dev/null
 
-        ssh $@ ${SSH_USER:-ec2-user}@$instance_id
+        ssh "$@" "${SSH_USER:-ec2-user}@${instance_id}"
     fi
 }
 
@@ -37,11 +37,11 @@ aws-sso() {
     if [ -n "$1" ]; then
         aws_profile="$1"
     else
-        aws_profile=`aws configure list-profiles | sort | peco --prompt="AWS SSO Profile"`
+        aws_profile="$(aws configure list-profiles | sort | peco --prompt="AWS SSO Profile")"
     fi
 
     if [ -n "$aws_profile" ]; then
-        aws sso login --profile $aws_profile
+        aws sso login --profile "$aws_profile"
     fi
 }
 
@@ -66,13 +66,13 @@ aws-kurisu-user() {
     local role_arn="arn:aws:iam::${AWS_KURISU_ACCOUNT_ID}:role/${AWS_KURISU_ROLE_NAME}"
     local session_name="${AWS_KURISU_SESSION_NAME:-kurisu-session}"
 
-    token=`AWS_PROFILE=kurisu-login aws sts assume-role --role-arn "$role_arn" --role-session-name "$session_name"`
-    if [[ $? -eq "0" ]] then;
-        export AWS_ACCESS_KEY_ID=`echo $token | jq -r .Credentials.AccessKeyId`
-        export AWS_SECRET_ACCESS_KEY=`echo $token | jq -r .Credentials.SecretAccessKey`
-        export AWS_SESSION_TOKEN=`echo $token | jq -r .Credentials.SessionToken`
+    local token
+    if token="$(AWS_PROFILE=kurisu-login aws sts assume-role --role-arn "$role_arn" --role-session-name "$session_name")"; then
+        export AWS_ACCESS_KEY_ID="$(echo "$token" | jq -r .Credentials.AccessKeyId)"
+        export AWS_SECRET_ACCESS_KEY="$(echo "$token" | jq -r .Credentials.SecretAccessKey)"
+        export AWS_SESSION_TOKEN="$(echo "$token" | jq -r .Credentials.SessionToken)"
         export AWS_DEFAULT_REGION=us-east-1
-        echo Login Succeed until $(date -j -f "%Y-%m-%dT%H:%M:%S%z" $(echo $token | jq -r .Credentials.Expiration | sed "s/+00:00/+0000/" ) +"%Y-%m-%d %H:%M:%S %Z" -v+9H)
+        echo Login Succeed until "$(date -j -f "%Y-%m-%dT%H:%M:%S%z" "$(echo "$token" | jq -r .Credentials.Expiration | sed "s/+00:00/+0000/")" +"%Y-%m-%d %H:%M:%S %Z" -v+9H)"
     else
         echo Login Failed.
     fi
