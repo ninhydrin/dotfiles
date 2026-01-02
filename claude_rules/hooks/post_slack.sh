@@ -59,8 +59,7 @@ TOOL_NAME=$(echo "$JSON_INPUT" | jq -r '.tool_name // empty')
 
 # デバッグログの出力（有効な場合のみ）
 if [ "$ENABLE_DEBUG_LOG" = "true" ]; then
-  echo "$HOOK_EVENT_NAME: $JSON_INPUT" >> "$DEBUG_LOG_FILE"
-  echo "--------" >> "$DEBUG_LOG_FILE"
+    echo "[$TIMESTAMP] $HOOK_EVENT_NAME: $JSON_INPUT" >> "$DEBUG_LOG_FILE"
 fi
 
 
@@ -342,7 +341,7 @@ display notification "${SAFE_DETAILS}" with title "Claude Code" subtitle "${SAFE
 EOF
     then
         # AppleScriptが失敗した場合はログに記録
-        echo "AppleScript notification failed: TITLE='${SAFE_TITLE}' DETAILS='${SAFE_DETAILS}'" >&2
+        echo "[$TIMESTAMP] AppleScript notification failed: TITLE='${SAFE_TITLE}' DETAILS='${SAFE_DETAILS}'" >&2
     fi
 fi
 
