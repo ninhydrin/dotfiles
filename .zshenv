@@ -77,9 +77,6 @@ export ZPLUG_HOME=${HOME}/dotfiles/.zplug
 export ZSH_VARIABLES=${HOME}/.zsh_variables
 export PATH="/opt/homebrew/bin:$PATH"
 
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 
 # Load all *.env files from .env.d directory
 if [ -d "$HOME/.env.d" ]; then
