@@ -84,3 +84,8 @@ if [ -d "$HOME/.env.d" ]; then
     [ -r "$env_file" ] && source "$env_file"
   done
 fi
+
+# claude
+export ENABLE_TOOL_SEARCH=true
+export ENABLE_EXPERIMENTAL_MCP_CLI=false
+
