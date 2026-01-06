@@ -89,3 +89,7 @@ fi
 export ENABLE_TOOL_SEARCH=true
 export ENABLE_EXPERIMENTAL_MCP_CLI=false
 
+# proto
+# bash <(curl -fsSL https://moonrepo.dev/install/proto.sh)
+export PROTO_HOME="$HOME/.proto";
+export PATH="$PROTO_HOME/shims:$PROTO_HOME/bin:$PATH";
