@@ -97,3 +97,5 @@ esac
 function gfp() {
     command git fetch origin pull/$1/head:PR-$1
 }
+
+alias myclaude='env -u ANTHROPIC_AUTH_TOKEN -u ANTHROPIC_BASE_URL ANTHROPIC_MODEL=opus claude'

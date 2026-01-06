@@ -21,6 +21,8 @@ deploy:
 	@echo '==> Start to deploy dotfiles to home directory.'
 	@echo ''
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
+	@mkdir -p $(HOME)/.proto
+	@ln -sfnv $(abspath .prototools) $(HOME)/.proto/.prototools
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
