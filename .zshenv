@@ -69,7 +69,7 @@ export PATH=$HOME/.local/bin:$PATH
     # eval "$(rbenv init -)"
 # fi
 
-export PATH=$HOME/.nodebrew/current/bin:$PATH
+# export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # ZPLUG
 export ZPLUG_HOME=${HOME}/dotfiles/.zplug
