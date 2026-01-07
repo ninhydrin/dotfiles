@@ -1,0 +1,125 @@
+# Ghostty Terminal Emulator Configuration
+# https://ghostty.org/docs/config/reference
+
+# ============================================================================
+# Theme & Colors
+# ============================================================================
+# Reference: https://ghostty.org/docs/features/theme
+#
+# Catppuccin is a modern, eye-friendly theme with excellent contrast
+# Automatically switches between dark (Mocha) and light (Latte) based on system appearance
+
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+
+# ============================================================================
+# Font Settings
+# ============================================================================
+# Reference: https://ghostty.org/docs/config/reference#font-family
+#
+# JetBrains Mono is designed for developers with excellent readability
+# Includes programming ligatures for better code visualization
+
+font-family = "JetBrains Mono"
+font-size = 13
+
+# Enable font ligatures (default: true)
+# Disable with: font-feature = -calt
+font-synthetic-style = true
+
+# ============================================================================
+# Window & Appearance
+# ============================================================================
+# Reference: https://ghostty.org/docs/config/reference#window-padding-x
+
+# Background transparency (0.0-1.0)
+background-opacity = 0.95
+
+# Background blur effect (macOS and KDE Plasma only)
+# Creates a frosted glass effect with transparency
+background-blur = 20
+
+# Window padding
+window-padding-x = 10
+window-padding-y = 10
+
+# macOS-specific titlebar style
+# Options: native, transparent, tabs, hidden
+macos-titlebar-style = transparent
+
+# Enable VSync to prevent screen tearing
+window-vsync = true
+
+# ============================================================================
+# Terminal Behavior
+# ============================================================================
+# Reference: https://ghostty.org/docs/features/shell-integration
+
+# Shell integration (auto-detect: bash, zsh, fish, elvish)
+shell-integration = detect
+
+# Working directory for new windows/tabs/splits
+# Options: home, inherit, or absolute path
+working-directory = inherit
+
+# ============================================================================
+# Clipboard & Selection
+# ============================================================================
+# Reference: https://ghostty.org/docs/config/reference#clipboard-read
+
+# Allow clipboard write via OSC 52
+clipboard-write = allow
+
+# Clipboard read permission
+clipboard-read = ask
+
+# Copy to clipboard on selection (macOS default behavior is false)
+copy-on-select = false
+
+# ============================================================================
+# Performance
+# ============================================================================
+# Reference: https://ghostty.org/docs/config/reference#scrollback-limit
+
+# Scrollback buffer limit (in bytes)
+# 32MB = 33554432 bytes
+scrollback-limit = 33554432
+
+# ============================================================================
+# Key Bindings (macOS optimized)
+# ============================================================================
+# Reference: https://ghostty.org/docs/config/keybind
+#
+# Custom key bindings for improved productivity
+# Format: keybind = <key combination>=<action>
+
+# Tab management
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface
+keybind = cmd+shift+[=previous_tab
+keybind = cmd+shift+]=next_tab
+
+# Split management
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Window management
+keybind = cmd+n=new_window
+
+# Configuration reload
+keybind = cmd+comma=reload_config
+
+# Clipboard operations (using default system shortcuts)
+# cmd+c / cmd+v are handled by shell integration
+
+# ============================================================================
+# Additional Resources
+# ============================================================================
+# Official Documentation: https://ghostty.org/docs
+# GitHub Repository: https://github.com/ghostty-org/ghostty
+# Theme Gallery: https://ghostty.org/docs/features/theme
+#
+# Commands:
+#   ghostty +list-themes              - List all available themes
+#   ghostty +list-fonts               - List all available fonts
+#   ghostty +show-config --default    - Show default configuration
+#   ghostty +list-keybinds --default  - Show default key bindings

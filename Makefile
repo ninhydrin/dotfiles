@@ -23,6 +23,16 @@ deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 	@mkdir -p $(HOME)/.proto
 	@ln -sfnv $(abspath .prototools) $(HOME)/.proto/.prototools
+	@if [ -d .config ]; then \
+		echo '==> Deploying .config directories...'; \
+		mkdir -p $(HOME)/.config; \
+		for dir in .config/*; do \
+			if [ -d "$$dir" ]; then \
+				target=$$(basename "$$dir"); \
+				ln -sfnv $(abspath $$dir) $(HOME)/.config/$$target; \
+			fi; \
+		done; \
+	fi
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
