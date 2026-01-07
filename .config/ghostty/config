@@ -123,3 +123,4 @@ keybind = cmd+comma=reload_config
 #   ghostty +list-fonts               - List all available fonts
 #   ghostty +show-config --default    - Show default configuration
 #   ghostty +list-keybinds --default  - Show default key bindings
+theme = tokyonight
