@@ -20,7 +20,7 @@ theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 # Includes programming ligatures for better code visualization
 
 font-family = "JetBrains Mono"
-font-size = 13
+font-size = 17
 
 # Enable font ligatures (default: true)
 # Disable with: font-feature = -calt
@@ -134,3 +134,19 @@ keybind = cmd+comma=reload_config
 #   ghostty +show-config --default    - Show default configuration
 #   ghostty +list-keybinds --default  - Show default key bindings
 theme = tokyonight
+
+# Carriage Return (Enter)
+keybind = ctrl+m=text:\x0d
+
+# Tab
+keybind = ctrl+i=text:\x09
+
+# Backspace
+keybind = ctrl+h=text:\x08
+
+# Escape
+keybind = ctrl+[=text:\x1b
+
+# Line Feed
+keybind = ctrl+j=text:\x0a
+
