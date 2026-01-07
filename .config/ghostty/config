@@ -54,6 +54,12 @@ window-vsync = true
 # ============================================================================
 # Reference: https://ghostty.org/docs/features/shell-integration
 
+# TERM environment variable
+# Default: xterm-ghostty (enables Kitty Keyboard Protocol)
+# Changed to xterm-256color for Emacs keybind compatibility
+# This disables Kitty Keyboard Protocol and allows Ctrl+I/M to work as Tab/Enter
+term = xterm-256color
+
 # Shell integration (auto-detect: bash, zsh, fish, elvish)
 shell-integration = detect
 
