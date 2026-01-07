@@ -46,6 +46,10 @@ window-padding-y = 10
 # Options: native, transparent, tabs, hidden
 macos-titlebar-style = transparent
 
+# Option key as Alt for Emacs meta key bindings
+# Reference: https://gist.github.com/drewr/8255d36c1d0ee3684a08822242f9d33b
+macos-option-as-alt = true
+
 # Enable VSync to prevent screen tearing
 window-vsync = true
 
