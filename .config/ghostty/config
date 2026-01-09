@@ -136,7 +136,7 @@ keybind = cmd+comma=reload_config
 theme = tokyonight
 
 # Carriage Return (Enter)
-keybind = ctrl+m=text:\x0d
+# keybind = ctrl+m=text:\x0d
 
 # Tab
 keybind = ctrl+i=text:\x09
@@ -149,4 +149,8 @@ keybind = ctrl+[=text:\x1b
 
 # Line Feed
 keybind = ctrl+j=text:\x0a
+
+# 単語移動
+keybind = command+b=esc:b
+keybind = command+f=esc:f
 
