@@ -1,3 +1,5 @@
+node = "25.2.1"
+npm = "11.7.0"
 [settings]
 auto-install = true # .prototools に記載されたツールを自動でインストール
-auto-clean = true # 古いバージョンを自動削除してディスク容量を節約
+auto-clean = false # 古いバージョンを自動削除してディスク容量を節約
