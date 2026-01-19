@@ -85,9 +85,8 @@ if [ -d "$HOME/.env.d" ]; then
   done
 fi
 
-# claude
-export ENABLE_TOOL_SEARCH=true
-export ENABLE_EXPERIMENTAL_MCP_CLI=false
+# export ENABLE_TOOL_SEARCH=true
+# export ENABLE_EXPERIMENTAL_MCP_CLI=false
 
 # proto
 # bash <(curl -fsSL https://moonrepo.dev/install/proto.sh)

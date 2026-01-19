@@ -23,6 +23,6 @@ if [ ! command -v proto > /dev/null 2>&1 -a ! -f $ZSH_VARIABLES/no_proto ]; then
 fi
 
 # proto shell activation
-if command -v proto >/dev/null 2>&1; then
-  eval "$(proto activate bash)"
-fi
+# if command -v proto >/dev/null 2>&1; then
+#   eval "$(proto activate bash)"
+# fi
