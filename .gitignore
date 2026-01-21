@@ -19,3 +19,4 @@ claude_rules/hooks/.env
 .gitconfig.local
 .gitconfig-private
 codex_config.toml
+codex/config.toml
