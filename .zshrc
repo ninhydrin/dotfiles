@@ -136,3 +136,39 @@ esac
 alias claude-mem='${HOME}/.bun/bin/bun "${HOME}/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
 
 export PATH="$HOME/.npm-global/bin:$PATH"
+
+# tmux helper functions
+# セッション名をディレクトリ名にして新規セッションを作成
+# 既存セッションがある場合は新しいウィンドウを追加してアタッチ
+function tn() {
+  local session_name
+  if [ -n "$1" ]; then
+    session_name="$1"
+  else
+    session_name=$(basename "$PWD")
+  fi
+
+  if tmux has-session -t="$session_name" 2>/dev/null; then
+    # 既存セッションに新しいウィンドウを作成してアタッチ
+    tmux new-window -t "$session_name" -c "$PWD" \; attach-session -t "$session_name"
+  else
+    # 新規セッション作成
+    tmux new-session -s "$session_name" -c "$PWD"
+  fi
+}
+
+# セッション名をディレクトリ名にして既存セッションにアタッチ、なければ新規作成
+function ta() {
+  local session_name
+  if [ -n "$1" ]; then
+    session_name="$1"
+  else
+    session_name=$(basename "$PWD")
+  fi
+
+  if tmux has-session -t="$session_name" 2>/dev/null; then
+    tmux attach-session -t "$session_name"
+  else
+    tmux new-session -s "$session_name" -c "$PWD"
+  fi
+}
