@@ -57,7 +57,7 @@ alias tmuxa="tmux a -t"
 alias jn="jupyter-notebook"
 
 #amadeus
-alias amadeus="/usr/bin/python3 ~/amadeus/job.py"
+alias amadeus="~/amadeus/.venv/bin/python ~/amadeus/job.py"
 alias ks="kubectl get svc"
 alias kj="kubectl get jobs"
 alias kp="kubectl get pods"

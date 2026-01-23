@@ -139,7 +139,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 # tmux helper functions
 # セッション名をディレクトリ名にして新規セッションを作成
-# 既存セッションがある場合は新しいウィンドウを追加してアタッチ
+# 既存セッションがある場合はナンバリングして新しいセッションを作成
 function tn() {
   local session_name
   if [ -n "$1" ]; then
@@ -148,13 +148,17 @@ function tn() {
     session_name=$(basename "$PWD")
   fi
 
+  # 既存セッションがある場合、ナンバリングして新しいセッションを作成
   if tmux has-session -t="$session_name" 2>/dev/null; then
-    # 既存セッションに新しいウィンドウを作成してアタッチ
-    tmux new-window -t "$session_name" -c "$PWD" \; attach-session -t "$session_name"
-  else
-    # 新規セッション作成
-    tmux new-session -s "$session_name" -c "$PWD"
+    local counter=1
+    while tmux has-session -t="${session_name}-${counter}" 2>/dev/null; do
+      counter=$((counter + 1))
+    done
+    session_name="${session_name}-${counter}"
   fi
+
+  # 新規セッション作成
+  tmux new-session -s "$session_name" -c "$PWD"
 }
 
 # セッション名をディレクトリ名にして既存セッションにアタッチ、なければ新規作成
