@@ -98,4 +98,10 @@ function gfp() {
     command git fetch origin pull/$1/head:PR-$1
 }
 
-alias myclaude='env -u ANTHROPIC_AUTH_TOKEN -u ANTHROPIC_BASE_URL -u CLAUDE_CODE_SUBAGENT_MODEL ANTHROPIC_MODEL=opusplan claude'
+# claudeコマンドにタスクリストID（ディレクトリパスベース）を自動設定
+claude() {
+    # env -u ANTHROPIC_AUTH_TOKEN -u ANTHROPIC_BASE_URL -u CLAUDE_CODE_SUBAGENT_MODEL ANTHROPIC_MODEL=opus CLAUDE_CODE_TASK_LIST_ID=$(pwd | sed 's/^\///;s/\//-/g') command claude "$@"
+		CLAUDE_CODE_TASK_LIST_ID=$(pwd | sed 's/^\///;s/\//-/g') command claude "$@"
+}
+
+alias kclaude='ANTHROPIC_BASE_URL=$TRIAL_ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN=$TRIAL_ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL=$TRIAL_ANTHROPIC_MODEL ~/.local/bin/claude'

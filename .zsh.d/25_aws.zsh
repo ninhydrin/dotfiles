@@ -130,4 +130,4 @@ _aws_ec2_hosts() {
     compadd -d names "${ids[@]}"
 }
 
-compdef _aws_ec2_hosts ssh
+(( $+commands[aws] )) && compdef _aws_ec2_hosts ssh
