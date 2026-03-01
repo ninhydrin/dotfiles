@@ -23,6 +23,7 @@ deploy:
 	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)
 	@mkdir -p $(HOME)/.proto
 	@ln -sfnv $(abspath .prototools) $(HOME)/.proto/.prototools
+	@ln -sfnv $(abspath my_env_files) $(HOME)/.env.d
 	@if [ -d .config ]; then \
 		echo '==> Deploying .config directories...'; \
 		mkdir -p $(HOME)/.config; \
