@@ -90,6 +90,7 @@ export NODE_PATH=`npm root -g`
 
 
 alias k=kubectl
+alias headlamp='/Applications/Headlamp.app/Contents/Resources/headlamp-server -kubeconfig ~/.kube/config -in-cluster=false -html-static-dir /Applications/Headlamp.app/Contents/Resources/frontend -enable-dynamic-clusters -listen-addr localhost -port 4466'
 source <(kubectl completion zsh)
 # complete -F __start_kubectl k
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
@@ -176,3 +177,11 @@ function ta() {
     tmux new-session -s "$session_name" -c "$PWD"
   fi
 }
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+export PATH="/usr/local/share/npm-global/bin:$PATH"
+export PATH="/usr/local/share/npm-global/bin:$PATH"
