@@ -112,6 +112,18 @@ keybind = cmd+shift+]=next_tab
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
 
+# Split navigation
+keybind = ctrl+option+h=goto_split:left
+keybind = ctrl+option+l=goto_split:right
+keybind = ctrl+option+j=goto_split:bottom
+keybind = ctrl+option+k=goto_split:top
+
+# Split resize
+keybind = cmd+ctrl+left=resize_split:left,40
+keybind = cmd+ctrl+right=resize_split:right,40
+keybind = cmd+ctrl+up=resize_split:up,40
+keybind = cmd+ctrl+down=resize_split:down,40
+
 # Window management
 keybind = cmd+n=new_window
 
@@ -154,3 +166,9 @@ keybind = ctrl+j=text:\x0a
 keybind = command+b=esc:b
 keybind = command+f=esc:f
 
+
+# keybind = ctrl+m=text:\n
+# keybind = ctrl+enter=text:\n
+# keybind = ctrl+i=text:\t
+# keybind = ctrl+m=text:\r
+# keybind = ctrl+m=ignore
