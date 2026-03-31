@@ -64,29 +64,46 @@ alias kp="kubectl get pods"
 alias kr='kubectl get ResourceQuota --all-namespaces|grep yoko'
 
 ## lsとpsの設定
-### ls: できるだけGNU lsを使う。
+### ls: eza > GNU ls > 標準lsの優先順位で使う。
 ### ps: 自分関連のプロセスのみ表示。
+if (( $+commands[eza] )); then
+	# alias la="eza -lhAF --icons --group-directories-first"
+	# alias lt="eza -lhAF --icons --group-directories-first --tree --level=2"
+	alias la="eza -lhAF --group-directories-first"
+	alias lt="eza -lhAF --group-directories-first --tree --level=2"
+
+else
+	case $(uname) in
+	    *BSD|Darwin)
+			if [ -x "$(which gnuls)" ]; then
+				alias s="gnuls"
+				alias la="ls -lhAF --color=auto"
+			else
+				alias la="ls -lhAFG"
+			fi
+			;;
+	    SunOS)
+			if [ -x "`which gls`" ]; then
+				alias ls="gls"
+				alias la="ls -lhAF --color=auto"
+			else
+				alias la="ls -lhAF"
+			fi
+			;;
+	    *)
+			alias la="ls -lhAF --color=auto"
+			;;
+	esac
+fi
+
 case $(uname) in
     *BSD|Darwin)
-		if [ -x "$(which gnuls)" ]; then
-			alias s="gnuls"
-			alias la="ls -lhAF --color=auto"
-		else
-			alias la="ls -lhAFG"
-		fi
 		alias ps="ps -fU$(whoami)"
 		;;
     SunOS)
-		if [ -x "`which gls`" ]; then
-			alias ls="gls"
-			alias la="ls -lhAF --color=auto"
-		else
-			alias la="ls -lhAF"
-		fi
 		alias ps="ps -fl -u$(/usr/xpg4/bin/id -un)"
 		;;
     *)
-		alias la="ls -lhAF --color=auto"
 		alias ps="ps -fU$(whoami) --forest"
 		;;
 esac
@@ -105,3 +122,4 @@ claude() {
 }
 
 alias kclaude='ANTHROPIC_BASE_URL=$TRIAL_ANTHROPIC_BASE_URL ANTHROPIC_AUTH_TOKEN=$TRIAL_ANTHROPIC_AUTH_TOKEN ANTHROPIC_MODEL=$TRIAL_ANTHROPIC_MODEL ~/.local/bin/claude'
+alias cc="IS_SANDBOX=1 claude --dangerously-skip-permissions"
