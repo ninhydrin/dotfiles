@@ -1,0 +1,64 @@
+# herdr 設定 — .tmux.conf からの移行版
+# デフォルト設定の全体: `herdr --default-config`
+# 反映: `herdr server reload-config`
+# ここに書いていないキーはデフォルト値が使われる
+
+# 初回セットアップ画面をスキップ
+onboarding = false
+
+[terminal]
+# tmux: set-option -g default-shell /bin/zsh
+default_shell = "/bin/zsh"
+# 新規ペイン・タブは現在のディレクトリを引き継ぐ
+# (tmux: split-window -c "#{pane_current_path}" 相当。"follow" がデフォルト)
+new_cwd = "follow"
+
+[theme]
+# tmux: Solarized カラースキーム
+name = "solarized"
+
+[ui.toast]
+# tmux: set-option -g visual-activity on 相当（エージェント通知をアプリ内表示）
+delivery = "herdr"
+
+[keys]
+# tmux: set-option -g prefix C-x
+prefix = "ctrl+x"
+
+# デフォルトの detach は prefix+q だが、tmux では q = kill-pane なので
+# detach を tmux 標準の prefix+d に移し、q を close_pane に割り当てる
+detach = "prefix+d"
+# tmux: bind q kill-pane（prefix+x は herdr デフォルト）
+close_pane = ["prefix+x", "prefix+q"]
+# tmux: bind C-q kill-session（prefix+shift+d は herdr デフォルト）
+close_workspace = ["prefix+shift+d", "prefix+ctrl+q"]
+
+# tmux: bind | split-window -h（縦線で左右分割）
+split_vertical = "prefix+|"
+# tmux: bind - split-window -v（herdr デフォルトと同じ）
+split_horizontal = "prefix+minus"
+
+# tmux: bind v / C-v copy-mode（prefix+[ は herdr デフォルト）
+copy_mode = ["prefix+[", "prefix+v", "prefix+ctrl+v"]
+
+# tmux: bind C-t new-window（prefix+c は herdr デフォルト）
+new_tab = ["prefix+c", "prefix+ctrl+t"]
+# tmux: bind -r C-h / C-l で前後のウィンドウ移動
+previous_tab = ["prefix+p", "prefix+ctrl+h"]
+next_tab = ["prefix+n", "prefix+ctrl+l"]
+
+# tmux: bind -n S-left/down/up/right（プレフィックス不要のペイン移動）
+focus_pane_left = ["prefix+h", "shift+left"]
+focus_pane_down = ["prefix+j", "shift+down"]
+focus_pane_up = ["prefix+k", "shift+up"]
+focus_pane_right = ["prefix+l", "shift+right"]
+
+# tmux: bind -n C-o でペインを順に切り替え
+cycle_pane_next = ["prefix+tab", "ctrl+o"]
+
+# tmux: bind C-r source-file ~/.tmux.conf（設定リロード）
+[[keys.command]]
+key = "prefix+ctrl+r"
+type = "shell"
+command = "herdr server reload-config"
+description = "reload config"
