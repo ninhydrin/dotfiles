@@ -8,7 +8,7 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 case ${OSTYPE} in
     darwin*)
-        function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
+        # function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
         alias imgcat='~/.imgcat'
         alias imgls='~/.imgls'
         # alias chrome='google-chrome'
