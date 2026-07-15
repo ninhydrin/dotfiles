@@ -18,6 +18,7 @@ claude_rules/hooks/.env
 **/*.env
 .gitconfig.local
 .gitconfig-private
+.zsh.d/local/
 codex_config.toml
 codex/config.toml
 *.eln

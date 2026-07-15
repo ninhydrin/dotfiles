@@ -14,6 +14,9 @@ if [ -d $ZSHHOME -a -r $ZSHHOME -a -x $ZSHHOME ]; then
         [[ ${i##*/} = *.zsh ]] &&
             [ \( -f $i -o -h $i \) -a -r $i ] && . $i
     done
+    for i in "$ZSHHOME"/local/[^_]*.zsh(N); do
+        . "$i"
+    done
 fi
 
 bindkey -e
