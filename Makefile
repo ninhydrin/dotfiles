@@ -28,12 +28,16 @@ deploy:
 		echo '==> Deploying .config directories...'; \
 		mkdir -p $(HOME)/.config; \
 		for dir in .config/*; do \
-			if [ -d "$$dir" ]; then \
+			if [ -d "$$dir" ] && [ "$$dir" != ".config/herdr" ]; then \
 				target=$$(basename "$$dir"); \
 				ln -sfnv $(abspath $$dir) $(HOME)/.config/$$target; \
 			fi; \
 		done; \
 	fi
+	@# herdr はランタイムファイル（ログ・ソケット等）が ~/.config/herdr に置かれるため
+	@# ディレクトリごとではなく config.toml のみリンクする
+	@mkdir -p $(HOME)/.config/herdr
+	@ln -sfnv $(abspath .config/herdr/config.toml) $(HOME)/.config/herdr/config.toml
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh
