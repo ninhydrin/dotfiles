@@ -1,0 +1,4 @@
+# yazi file manager configuration
+# Single column display for sidebar use
+[mgr]
+ratio = [0, 1, 0]

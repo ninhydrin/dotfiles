@@ -154,7 +154,7 @@ theme = tokyonight
 keybind = ctrl+i=text:\x09
 
 # Backspace
-keybind = ctrl+h=text:\x08
+# keybind = ctrl+h=text:\x08
 
 # Escape
 keybind = ctrl+[=text:\x1b
@@ -172,3 +172,11 @@ keybind = command+f=esc:f
 # keybind = ctrl+i=text:\t
 # keybind = ctrl+m=text:\r
 # keybind = ctrl+m=ignore
+# keybind = ctrl+h=ignore
+# keybind = cmd+b=ignore
+# keybind = alt+b=ignore
+keybind = cmd+shift+f=start_search
+keybind = cmd+f=ignore
+keybind = cmd+b=esc:b
+keybind = cmd+f=esc:f
+keybind = next_tab=ignore

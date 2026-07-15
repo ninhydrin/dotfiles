@@ -20,3 +20,4 @@ claude_rules/hooks/.env
 .gitconfig-private
 codex_config.toml
 codex/config.toml
+*.eln

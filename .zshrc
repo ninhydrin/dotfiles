@@ -86,7 +86,13 @@ if [[ "$TERM" == "dumb" ]]; then
     PS1='$ '
 fi
 export PATH=$PATH:$HOME/.nodebrew/current/bin
-export NODE_PATH=`npm root -g`
+export NODE_PATH=$(pnpm root -g 2>/dev/null)
+
+# npm を禁止して pnpm を使うよう促す
+function npm() {
+  echo "⛔ npm is disabled. Use pnpm instead." >&2
+  return 1
+}
 
 
 alias k=kubectl
@@ -185,3 +191,10 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 export PATH="/usr/local/share/npm-global/bin:$PATH"
 export PATH="/usr/local/share/npm-global/bin:$PATH"
+
+# agmsg Codex monitor beta
+if [[ -x ~/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh ]]; then
+  codex() {
+    ~/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh "$@"
+  }
+fi
