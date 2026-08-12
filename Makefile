@@ -1,6 +1,8 @@
 DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 CANDIDATES := $(wildcard .??*) bin
-EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml .Trash
+# .config は丸ごとsymlinkせず、deploy内の個別処理でサブディレクトリ単位にリンクする
+# （丸ごとsymlinkすると ~/.config が無い新規マシンで個別リンクが自己参照になり ln が失敗する）
+EXCLUSIONS := .DS_Store .git .gitmodules .travis.yml .Trash .config
 DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))
 
 all: install
@@ -24,6 +26,10 @@ deploy:
 	@mkdir -p $(HOME)/.proto
 	@ln -sfnv $(abspath .prototools) $(HOME)/.proto/.prototools
 	@ln -sfnv $(abspath my_env_files) $(HOME)/.env.d
+	@if [ -L $(HOME)/.config ]; then \
+		echo '==> Replacing legacy ~/.config symlink with a real directory'; \
+		rm $(HOME)/.config; \
+	fi
 	@if [ -d .config ]; then \
 		echo '==> Deploying .config directories...'; \
 		mkdir -p $(HOME)/.config; \
