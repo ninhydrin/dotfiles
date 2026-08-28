@@ -91,12 +91,6 @@ fi
 export PATH=$PATH:$HOME/.nodebrew/current/bin
 export NODE_PATH=$(pnpm root -g 2>/dev/null)
 
-# npm を禁止して pnpm を使うよう促す
-function npm() {
-  echo "⛔ npm is disabled. Use pnpm instead." >&2
-  return 1
-}
-
 
 alias k=kubectl
 alias headlamp='/Applications/Headlamp.app/Contents/Resources/headlamp-server -kubeconfig ~/.kube/config -in-cluster=false -html-static-dir /Applications/Headlamp.app/Contents/Resources/frontend -enable-dynamic-clusters -listen-addr localhost -port 4466'
@@ -131,8 +125,8 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
 
@@ -201,3 +195,33 @@ if [[ -x ~/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh ]]; th
     ~/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh "$@"
   }
 fi
+
+# npm の依存変更系サブコマンドを封じて pnpm に寄せる。
+# 参照系(view/whoami/publish 等)は素通し。緊急時は `command npm ...` で回避可能。
+npm() {
+  case "$1" in
+    install|i|in|ins|isnt|add|ci|update|up|upgrade|uninstall|un|unlink|remove|rm|r|dedupe|ddp|link|ln)
+      print -u2 "🚫 npm $1 は無効化されています。pnpm を使ってください:"
+      print -u2 "   pnpm ${@}"
+      print -u2 "   (どうしても npm が必要なら: command npm ${@})"
+      return 1
+      ;;
+  esac
+  command npm "$@"
+}
+
+# npx の代替は pnpm dlx
+npx() {
+  print -u2 "🚫 npx は無効化されています。pnpm dlx を使ってください:"
+  print -u2 "   pnpm dlx ${@}"
+  print -u2 "   (どうしても npx が必要なら: command npx ${@})"
+  return 1
+}
+
+# >>> otty shell integration >>>
+# Added by Otty — toggle in Settings > Shell > Shell Integration.
+# Inert unless launched by Otty (it sets $OTTY_SHELL_INTEGRATION).
+if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integration.zsh" ]; then
+  . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
+fi
+# <<< otty shell integration <<<
