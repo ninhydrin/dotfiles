@@ -72,4 +72,4 @@ command = "herdr server reload-config"
 description = "reload config"
 
 [ui]
-agent_panel_sort = "priority"
+agent_panel_sort = "spaces"
