@@ -179,4 +179,4 @@ keybind = cmd+shift+f=start_search
 keybind = cmd+f=ignore
 keybind = cmd+b=esc:b
 keybind = cmd+f=esc:f
-keybind = next_tab=ignore
+keybind = ctrl+tab=ignore
