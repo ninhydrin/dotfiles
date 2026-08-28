@@ -124,9 +124,11 @@ export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
+# pnpm 11+ はグローバルbinが $PNPM_HOME/bin。旧レイアウトのshim（codex等）が
+# $PNPM_HOME 直下に残っているため両方をPATHに入れる
 case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
-  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+  *) export PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
@@ -139,7 +141,6 @@ esac
 
 alias claude-mem='${HOME}/.bun/bin/bun "${HOME}/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
 
-export PATH="$HOME/.npm-global/bin:$PATH"
 
 # tmux helper functions
 # セッション名をディレクトリ名にして新規セッションを作成
@@ -186,8 +187,6 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
-export PATH="/usr/local/share/npm-global/bin:$PATH"
-export PATH="/usr/local/share/npm-global/bin:$PATH"
 
 # agmsg Codex monitor beta
 if [[ -x ~/.agents/skills/agmsg/scripts/drivers/types/codex/codex-shim.sh ]]; then
@@ -225,3 +224,13 @@ if [ -n "$OTTY_SHELL_INTEGRATION" ] && [ -r "$OTTY_SHELL_INTEGRATION/otty-integr
   . "$OTTY_SHELL_INTEGRATION/otty-integration.zsh"
 fi
 # <<< otty shell integration <<<
+
+# agmsg shim binaries (must be before pnpm/codex on PATH)
+
+# agmsg codex shim が本物の codex バイナリを見つけるために必要。
+# PATH 上の codex (~/.agents/bin, ~/.local/bin) は全て agmsg の shim ラッパーで、
+# この変数で pnpm でインストールされた実体を指定する。
+# shim ラッパー自体も codex-shim-install.sh 形式に置き換え済み
+# (各 shim に AGMSG_CODEX_SHIM_WRAPPER=1 等を設定)。
+export AGMSG_REAL_CODEX=/Users/tmp_kura_yokoshima/Library/pnpm/bin/codex
+export PATH="$HOME/.agents/bin:$PATH"
