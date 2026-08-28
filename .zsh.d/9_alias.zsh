@@ -121,3 +121,10 @@ claude() {
 		CLAUDE_CODE_TASK_LIST_ID=$(pwd | sed 's/^\///;s/\//-/g') command claude "$@"
 }
 alias cc="IS_SANDBOX=1 claude --dangerously-skip-permissions"
+
+# tailscale
+if [[ "$(uname -s)" == "Darwin" ]] && \
+   ! command -v tailscale >/dev/null 2>&1 && \
+   [[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]]; then
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi
