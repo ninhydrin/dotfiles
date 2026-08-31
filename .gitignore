@@ -21,4 +21,4 @@ claude_rules/hooks/.env
 .zsh.d/local/
 codex_config.toml
 codex/config.toml
-*.eln
+*.eln.plans/
