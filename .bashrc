@@ -1,8 +1,5 @@
 . "$HOME/.cargo/env"
 
-# agmsg shim binaries
-# export PATH="$HOME/.agents/bin:$PATH"
-
 case ${OSTYPE} in
     darwin*)
         # export PYENV_ROOT=/usr/local/var/pyenv
