@@ -1,0 +1,508 @@
+// Zed keymap — ported from VS Code (emacs-mcx + custom keybindings)
+[
+  {
+    "bindings": {
+      // Global bindings
+      "ctrl-g": "menu::Cancel",
+      "escape": "menu::Cancel",
+      "home": "menu::SelectFirst",
+      "shift-pageup": "menu::SelectFirst",
+      "pageup": "menu::SelectFirst",
+      "end": "menu::SelectLast",
+      "shift-pagedown": "menu::SelectLast",
+      "pagedown": "menu::SelectLast",
+      "ctrl-n": "menu::SelectNext",
+      "ctrl-p": "menu::SelectPrevious",
+      "enter": "menu::Confirm",
+      "ctrl-enter": "menu::SecondaryConfirm",
+      "alt-shift-enter": "menu::Restart",
+      "alt-enter": ["picker::ConfirmInput", { "secondary": false }],
+      "ctrl-alt-enter": ["picker::ConfirmInput", { "secondary": true }],
+      "ctrl-shift-w": "workspace::CloseWindow",
+      "shift-escape": "workspace::ToggleZoom",
+      "open": "workspace::Open",
+      "ctrl-=": "zed::IncreaseBufferFontSize",
+      "ctrl-+": "zed::IncreaseBufferFontSize",
+      "ctrl--": "zed::DecreaseBufferFontSize",
+      "ctrl-0": "zed::ResetBufferFontSize",
+      "ctrl-,": "zed::OpenSettings",
+      "f11": "zed::ToggleFullScreen",
+      // "ctrl-alt-z": "edit_prediction::RateCompletions", // action not found in current Zed
+      "ctrl-shift-i": "edit_prediction::ToggleMenu",
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-g": "editor::Cancel",
+      "cmd-x": "command_palette::Toggle", // VS Code: cmd+x
+
+      // Cursor movement
+      "ctrl-f": "editor::MoveRight", // forward-char
+      "ctrl-b": "editor::MoveLeft", // backward-char
+      "ctrl-n": "editor::MoveDown", // next-line
+      "ctrl-p": "editor::MoveUp", // previous-line
+      "right": "editor::MoveRight",
+      "left": "editor::MoveLeft",
+      "down": "editor::MoveDown",
+      "up": "editor::MoveUp",
+
+      // Cursor movement: words (alt = emacs M-, cmd = VS Code user override)
+      "alt-b": "editor::MoveToPreviousWordStart",
+      "alt-f": "editor::MoveToNextWordEnd",
+      "cmd-f": "editor::MoveToNextWordEnd", // VS Code: cursorWordRight
+      "cmd-b": "editor::MoveToPreviousWordStart", // VS Code: cursorWordLeft
+
+      // Cursor movement: pages
+      "ctrl-v": ["editor::MovePageDown", { "center_cursor": false }], // scroll-up
+      "alt-v": ["editor::MovePageUp", { "center_cursor": false }], // scroll-down
+      "alt-<": "editor::MoveToBeginning", // beginning-of-buffer
+      "alt->": "editor::MoveToEnd", // end-of-buffer
+      "cmd-shift-,": "editor::MoveToBeginning", // VS Code: cursorTop
+      "cmd-shift-.": "editor::MoveToEnd", // VS Code: cursorBottom
+      "ctrl-l": "editor::ScrollCursorCenterTopBottom", // recenter-top-bottom
+
+      // Text editing: words
+      "alt-d": "editor::DeleteToNextWordEnd",
+      "alt-h": "editor::DeleteToPreviousWordStart",
+      "alt-backspace": "editor::DeleteToPreviousWordStart",
+      "alt-q": "editor::Rewrap",
+
+      // Text editing: characters
+      "ctrl-d": "editor::Delete", // delete-char
+      "backspace": "editor::Backspace",
+
+      // Terminal toggle (VS Code: ctrl+t)
+      "ctrl-t": "terminal_panel::ToggleFocus",
+
+      // Text editing: transforms
+      "alt-u": "editor::ConvertToUpperCase", // upcase-word
+      "alt-l": "editor::ConvertToLowerCase", // downcase-word
+      "alt-c": "editor::ConvertToUpperCamelCase",
+      "alt-s": "editor::ConvertToSnakeCase",
+      "alt-;": ["editor::ToggleComments", { "advance_downwards": false }],
+      "ctrl-x ctrl-;": "editor::ToggleComments",
+
+      // Undo / redo
+      "ctrl-/": "editor::Undo", // undo
+      "ctrl-_": "editor::Undo", // undo (C-_)
+      "ctrl-?": "editor::Redo", // redo, ctrl-shift-/
+      "ctrl-s": "buffer_search::Deploy", // isearch-forward
+      "ctrl-6": "editor::JoinLines", // join-line
+
+      // Copy / paste
+      "alt-shift-w": "editor::Copy",
+      "ctrl-shift-w": "editor::Cut", // kill-region
+      "ctrl-x h": "editor::SelectAll", // mark-whole-buffer
+      "alt-w": ["workspace::SendKeystrokes", "alt-shift-w ctrl-g"],
+      "ctrl-w": ["workspace::SendKeystrokes", "ctrl-shift-w ctrl-g"],
+      "ctrl-y": "editor::Paste",
+    },
+  },
+  {
+    "context": "Editor && mode == full",
+    "bindings": {
+      // Text editing: new lines
+      "enter": "editor::Newline",
+      "ctrl-j": "editor::NewlineBelow",
+      "ctrl-m": "editor::Newline", // VS Code: ctrl+m = newline
+      "ctrl-k": "editor::CutToEndOfLine", // VS Code emacs-mcx: killLine (was DeleteLine)
+
+      // Pane navigation (VS Code: ctrl+o = navigateEditorGroups)
+      "ctrl-o": "workspace::ActivateNextPane",
+
+      // Buffer navigation
+      "ctrl-x b": "tab_switcher::Toggle", // switch-to-buffer
+      "ctrl-x ctrl-b": "tab_switcher::Toggle", // switch-to-buffer
+      "alt-g g": "go_to_line::Toggle", // goto-line
+      "alt-g alt-g": "go_to_line::Toggle", // goto-line
+      "ctrl-@": "editor::SetMark", // set-mark
+      "ctrl-x ctrl-x": "editor::SwapSelectionEnds", // exchange-point-and-mark
+      "ctrl-a": [
+        "editor::MoveToBeginningOfLine",
+        { "stop_at_soft_wraps": false },
+      ], // move-beginning-of-line
+      "ctrl-e": ["editor::MoveToEndOfLine", { "stop_at_soft_wraps": false }], // move-end-of-line
+
+      // Multibuffers
+      "ctrl-enter": "editor::ExpandExcerpts",
+      "ctrl-alt-enter": "editor::OpenExcerpts",
+
+      // LSP
+      "alt-.": "editor::GoToDefinition", // xref-find-definitions
+      "alt-,": "pane::GoBack", // xref-pop-marker-stack
+      "ctrl-c w": "diagnostics::ToggleWarnings",
+      "ctrl-c ctrl-w": "diagnostics::ToggleWarnings",
+      "ctrl-c n": "editor::GoToDiagnostic",
+      "ctrl-c ctrl-n": "editor::GoToDiagnostic",
+      "ctrl-c p": "editor::GoToPreviousDiagnostic",
+      "ctrl-c ctrl-p": "editor::GoToPreviousDiagnostic",
+      "ctrl-c l": "diagnostics::Deploy",
+      "ctrl-c ctrl-l": "diagnostics::Deploy",
+      "ctrl-c r": "editor::Rename",
+      "ctrl-c ctrl-r": "editor::Rename",
+
+      // Assistants
+      "ctrl-c a": "assistant::InlineAssist",
+      "ctrl-c ctrl-a": "assistant::InlineAssist",
+      "ctrl->": "assistant::QuoteSelection",
+      // "ctrl-<": "assistant::InsertIntoEditor", // removed in current Zed (agent diff flow)
+
+      // Comments (VS Code: ctrl+; = line comment, ctrl+. = block comment)
+      "ctrl-alt-space": "editor::ShowCharacterPalette",
+      "ctrl-:": "editor::ToggleInlayHints",
+      "ctrl-;": ["editor::ToggleComments", { "advance_downwards": false }],
+      "ctrl-.": ["editor::ToggleComments", { "advance_downwards": false }],
+    },
+  },
+  {
+    "context": "Editor && selection_mode", // region selection
+    "bindings": {
+      "ctrl-g": "editor::Cancel",
+      // Cursor movement
+      "ctrl-f": "editor::SelectRight", // forward-char
+      "ctrl-b": "editor::SelectLeft", // backward-char
+      "ctrl-n": "editor::SelectDown", // next-line
+      "ctrl-p": "editor::SelectUp", // previous-line
+      "right": "editor::SelectRight",
+      "left": "editor::SelectLeft",
+      "down": "editor::SelectDown",
+      "up": "editor::SelectUp",
+      "alt-left": "editor::SelectToPreviousWordStart",
+      "alt-right": "editor::SelectToNextWordEnd",
+      "cmd-f": "editor::SelectToNextWordEnd", // VS Code: word select right
+      "cmd-b": "editor::SelectToPreviousWordStart", // VS Code: word select left
+      "ctrl-v": "editor::SelectPageDown",
+      "alt-v": "editor::SelectPageUp",
+      "ctrl-a": [
+        "editor::SelectToBeginningOfLine",
+        { "stop_at_soft_wraps": false },
+      ],
+      "ctrl-e": ["editor::SelectToEndOfLine", { "stop_at_soft_wraps": false }],
+      "alt-f": "editor::SelectToNextWordEnd",
+      "alt-b": "editor::SelectToPreviousSubwordStart",
+      "alt-<": "editor::SelectToBeginning",
+      "alt->": "editor::SelectToEnd",
+      "cmd-shift-,": "editor::SelectToBeginning", // VS Code: select to top
+      "cmd-shift-.": "editor::SelectToEnd", // VS Code: select to bottom
+      "ctrl-shift-p": "editor::SelectLargerSyntaxNode", // Expand Selection
+      "ctrl-shift-n": "editor::SelectSmallerSyntaxNode", // Shrink Selection
+      "cmd-w": ["action::Sequence", ["editor::Copy", "editor::Cancel"]],
+      "alt-w": ["action::Sequence", ["editor::Copy", "editor::Cancel"]],
+    },
+  },
+  // Bindings that should be unified with bindings for more general actions
+  {
+    "context": "Editor && renaming",
+    "bindings": {
+      "enter": "editor::ConfirmRename",
+    },
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-p": "editor::ContextMenuPrevious",
+      "ctrl-n": "editor::ContextMenuNext",
+      "alt-<": "editor::ContextMenuFirst",
+      "alt->": "editor::ContextMenuLast",
+      // There seems to be no way to go up/down one page of results of code actions / completions
+      "alt-v": "editor::ContextMenuFirst",
+      "ctrl-v": "editor::ContextMenuLast",
+    },
+  },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "enter": "editor::ConfirmCompletion",
+      "tab": "editor::ComposeCompletion",
+      "ctrl-j": "editor::ContextMenuNext", // VS Code: selectNextSuggestion
+      "ctrl-k": "editor::ContextMenuPrevious", // VS Code: selectPrevSuggestion
+    },
+  },
+  {
+    "context": "Editor && showing_code_actions",
+    "bindings": {
+      "enter": "editor::ConfirmCodeAction",
+    },
+  },
+  {
+    "context": "Editor && mode == full && edit_prediction",
+    "bindings": {
+      "alt-]": "editor::NextEditPrediction",
+      "alt-[": "editor::PreviousEditPrediction",
+      "alt-f": "editor::AcceptNextWordEditPrediction",
+    },
+  },
+  {
+    "context": "Editor && !edit_prediction",
+    "bindings": {
+      "alt-e": "editor::ShowEditPrediction",
+    },
+  },
+  {
+    "context": "Editor && edit_prediction",
+    "bindings": {
+      "tab": "editor::AcceptEditPrediction",
+    },
+  },
+  {
+    "context": "Editor && (edit_prediction && (showing_completions || in_leading_whitespace))",
+    "bindings": {
+      "alt-a": "editor::AcceptEditPrediction",
+    },
+  },
+  {
+    "context": "AssistantPanel",
+    "bindings": {
+      "ctrl-alt-/": "assistant::ToggleModelSelector",
+      // "enter": "assistant::ConfirmCommand", // removed in current Zed
+    },
+  },
+  {
+    "context": "ContextEditor > Editor",
+    "bindings": {
+      // "ctrl-enter": "assistant::Assist", // removed in current Zed (use agent::Chat)
+      // "ctrl-shift-enter": "assistant::Edit", // removed in current Zed
+      "ctrl->": "assistant::QuoteSelection",
+      // "ctrl-<": "assistant::InsertIntoEditor", // removed in current Zed
+      "ctrl-c m": "assistant::ToggleModelSelector",
+      // "shift-enter": "assistant::Split", // removed in current Zed
+      // "ctrl-r": "assistant::CycleMessageRole", // removed in current Zed
+      // "enter": "assistant::ConfirmCommand", // removed in current Zed
+    },
+  },
+  {
+    "context": "ProposedChangesEditor",
+    "bindings": {
+      "ctrl-shift-y": "editor::ApplyDiffHunk",
+      "ctrl-alt-a": "editor::ApplyAllDiffHunks",
+    },
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-x ctrl-r": "projects::OpenRecent",
+      "ctrl-x ctrl-shift-r": "projects::OpenRemote",
+      "ctrl-~": "workspace::NewTerminal",
+      "ctrl-x ctrl-s": "workspace::Save",
+      "ctrl-x ctrl-shift-s": "workspace::SaveWithoutFormat",
+      "ctrl-x ctrl-w": "workspace::SaveAs", // write-file
+      "new": "workspace::NewFile",
+      "alt-x": "command_palette::Toggle",
+      "cmd-x": "command_palette::Toggle", // VS Code: showCommands
+      "shift-new": "workspace::NewWindow",
+      "ctrl-shift-n": "workspace::NewWindow",
+      "ctrl-`": "terminal_panel::ToggleFocus",
+      "ctrl-t": "terminal_panel::ToggleFocus", // VS Code: terminal toggle
+      "alt-1": ["workspace::ActivatePane", 0],
+      "alt-2": ["workspace::ActivatePane", 1],
+      "alt-3": ["workspace::ActivatePane", 2],
+      "alt-4": ["workspace::ActivatePane", 3],
+      "alt-5": ["workspace::ActivatePane", 4],
+      "alt-6": ["workspace::ActivatePane", 5],
+      "alt-7": ["workspace::ActivatePane", 6],
+      "alt-8": ["workspace::ActivatePane", 7],
+      "alt-9": ["workspace::ActivatePane", 8],
+      "ctrl-z ctrl-x": "workspace::ToggleLeftDock",
+      "ctrl-z ctrl-c": "workspace::ToggleRightDock",
+      "alt-save": "workspace::SaveAll",
+      "ctrl-alt-s": "workspace::SaveAll",
+      "escape": "workspace::Unfollow",
+      "ctrl-shift-x": "zed::Extensions",
+
+      "ctrl-x ctrl-t": "theme_selector::Toggle",
+
+      // Tasks
+      "ctrl-c t": "task::Spawn",
+      "ctrl-c ctrl-t": ["task::Spawn", { "reveal_target": "center" }],
+      "ctrl-c shift-t": "task::Rerun",
+
+      // Side panels
+      "ctrl-z i": "assistant::ToggleFocus",
+      "ctrl-z ctrl-i": "assistant::ToggleFocus",
+      "ctrl-z p": "project_panel::ToggleFocus",
+      "ctrl-z ctrl-p": "project_panel::ToggleFocus",
+      "ctrl-z o": "outline_panel::ToggleFocus",
+      "ctrl-z ctrl-o": "outline_panel::ToggleFocus",
+      "ctrl-z g": "git_panel::ToggleFocus",
+      "ctrl-z ctrl-g": "git_panel::ToggleFocus",
+      "ctrl-z ctrl-s": "outline::Toggle",
+      "ctrl-cmd-b": "workspace::ToggleLeftDock", // VS Code: toggle sidebar
+
+      "ctrl-x ctrl-c": "zed::Quit", // save-buffers-kill-terminal
+      "ctrl-x 5 0": "workspace::CloseWindow", // delete-frame
+      "ctrl-x 5 2": "workspace::NewWindow", // make-frame-command
+      "ctrl-x o": "workspace::ActivateNextPane", // other-window
+      "ctrl-x k": "pane::CloseActiveItem", // kill-buffer
+      "ctrl-x ctrl-k": "pane::CloseActiveItem", // kill-buffer
+      "ctrl-x 0": "pane::CloseActiveItem", // delete-window
+      "ctrl-x 1": "pane::CloseInactiveItems", // delete-other-windows
+      "ctrl-x 2": "pane::SplitDown", // split-window-below
+      "ctrl-x 3": "pane::SplitRight", // split-window-right
+      "ctrl-x ctrl-f": "file_finder::Toggle", // find-file
+      "ctrl-x s": "workspace::SaveAll", // save-some-buffers
+
+      // Editor tab navigation (VS Code: shift+cmd+]/[)
+      "shift-cmd-]": "pane::ActivateNextItem",
+      "shift-cmd-[": "pane::ActivatePreviousItem",
+
+      // Workspace (project) navigation
+      "ctrl-cmd-]": "multi_workspace::NextProject",
+      "ctrl-cmd-[": "multi_workspace::PreviousProject",
+    }
+  },
+  {
+    "context": "OutlinePanel && not_editing",
+    "bindings": {
+      "ctrl-g": "menu::Cancel",
+      "left": "outline_panel::CollapseSelectedEntry",
+      "right": "outline_panel::ExpandSelectedEntry",
+      "alt-copy": "workspace::CopyPath",
+      "ctrl-alt-c": "workspace::CopyPath",
+      "alt-shift-copy": "workspace::CopyRelativePath",
+      "alt-ctrl-shift-c": "workspace::CopyRelativePath",
+      "alt-ctrl-r": "outline_panel::RevealInFileManager",
+      "space": "outline_panel::OpenSelectedEntry",
+      "shift-down": "menu::SelectNext",
+      "shift-up": "menu::SelectPrevious",
+      "alt-enter": "editor::OpenExcerpts",
+      "ctrl-alt-enter": "editor::OpenExcerptsSplit",
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "ctrl-g": "menu::Cancel",
+      "tab": "project_panel::ExpandSelectedEntry",
+      "ctrl-b": "project_panel::CollapseSelectedEntry",
+      "ctrl-f": "project_panel::ExpandSelectedEntry",
+      "ctrl-w": "project_panel::Cut",
+      "alt-w": "project_panel::Copy",
+      "ctrl-y": "project_panel::Paste",
+      "ctrl-k": ["project_panel::Trash", { "skip_prompt": false }],
+      "alt-<": "menu::SelectFirst",
+      "alt->": "menu::SelectLast",
+      "ctrl-s": "project_panel::NewSearchInDirectory",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "ctrl-g": "workspace::ActivateNextPane",
+      "space": "project_panel::Open",
+      "tab": "project_panel::Open",
+      "enter": "project_panel::Open",
+      "r": "project_panel::Rename",
+      "n": "project_panel::NewFile",
+      "shift-n": "project_panel::NewDirectory",
+    },
+  },
+  {
+    // Terminal: pass through emacs keys to shell, add VS Code-style bindings
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-x ctrl-c": null, // pass to shell
+      "ctrl-x ctrl-f": null, // pass to shell
+      "ctrl-x ctrl-s": null, // pass to shell
+      "ctrl-x ctrl-w": null, // pass to shell
+      "ctrl-x s": null, // pass to shell
+      "ctrl-t": "terminal_panel::ToggleFocus", // VS Code: back to editor
+      "cmd-t": "workspace::NewTerminal", // VS Code: new terminal
+    },
+  },
+  {
+    "context": "ProjectSearchBar",
+
+    "bindings": {
+      "ctrl-g": "project_search::ToggleFocus",
+      "ctrl-s": "search::FocusSearch",
+      "ctrl-h": "search::ToggleReplace",
+      "ctrl-c x": "search::ToggleRegex",
+    },
+  },
+  {
+    "context": "ProjectSearchBar > Editor",
+    "bindings": {
+      "ctrl-p": "search::PreviousHistoryQuery",
+      "ctrl-n": "search::NextHistoryQuery",
+      "ctrl-c x": "search::ToggleRegex",
+    },
+  },
+  {
+    "context": "ProjectSearchBar && in_replace > Editor",
+    "bindings": {
+      "enter": "search::ReplaceNext",
+      "ctrl-enter": "search::ReplaceAll",
+      "alt-enter": "search::SelectAllMatches",
+    },
+  },
+  {
+    "context": "ProjectSearchView",
+    "bindings": {
+      "ctrl-g": "project_search::ToggleFocus",
+      "ctrl-h": "search::ToggleReplace",
+      "ctrl-c x": "search::ToggleRegex",
+    },
+  },
+  {
+    "context": "BufferSearchBar > Editor",
+    "bindings": {
+      "ctrl-s": "search::SelectNextMatch",
+      "ctrl-n": "search::SelectNextMatch",
+      "ctrl-r": "search::SelectPreviousMatch",
+      "ctrl-p": "search::SelectPreviousMatch",
+      "ctrl-g": "buffer_search::Dismiss",
+      "ctrl-h": "search::ToggleReplace",
+      "ctrl-c x": "search::ToggleRegex",
+      "ctrl-l": "search::ToggleSelection",
+      "alt-enter": "search::SelectAllMatches",
+    },
+  },
+  {
+    "context": "BufferSearchBar && in_replace > Editor",
+    "bindings": {
+      "enter": "search::ReplaceNext",
+      "ctrl-enter": "search::ReplaceAll",
+    },
+  },
+  {
+    "context": "BufferSearchBar && !in_replace > Editor",
+    "bindings": {
+      "alt-p": "search::PreviousHistoryQuery",
+      "alt-n": "search::NextHistoryQuery",
+    },
+  },
+  {
+    "context": "TabSwitcher",
+    "bindings": {
+      "ctrl-k": "tab_switcher::CloseSelectedItem",
+    },
+  },
+  {
+    "context": "Pane",
+    "bindings": {
+      "ctrl-alt-left": "pane::GoBack",
+      "ctrl-alt-right": "pane::GoForward",
+    },
+  },
+  {
+    "context": "PromptEditor",
+    "bindings": {
+      // "ctrl-[": "assistant::CyclePreviousInlineAssist", // action not found in current Zed
+      // "ctrl-]": "assistant::CycleNextInlineAssist", // action not found in current Zed
+      // "ctrl-alt-e": "agent::RemoveAllContext", // action not found in current Zed
+      "enter": "agent::NewThread",
+      "ctrl-c ctrl-a": "assistant::InlineAssist",
+    },
+  },
+  {
+    "context": "FileFinder || (FileFinder > Picker > Editor) || (FileFinder > Picker > menu)",
+    "bindings": {
+      "enter": "menu::Confirm",
+      "ctrl-1": "pane::SplitUp",
+      "ctrl-2": "pane::SplitDown",
+      "ctrl-3": "pane::SplitRight",
+      "ctrl-4": "pane::SplitLeft",
+    },
+  },
+]
