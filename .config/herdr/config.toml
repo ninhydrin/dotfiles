@@ -80,3 +80,17 @@ description = "reload config"
 
 [ui]
 agent_panel_sort = "spaces"
+# ペイン境界に検出されたエージェント名（Claude / Codex など）を表示
+show_agent_labels_on_pane_borders = true
+
+# エージェント種別ごとにサイドバーの表示行を定義し、
+# ディレクトリ名（workspace トークン）の文字色を種別ごとに変える。
+# canonical agent ID は `herdr agent list --json` の "agent" フィールド（claude/codex/kiro）。
+# デフォルト行 [["state_icon","workspace","tab"],["agent"]] を踏襲し workspace の fg のみ指定。
+[ui.sidebar.agents.rows_by_agent]
+# claude: ちょい薄めのオレンジ
+claude = [["state_icon", { token = "workspace", fg = "#e8bd94" }, "tab"], ["agent"]]
+# codex: 薄い水色
+codex = [["state_icon", { token = "workspace", fg = "#a5d8e6" }, "tab"], ["agent"]]
+# kiro: パープル
+kiro = [["state_icon", { token = "workspace", fg = "#a679d6" }, "tab"], ["agent"]]
