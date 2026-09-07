@@ -63,6 +63,13 @@ focus_pane_right = ["prefix+l", "shift+right"]
 
 # tmux: bind -n C-o でペインを順に切り替え
 cycle_pane_next = ["prefix+tab", "ctrl+o"]
+# 逆回り: ctrl+o と対称に prefix 不要の ctrl+shift+o を割り当て（herdr デフォルトは prefix+shift+tab）
+cycle_pane_previous = ["prefix+shift+tab", "ctrl+shift+o"]
+
+# エージェント移動（頻度が高いので prefix なしの直接キー）
+# vim 的な j=next / k=previous。cmd 単独より衝突しにくい ctrl+cmd を使う
+next_agent = "ctrl+cmd+j"
+previous_agent = "ctrl+cmd+k"
 
 # tmux: bind C-r source-file ~/.tmux.conf（設定リロード）
 [[keys.command]]
