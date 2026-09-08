@@ -52,7 +52,7 @@ test:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/test/test.sh
 
 update:
-	git pull origin master
+	git pull origin main
 
 install: update deploy init
 	@exec $$SHELL
