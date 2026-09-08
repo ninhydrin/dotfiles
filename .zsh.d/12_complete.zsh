@@ -2,8 +2,8 @@
 ## 初期化
 plugins=( zsh-completions)
 autoload -U compinit
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin �
-                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin �
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin \
+                             /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin \
                              /usr/local/git/bin
 compinit
 # dockerの補完
