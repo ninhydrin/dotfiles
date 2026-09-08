@@ -93,8 +93,8 @@ export NODE_PATH=$(pnpm root -g 2>/dev/null)
 
 
 alias k=kubectl
-alias headlamp='/Applications/Headlamp.app/Contents/Resources/headlamp-server -kubeconfig ~/.kube/config -in-cluster=false -html-static-dir /Applications/Headlamp.app/Contents/Resources/frontend -enable-dynamic-clusters -listen-addr localhost -port 4466'
-source <(kubectl completion zsh)
+[[ "$OSTYPE" == darwin* ]] && alias headlamp='/Applications/Headlamp.app/Contents/Resources/headlamp-server -kubeconfig ~/.kube/config -in-cluster=false -html-static-dir /Applications/Headlamp.app/Contents/Resources/frontend -enable-dynamic-clusters -listen-addr localhost -port 4466'
+command -v kubectl > /dev/null 2>&1 && source <(kubectl completion zsh)
 # complete -F __start_kubectl k
 export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
@@ -123,7 +123,11 @@ fi
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
+case ${OSTYPE} in
+  darwin*) export PNPM_HOME="$HOME/Library/pnpm" ;;
+  linux*)  export PNPM_HOME="$HOME/.local/share/pnpm" ;;
+  *)       export PNPM_HOME="$HOME/.local/share/pnpm" ;;
+esac
 # pnpm 11+ はグローバルbinが $PNPM_HOME/bin。旧レイアウトのshim（codex等）が
 # $PNPM_HOME 直下に残っているため両方をPATHに入れる
 case ":$PATH:" in
