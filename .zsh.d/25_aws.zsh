@@ -130,4 +130,10 @@ _aws_ec2_hosts() {
     compadd -d names "${ids[@]}"
 }
 
-(( $+commands[aws] )) && compdef _aws_ec2_hosts ssh
+# 【無効化】 compdef _aws_ec2_hosts ssh は ssh の補完を EC2 インスタンスID 専用に
+# 「丸ごと差し替える」ため、~/.ssh/config の Host エイリアス・known_hosts・
+# ssh のオプション補完がすべて消え、TAB のたびに aws ec2 describe-instances が
+# 走る（ネットワーク待ち）。aws CLI が未インストールの間だけ不発になっていた。
+# EC2 への接続は peco で選択する aws-ssh() を使うこと。
+# どうしても ssh に併合したい場合は _ssh_hosts 側に候補を足す形にする。
+# (( $+commands[aws] )) && compdef _aws_ec2_hosts ssh
