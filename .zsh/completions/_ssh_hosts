@@ -1,0 +1,74 @@
+#autoload
+
+# zsh 5.9 標準の _ssh_hosts (/usr/share/zsh/5.9/functions/_ssh_hosts) の改変版。
+#
+# 標準版は先頭で
+#     _combination -s '[:@]' my-accounts users-hosts ... hosts "$@" && return
+# を実行し、known_hosts / /etc/hosts 側に1件でも候補が見つかると early return する。
+# そのため ~/.ssh/config の Host エイリアスは「known_hosts と先頭が被らない場合だけ」
+# 補完される、という分かりにくい挙動になっていた。
+#   例) `ssh sp<TAB>` -> known_hosts の spark-436f.local にヒットして打ち切られ、
+#       config の spark1 / spark1_ip / spark1_tail / spark1_rescue が一切出ない
+#
+# ここでは順序を入れ替え、
+#   1. ~/.ssh/config の Host エイリアスを先に補完
+#   2. その後 early return せずに known_hosts / /etc/hosts 側も必ず追加
+# とする。config 解析部分は標準版から変更していない。
+
+local -a config_hosts
+local config
+integer ind ret=1
+
+# `ssh -F <file>` が指定されていればそちらを読む（標準版と同じ）
+if (( ind = ${words[(I)-F]} )); then
+  config=${~words[ind+1]} 2>/dev/null
+else
+  config="$HOME/.ssh/config"
+fi
+
+if [[ -r $config ]]; then
+  local key line host
+  local -a lines=("${(@f)$(<"$config")}") 2>/dev/null
+  local -a match_args
+  local idx=1
+  while (( idx <= $#lines )); do
+    IFS=$'=\t ' read -r key line <<<"${lines[idx]}"
+    if [[ "$key" == ((#i)match) ]]; then
+      match_args=(${(z)line})
+      while [[ $#match_args -ge 2 ]]; do
+	if [[ "${match_args[1]}" == (#i)(canonical|final|(|original)host) ]]; then
+	  key="Host"
+	  line="${match_args[2]//,/ }"
+	  break
+	fi
+	shift 2 match_args
+      done
+    fi
+    case "$key" in
+    ((#i)include)
+      lines[idx]=("${(@f)$(cd $HOME/.ssh; cat ${(z)~line})}") 2>/dev/null;;
+    ((#i)host(|name))
+      for host in ${(z)line}; do
+	case $host in
+	(*[*?]*) ;;
+	(*) config_hosts+=("$host") ;;
+	esac
+      done ;&
+    (*) (( ++idx ));;
+    esac
+  done
+  if (( ${#config_hosts} )); then
+    _wanted hosts expl 'ssh config host' \
+      compadd -M 'm:{a-zA-Z}={A-Za-z} r:|.=* r:|=*' "$@" $config_hosts && ret=0
+  fi
+fi
+
+# known_hosts / /etc/hosts / users-hosts スタイル由来（標準版の挙動をそのまま実行）
+if [[ "$IPREFIX" == *@ ]]; then
+  _combination -s '[:@]' my-accounts users-hosts "users=${IPREFIX/@}" hosts "$@" && ret=0
+else
+  _combination -s '[:@]' my-accounts users-hosts \
+    ${opt_args[-l]:+"users=${opt_args[-l]:q}"} hosts "$@" && ret=0
+fi
+
+return ret
