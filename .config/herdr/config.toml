@@ -55,6 +55,11 @@ next_tab = ["prefix+n", "prefix+ctrl+l"]
 navigate_workspace_down = ["down", "j", "ctrl+n"]
 navigate_workspace_up = ["up", "k", "ctrl+p"]
 
+# navigate mode 内では j/k をワークスペース選択に使うため、
+# デフォルトで j/k に割り当たっているペイン上下移動を無効化する
+navigate_pane_down = ""
+navigate_pane_up = ""
+
 # tmux: bind -n S-left/down/up/right（プレフィックス不要のペイン移動）
 focus_pane_left = ["prefix+h", "shift+left"]
 focus_pane_down = ["prefix+j", "shift+down"]
