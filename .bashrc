@@ -32,24 +32,16 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# npm の依存変更系サブコマンドを封じて pnpm に寄せる（.zshrcと同じ方針）。
-# 参照系(view/whoami/publish 等)は素通し。緊急時は `command npm ...` で回避可能。
+# npm/npx は全面禁止（.zshrcと同じ方針）。パッケージ管理は pnpm に一本化する。
 npm() {
-  case "$1" in
-    install|i|in|ins|isnt|add|ci|update|up|upgrade|uninstall|un|unlink|remove|rm|r|dedupe|ddp|link|ln)
-      echo "🚫 npm $1 は無効化されています。pnpm を使ってください:" >&2
-      echo "   pnpm $*" >&2
-      echo "   (どうしても npm が必要なら: command npm $*)" >&2
-      return 1
-      ;;
-  esac
-  command npm "$@"
+  echo "🚫 npm は禁止です。pnpm を使ってください:" >&2
+  echo "   pnpm $*" >&2
+  return 1
 }
 
 # npx の代替は pnpm dlx
 npx() {
-  echo "🚫 npx は無効化されています。pnpm dlx を使ってください:" >&2
+  echo "🚫 npx は禁止です。pnpm dlx を使ってください:" >&2
   echo "   pnpm dlx $*" >&2
-  echo "   (どうしても npx が必要なら: command npx $*)" >&2
   return 1
 }

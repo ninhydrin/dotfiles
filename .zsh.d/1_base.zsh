@@ -96,5 +96,5 @@ if [[ "$TERM" == "dumb" ]]; then
     unfunction preexec
     PS1='$ '
 fi
-export PATH=$PATH:$HOME/.nodebrew/current/bin
-export NODE_PATH=`npm root -g`
+# Node のバージョン管理は proto に一本化（nodebrew/fnm は使わない）
+# NODE_PATH は .zshrc で `pnpm root -g` から設定する（npmは使わない）

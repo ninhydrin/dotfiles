@@ -88,8 +88,8 @@ if [[ "$TERM" == "dumb" ]]; then
     unfunction preexec
     PS1='$ '
 fi
-export PATH=$PATH:$HOME/.nodebrew/current/bin
-export NODE_PATH=$(pnpm root -g 2>/dev/null)
+# Node のバージョン管理は proto に一本化（nodebrew/fnm は使わない）
+# NODE_PATH は PNPM_HOME 設定後（後述の pnpm ブロック）で設定する
 
 
 alias k=kubectl
@@ -113,12 +113,6 @@ alias ke="kssh"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-# fnm
-FNM_PATH="/opt/homebrew/opt/fnm/bin"
-if [ -d "$FNM_PATH" ]; then
-  eval "`fnm env`"
-fi
-
 # Added by Antigravity
 export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
@@ -134,6 +128,8 @@ case ":$PATH:" in
   *":$PNPM_HOME/bin:"*) ;;
   *) export PATH="$PNPM_HOME/bin:$PNPM_HOME:$PATH" ;;
 esac
+# グローバルモジュール解決先。PNPM_HOME 確定後に評価する必要がある
+export NODE_PATH=$(pnpm root -g 2>/dev/null)
 # pnpm end
 
 # bun completions
@@ -192,25 +188,19 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
-# npm の依存変更系サブコマンドを封じて pnpm に寄せる。
-# 参照系(view/whoami/publish 等)は素通し。緊急時は `command npm ...` で回避可能。
+# npm/npx は全面禁止。パッケージ管理は pnpm に一本化する。
+# .prototools から npm を外しているため ~/.proto/shims/npm も存在しない。
+# どうしても必要になったら `proto install npm` で一時的に戻す。
 npm() {
-  case "$1" in
-    install|i|in|ins|isnt|add|ci|update|up|upgrade|uninstall|un|unlink|remove|rm|r|dedupe|ddp|link|ln)
-      print -u2 "🚫 npm $1 は無効化されています。pnpm を使ってください:"
-      print -u2 "   pnpm ${@}"
-      print -u2 "   (どうしても npm が必要なら: command npm ${@})"
-      return 1
-      ;;
-  esac
-  command npm "$@"
+  print -u2 "🚫 npm は禁止です。pnpm を使ってください:"
+  print -u2 "   pnpm ${@}"
+  return 1
 }
 
 # npx の代替は pnpm dlx
 npx() {
-  print -u2 "🚫 npx は無効化されています。pnpm dlx を使ってください:"
+  print -u2 "🚫 npx は禁止です。pnpm dlx を使ってください:"
   print -u2 "   pnpm dlx ${@}"
-  print -u2 "   (どうしても npx が必要なら: command npx ${@})"
   return 1
 }
 
