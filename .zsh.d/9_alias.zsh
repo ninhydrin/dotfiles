@@ -115,11 +115,6 @@ function gfp() {
     command git fetch origin pull/$1/head:PR-$1
 }
 
-# claudeコマンドにタスクリストID（ディレクトリパスベース）を自動設定
-claude() {
-    # env -u ANTHROPIC_AUTH_TOKEN -u ANTHROPIC_BASE_URL -u CLAUDE_CODE_SUBAGENT_MODEL ANTHROPIC_MODEL=opus CLAUDE_CODE_TASK_LIST_ID=$(pwd | sed 's/^\///;s/\//-/g') command claude "$@"
-		CLAUDE_CODE_TASK_LIST_ID=$(pwd | sed 's/^\///;s/\//-/g') command claude "$@"
-}
 alias cc="IS_SANDBOX=1 claude --dangerously-skip-permissions"
 
 # tailscale
