@@ -22,8 +22,6 @@ esac
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
 
-alias claude-mem='${HOME}/.bun/bin/bun "${HOME}/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-
 # pnpm（.zshrcと同じ設定。グローバルbinは$PNPM_HOME/bin、旧shimが直下に残るため両方）
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in

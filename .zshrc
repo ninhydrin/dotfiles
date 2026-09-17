@@ -139,9 +139,6 @@ export NODE_PATH=$(pnpm root -g 2>/dev/null)
 # export BUN_INSTALL="$HOME/.bun"
 # export PATH="$BUN_INSTALL/bin:$PATH"
 
-alias claude-mem='${HOME}/.bun/bin/bun "${HOME}/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
-
-
 # tmux helper functions
 # セッション名をディレクトリ名にして新規セッションを作成
 # 既存セッションがある場合はナンバリングして新しいセッションを作成
