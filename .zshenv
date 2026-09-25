@@ -56,6 +56,9 @@ esac
 # uv
 export PATH=$HOME/.local/bin:$PATH
 
+# opencode (native binary, installed via https://opencode.ai/v2/install)
+export PATH="$HOME/.opencode/bin:$PATH"
+
 
 # if [ -d ${PYENV_ROOT} ]; then
     # export PATH=${PYENV_ROOT}/bin:$PATH
