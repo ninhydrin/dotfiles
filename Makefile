@@ -44,6 +44,10 @@ deploy:
 	@# ディレクトリごとではなく config.toml のみリンクする
 	@mkdir -p $(HOME)/.config/herdr
 	@ln -sfnv $(abspath .config/herdr/config.toml) $(HOME)/.config/herdr/config.toml
+	@# opencode はランタイムファイル（service.json・node_modules等）が ~/.config/opencode に置かれるため
+	@# .config/opencode ディレクトリごとではなく cli.json のみリンクする
+	@mkdir -p $(HOME)/.config/opencode
+	@ln -sfnv $(abspath .config/opencode/cli.json) $(HOME)/.config/opencode/cli.json
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh

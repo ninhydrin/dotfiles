@@ -1,0 +1,10 @@
+{
+  "keybinds": {
+    "command.palette.show": "alt+p",
+    "session.background": "alt+b",
+    "input.backspace": "backspace,shift+backspace,ctrl+h",
+    "input.move.up": "up,ctrl+p",
+    "input.move.down": "down,ctrl+n",
+    "input.move.left": "left,ctrl+b"
+  }
+}
