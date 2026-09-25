@@ -123,3 +123,8 @@ if [[ "$(uname -s)" == "Darwin" ]] && \
    [[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]]; then
   alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
+
+# opencode: インストールされている場合のみ oc エイリアスを定義する
+if (( $+commands[opencode] )); then
+  alias oc="opencode"
+fi
