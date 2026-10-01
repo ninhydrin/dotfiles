@@ -40,6 +40,10 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' completer \
     _oldlist _complete _match _ignored _approximate _prefix
 
+## ssh 系のホスト補完に known_hosts・/etc/hosts を使わない（~/.ssh/config の Host のみ）。
+### known_hosts には消えた EC2 インスタンス等が大量に残り、候補がノイズになるため。
+zstyle ':completion:*:(ssh|scp|sftp|rsync):*' hosts
+
 ## 補完候補をキャッシュする。
 zstyle ':completion:*' use-cache yes
 ## 詳細な情報を使う。
