@@ -110,30 +110,50 @@ lsec2 (){
     --filters "Name=instance-state-name,Values=running"
 }
 
-_aws_ec2_hosts() {
-    local -a ids names
+# プロファイルごとの EC2 候補キャッシュ（"i-xxx<TAB>Name" の改行区切り）
+typeset -gA _aws_ec2_hosts_cache _aws_ec2_hosts_cache_time
+_AWS_EC2_HOSTS_CACHE_TTL=300
 
-    while IFS=' ' read -r id name; do
+# running な EC2 を補完候補に追加する。ID でも Name タグでも前方一致し、
+# 確定時はインスタンスID に置き換える（~/.ssh/config の Host i-* で SSM 接続するため）
+_aws_ec2_hosts() {
+    local key="${AWS_PROFILE:-default}" out
+    if (( EPOCHSECONDS - ${_aws_ec2_hosts_cache_time[$key]:-0} > _AWS_EC2_HOSTS_CACHE_TTL )); then
+        out="$(
+            aws ec2 describe-instances --output json \
+                --filters 'Name=instance-state-name,Values=running' 2>/dev/null |
+                jq -r '.Reservations[].Instances[] |
+                    "\(.InstanceId)\t\((.Tags // [] | map(select(.Key=="Name"))[0].Value) // "-")"'
+        )" || return 1
+        _aws_ec2_hosts_cache[$key]=$out
+        _aws_ec2_hosts_cache_time[$key]=$EPOCHSECONDS
+    fi
+
+    local line id name
+    local -a ids descs
+    for line in "${(f)_aws_ec2_hosts_cache[$key]}"; do
+        id=${line%%$'\t'*} name=${line#*$'\t'}
+        [[ $id == "$PREFIX"* || $name == "$PREFIX"* ]] || continue
         ids+=("$id")
-        names+=("$name")
-    done < <(
-        aws ec2 describe-instances --output json |
-            jq -r '
-            .Reservations[].Instances[] |
-            .InstanceId as $id |
-            (
-              (.Tags // [] | map(select(.Key=="Name"))[0].Value) // "-"
-            ) as $name |
-            "\($id) \($name)"
-            '
-        )
-    compadd -d names "${ids[@]}"
+        descs+=("$name  ($id)")
+    done
+    (( ${#ids} )) || return 1
+    # -U: 入力済みの名前を ID で置き換えるため、PREFIX との照合を compadd にさせない
+    local expl
+    _wanted ec2-instances expl 'EC2 instance' compadd -U -d descs "$@" -a ids
 }
 
-# 【無効化】 compdef _aws_ec2_hosts ssh は ssh の補完を EC2 インスタンスID 専用に
-# 「丸ごと差し替える」ため、~/.ssh/config の Host エイリアス・known_hosts・
-# ssh のオプション補完がすべて消え、TAB のたびに aws ec2 describe-instances が
-# 走る（ネットワーク待ち）。aws CLI が未インストールの間だけ不発になっていた。
-# EC2 への接続は peco で選択する aws-ssh() を使うこと。
-# どうしても ssh に併合したい場合は _ssh_hosts 側に候補を足す形にする。
-# (( $+commands[aws] )) && compdef _aws_ec2_hosts ssh
+# ssh の既存補完（~/.ssh/config の Host・known_hosts）に EC2 インスタンスを追加する。
+# compdef で丸ごと差し替えると既存補完が消えるため、_ssh_hosts をラップする。
+# 環境ごとに opt-in: .zsh.d/local/*.zsh（git 管理外）で aws-ec2-ssh-completion を呼ぶ。
+aws-ec2-ssh-completion() {
+    (( $+commands[aws] && $+commands[jq] )) || return
+    (( $+functions[_ssh_hosts_orig] )) && return
+    zmodload -F zsh/datetime p:EPOCHSECONDS
+    autoload +X _ssh_hosts
+    functions -c _ssh_hosts _ssh_hosts_orig
+    _ssh_hosts() {
+        _aws_ec2_hosts "$@"
+        _ssh_hosts_orig "$@"
+    }
+}
