@@ -1,4 +1,3 @@
-alias e="emacs"
 alias imgcat='~/.imgcat'
 alias imgls='~/.imgls'
 # alias chrome='google-chrome'
@@ -20,8 +19,6 @@ alias sl='la'
 alias l='la'
 alias al='la'
 
-### -nw: ターミナル内でEmacsを起動する。
-alias enw="emacs -nw"
 alias x="exit"
 
 ## 完全に削除。
