@@ -20,9 +20,6 @@ alias sl='la'
 alias l='la'
 alias al='la'
 
-### brew doctor時のpyenvのwarning対策
-alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:?/} brew"
-
 ### -nw: ターミナル内でEmacsを起動する。
 alias enw="emacs -nw"
 alias x="exit"
@@ -48,8 +45,6 @@ function tensorboard-docker(){
 }
 
 alias smi="nvidia-smi"
-# brew のpyenvでのwarning対策
-alias brew="env PATH=${PATH/\/Users\/${USER}\/\.pyenv\/shims:/} brew"
 
 alias rmds="find . -name '*.DS_Store' -type f -ls -delete"
 
