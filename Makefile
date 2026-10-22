@@ -34,7 +34,7 @@ deploy:
 		echo '==> Deploying .config directories...'; \
 		mkdir -p $(HOME)/.config; \
 		for dir in .config/*; do \
-			if [ -d "$$dir" ] && [ "$$dir" != ".config/herdr" ]; then \
+			if [ -d "$$dir" ] && [ "$$dir" != ".config/herdr" ] && [ "$$dir" != ".config/uv" ]; then \
 				target=$$(basename "$$dir"); \
 				ln -sfnv $(abspath $$dir) $(HOME)/.config/$$target; \
 			fi; \
@@ -48,6 +48,10 @@ deploy:
 	@# .config/opencode ディレクトリごとではなく cli.json のみリンクする
 	@mkdir -p $(HOME)/.config/opencode
 	@ln -sfnv $(abspath .config/opencode/cli.json) $(HOME)/.config/opencode/cli.json
+	@# uv は ~/.config/uv にインストール記録（uv-receipt.json）が置かれるため
+	@# .config/uv ディレクトリごとではなく uv.toml のみリンクする
+	@mkdir -p $(HOME)/.config/uv
+	@ln -sfnv $(abspath .config/uv/uv.toml) $(HOME)/.config/uv/uv.toml
 
 init:
 	@DOTPATH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh

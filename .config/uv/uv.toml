@@ -1,0 +1,2 @@
+exclude-newer = "1 week"
+exclude-newer-package = {torch = false, torchvision = false}
