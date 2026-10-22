@@ -7,8 +7,8 @@
 # を実行し、known_hosts / /etc/hosts 側に1件でも候補が見つかると early return する。
 # そのため ~/.ssh/config の Host エイリアスは「known_hosts と先頭が被らない場合だけ」
 # 補完される、という分かりにくい挙動になっていた。
-#   例) `ssh sp<TAB>` -> known_hosts の spark-436f.local にヒットして打ち切られ、
-#       config の spark1 / spark1_ip / spark1_tail / spark1_rescue が一切出ない
+#   例) `ssh my<TAB>` -> known_hosts の myhost.local にヒットして打ち切られ、
+#       config の myhost / myhost_ip が一切出ない
 #
 # ここでは順序を入れ替え、
 #   1. ~/.ssh/config の Host エイリアスを先に補完
