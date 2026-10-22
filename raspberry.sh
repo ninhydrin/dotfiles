@@ -8,7 +8,7 @@ su hoge
 cd
 git clone http://github.com/ninhydrin/dotfiles
 cd dotfiles
-make deploy
+./install.sh deploy
 cd
 sudo apt-get update
 sudo apt-get upgrade

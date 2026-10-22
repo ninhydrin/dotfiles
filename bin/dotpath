@@ -70,7 +70,7 @@ dot() {
             return
             ;;
         "-c"|"--clean")
-            make --file="${DOTPATH:?not set}"/Makefile clean
+            "${DOTPATH:?not set}"/install.sh clean
             return $?
             ;;
         "-f"|"--file")

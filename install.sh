@@ -64,6 +64,7 @@ cmd_deploy() {
   echo '==> Deploying .config directories...'
   run mkdir -p "$HOME/.config"
   for dir in "$DOTPATH"/.config/*/; do
+    [ -d "$dir" ] || continue
     name="$(basename "$dir")"
     file="$(config_file_only "$name")"
     if [ -n "$file" ]; then
@@ -80,6 +81,11 @@ cmd_update() {
 }
 
 cmd_clean() {
+  # リポジトリ以外（/ や $HOME）を消さないよう確認する
+  if [ ! -f "$DOTPATH/install.sh" ] || [ "$DOTPATH" = "$HOME" ]; then
+    echo "Refusing to clean: unexpected DOTPATH=$DOTPATH" >&2
+    exit 1
+  fi
   echo 'Remove dot files in your home directory...'
   local f
   while read -r f; do
@@ -106,7 +112,7 @@ case "${1:-help}" in
   install)
     cmd_update
     cmd_deploy
-    exec "$SHELL"
+    [ "${DRY_RUN:-}" = 1 ] || exec "$SHELL"
     ;;
   help) cmd_help ;;
   *)
