@@ -38,11 +38,7 @@ export PATH="$CARGO_DIR/bin:$PATH"
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 case ${OSTYPE} in
     darwin*)
-        export RBENV_ROOT=/usr/local/var/rbenv
         export LSCOLORS=xefxcxdxbxegedabagacad
-        ;;
-    linux*)
-        export RBENV_ROOT=${HOME}/.rbenv
         ;;
 esac
 
@@ -52,11 +48,6 @@ export PATH=$HOME/.local/bin:$PATH
 # opencode (native binary, installed via https://opencode.ai/v2/install)
 export PATH="$HOME/.opencode/bin:$PATH"
 
-
-# if [ -d ${RBENV_ROOT} ]; then
-    # export PATH=${RBENV_ROOT}/bin:$PATH
-    # eval "$(rbenv init -)"
-# fi
 
 # export PATH=$HOME/.nodebrew/current/bin:$PATH
 

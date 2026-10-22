@@ -2,12 +2,7 @@
 
 case ${OSTYPE} in
     darwin*)
-        export RBENV_ROOT=/usr/local/var/rbenv
         export LSCOLORS=xefxcxdxbxegedabagacad
-        ;;
-    linux*)
-        export RBENV_ROOT=${HOME}/.rbenv
-
         ;;
 esac
 
