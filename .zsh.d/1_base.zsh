@@ -1,6 +1,5 @@
 
 # -*- sh -*-
-# git clone https://github.com/syl20bnr/spacemacs .emacs.d
 
 # brew tap homebrew/science;brew install openblas # openblas for numpy
 # conda install -c conda-forge numpy
@@ -8,7 +7,6 @@ export PATH="/usr/local/opt/ncurses/bin:$PATH"
 
 case ${OSTYPE} in
     darwin*)
-        # function emacs () { /Applications/Emacs.app/Contents/MacOS/Emacs $1 &}
         alias imgcat='~/.imgcat'
         alias imgls='~/.imgls'
         # alias chrome='google-chrome'
@@ -16,9 +14,6 @@ case ${OSTYPE} in
         # alias google-chrome='open -a Google\ Chrome'
         alias lsusb='system_profiler SPUSBDataType'
             ;;
-    linux*)
-        # function emacs () { /usr/bin/emacs $1 &}
-        ;;
 esac
 
 #任意のエイリアス
