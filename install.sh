@@ -4,7 +4,7 @@
 set -euo pipefail
 
 DOTPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-EXCLUSIONS=(.gitmodules .config)
+EXCLUSIONS=(.gitmodules .config .zsh)
 # git 管理外だが、存在すればリンクするマシン固有・私的なファイル
 LOCAL_FILES=(.gitconfig.local .gitconfig-private .zsh_history)
 
@@ -74,6 +74,13 @@ cmd_deploy() {
   run mkdir -p "$HOME/.proto"
   link "$DOTPATH/.prototools" "$HOME/.proto/.prototools"
   link "$DOTPATH/my_env_files" "$HOME/.env.d"
+
+  # ~/.zsh/completions には Docker.app の補完などマシン固有のファイルも置かれるため
+  # ディレクトリごとではなく、dotfiles の補完ファイルを1つずつリンクする
+  run mkdir -p "$HOME/.zsh/completions"
+  while read -r f; do
+    link "$DOTPATH/$f" "$HOME/$f"
+  done < <(git -C "$DOTPATH" ls-files .zsh/completions)
 
   # .config は丸ごとsymlinkせず、サブディレクトリ単位にリンクする
   # （丸ごとsymlinkすると ~/.config が無い新規マシンで個別リンクが自己参照になり ln が失敗する）
