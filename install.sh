@@ -4,7 +4,9 @@
 set -euo pipefail
 
 DOTPATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-EXCLUSIONS=(.DS_Store .git .gitmodules .travis.yml .Trash .config)
+EXCLUSIONS=(.gitmodules .config)
+# git 管理外だが、存在すればリンクするマシン固有・私的なファイル
+LOCAL_FILES=(.gitconfig.local .gitconfig-private .zsh_history)
 
 # ランタイムファイルが同じディレクトリに置かれるため、ディレクトリごとではなく
 # 指定したファイルだけを ~/.config/<dir>/ にリンクするもの
@@ -28,17 +30,35 @@ run() {
   fi
 }
 
+# 既に実ファイル・実ディレクトリがある場所は上書きせず飛ばす
+# （ln -sfn は実ディレクトリの中にリンクを作ってしまうため）
+link() {
+  local src="$1" dst="$2"
+  if [ -e "$dst" ] && [ ! -L "$dst" ]; then
+    echo "==> Skip: $dst is not a symlink" >&2
+    return 0
+  fi
+  run ln -sfnv "$src" "$dst"
+}
+
 # ホームにリンクするリポジトリ直下のファイル（.config は deploy 内で個別に扱う）
+# 作業用の未追跡ファイルを巻き込まないよう、git 管理下のものと LOCAL_FILES に限る
 dotfiles() {
   local f ex
-  shopt -s nullglob
-  for f in "$DOTPATH"/.??* "$DOTPATH"/bin; do
-    f="${f##*/}"
+  while read -r f; do
+    case "$f" in
+      .??* | bin) ;;
+      *) continue ;;
+    esac
     for ex in "${EXCLUSIONS[@]}"; do
       [ "$f" = "$ex" ] && continue 2
     done
     echo "$f"
+  done < <(git -C "$DOTPATH" ls-files | cut -d/ -f1 | sort -u)
+  for f in "${LOCAL_FILES[@]}"; do
+    [ -e "$DOTPATH/$f" ] && echo "$f"
   done
+  return 0
 }
 
 cmd_list() {
@@ -49,11 +69,11 @@ cmd_deploy() {
   echo '==> Start to deploy dotfiles to home directory.'
   local f dir name file
   while read -r f; do
-    run ln -sfnv "$DOTPATH/$f" "$HOME/$f"
+    link "$DOTPATH/$f" "$HOME/$f"
   done < <(dotfiles)
   run mkdir -p "$HOME/.proto"
-  run ln -sfnv "$DOTPATH/.prototools" "$HOME/.proto/.prototools"
-  run ln -sfnv "$DOTPATH/my_env_files" "$HOME/.env.d"
+  link "$DOTPATH/.prototools" "$HOME/.proto/.prototools"
+  link "$DOTPATH/my_env_files" "$HOME/.env.d"
 
   # .config は丸ごとsymlinkせず、サブディレクトリ単位にリンクする
   # （丸ごとsymlinkすると ~/.config が無い新規マシンで個別リンクが自己参照になり ln が失敗する）
@@ -63,17 +83,15 @@ cmd_deploy() {
   fi
   echo '==> Deploying .config directories...'
   run mkdir -p "$HOME/.config"
-  for dir in "$DOTPATH"/.config/*/; do
-    [ -d "$dir" ] || continue
-    name="$(basename "$dir")"
+  while read -r name; do
     file="$(config_file_only "$name")"
     if [ -n "$file" ]; then
       run mkdir -p "$HOME/.config/$name"
-      run ln -sfnv "$DOTPATH/.config/$name/$file" "$HOME/.config/$name/$file"
+      link "$DOTPATH/.config/$name/$file" "$HOME/.config/$name/$file"
     else
-      run ln -sfnv "$DOTPATH/.config/$name" "$HOME/.config/$name"
+      link "$DOTPATH/.config/$name" "$HOME/.config/$name"
     fi
-  done
+  done < <(git -C "$DOTPATH" ls-files .config | cut -d/ -f2 | sort -u)
 }
 
 cmd_update() {
