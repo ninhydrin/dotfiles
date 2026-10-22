@@ -48,8 +48,8 @@ copy_mode = ["prefix+[", "prefix+v", "prefix+ctrl+v"]
 # tmux: bind C-t new-window（prefix+c は herdr デフォルト）
 new_tab = ["prefix+c", "prefix+ctrl+t", "prefix+t"]
 # tmux: bind -r C-h / C-l で前後のウィンドウ移動
-previous_tab = ["prefix+p", "prefix+ctrl+h"]
-next_tab = ["prefix+n", "prefix+ctrl+l"]
+previous_tab = ["prefix+p", "prefix+ctrl+h", "cmd+["]
+next_tab = ["prefix+n", "prefix+ctrl+l", "cmd+]"]
 
 # ワークスペースピッカー内の移動に j/k を追加
 navigate_workspace_down = ["down", "j", "ctrl+n"]
