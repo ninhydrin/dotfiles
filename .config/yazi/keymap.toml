@@ -1,0 +1,10 @@
+[mgr]
+prepend_keymap = [
+  { on = "<C-p>", run = "arrow -1", desc = "Up" },
+  { on = "<C-n>", run = "arrow 1",  desc = "Down" },
+  { on = "<C-b>", run = "leave",    desc = "Leave directory" },
+  { on = "<C-f>", run = "enter",    desc = "Enter directory" },
+
+  # 右の tmux pane でファイルを開く
+  { on = "o", run = "shell -- ~/.config/yazi/scripts/open-in-right-pane.sh %h", desc = "Open in right tmux pane" },
+]

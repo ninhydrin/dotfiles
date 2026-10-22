@@ -1,4 +1,10 @@
-# yazi file manager configuration
-# Single column display for sidebar use
 [mgr]
-ratio = [0, 1, 0]
+# 3カラムの幅比率: [親ディレクトリ, カレント, プレビュー]
+# 最初の値を0にすると親ディレクトリのペインが非表示になる
+ratio = [0, 2, 3]
+
+# 隠しファイル・フォルダ（ドットファイル）を常に表示する
+show_hidden = true
+
+# カスタムlinemode: サイズ + 作成日時を表示（init.luaで定義）
+linemode = "size_and_btime"
