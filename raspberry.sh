@@ -45,9 +45,6 @@ sudo vim /etc/samba/smb.conf
 # sambaに接続するユーザーにパスワードを設定
 sudo smbpasswd -a hoge
 
-# pyenv
-sudo apt install -y git openssl libssl-dev libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
-git clone https://github.com/yyuu/pyenv.git ~/.pyenv
 # vnc
 # 参考
 # https://qiita.com/karaage0703/items/9650e7aeceb6e1b81612

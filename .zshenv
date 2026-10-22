@@ -12,7 +12,6 @@ export GOPATH=~/dev/go-workspace
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 export DYLD_FALLBACK_LIBRARY_PATH=$ANACONDA_HOME/lib:/usr/local/lib:/usr/lib
-export DYLD_FALLBACK_LIBRARY_PATH=~/.pyenv/versions/anaconda-2.3.0/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
 export ZSHHOME="${HOME}/.zsh.d"
 
@@ -39,16 +38,10 @@ export PATH="$CARGO_DIR/bin:$PATH"
 export CARGO_NET_GIT_FETCH_WITH_CLI=true
 case ${OSTYPE} in
     darwin*)
-        # export PYENV_ROOT=/usr/local/var/pyenv
-        export PYENV_ROOT=${HOME}/.pyenv
-        export PYENV_VIRTUALENV_DISABLE_PROMPT=1
-        # if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-        # if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
         export RBENV_ROOT=/usr/local/var/rbenv
         export LSCOLORS=xefxcxdxbxegedabagacad
         ;;
     linux*)
-        export PYENV_ROOT=${HOME}/.pyenv
         export RBENV_ROOT=${HOME}/.rbenv
         ;;
 esac
@@ -59,12 +52,6 @@ export PATH=$HOME/.local/bin:$PATH
 # opencode (native binary, installed via https://opencode.ai/v2/install)
 export PATH="$HOME/.opencode/bin:$PATH"
 
-
-# if [ -d ${PYENV_ROOT} ]; then
-    # export PATH=${PYENV_ROOT}/bin:$PATH
-    # export PYTHONPATH=./pyenv/python:$PYTHONPATH
-    # eval "$(pyenv init -)"
-# fi
 
 # if [ -d ${RBENV_ROOT} ]; then
     # export PATH=${RBENV_ROOT}/bin:$PATH
