@@ -9,6 +9,10 @@ __pycache__
 .zsh_variables/*
 .zsh_history
 .claude.json
+# Claude credentials, transcripts, caches and local settings stay on this PC.
+# Keep reusable subagent definitions under version control.
+/.claude/*
+!/.claude/agents/
 claude_desktop_config.json
 .env.d
 skills
