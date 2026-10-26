@@ -1,6 +1,6 @@
 # lclaude: ローカルの LiteLLM 経由で Claude Code を起動する。
-# Usage: lclaude / lclaude --continue / lclaude -p '質問'
-# モデル名 openai、接続先 127.0.0.1:4000 の構成を使う。
+# Usage: lclaude / lclaude --model gpt-6-astra / lclaude --resume
+# 接続先 127.0.0.1:4000。既定は Sol。再開時も --model でモデルを指定できる。
 # LITELLM_MASTER_KEY がなければ、4000 番ポートを公開する Compose の
 # litellm サービスからキーを受け取る。キーはファイルに保存しない。
 function lclaude() (
@@ -30,11 +30,18 @@ function lclaude() (
   unset CLAUDE_CODE_USE_BEDROCK CLAUDE_CODE_USE_VERTEX CLAUDE_CODE_USE_FOUNDRY
   export ANTHROPIC_BASE_URL='http://127.0.0.1:4000'
   export ANTHROPIC_AUTH_TOKEN="$litellm_key"
-  export ANTHROPIC_MODEL=openai
-  export ANTHROPIC_DEFAULT_FABLE_MODEL=openai
-  export ANTHROPIC_DEFAULT_OPUS_MODEL=openai
-  export ANTHROPIC_DEFAULT_SONNET_MODEL=openai
-  export ANTHROPIC_DEFAULT_HAIKU_MODEL=openai
-  export CLAUDE_CODE_SUBAGENT_MODEL=openai
-  command claude --model openai "$@"
+  unset ANTHROPIC_MODEL CLAUDE_CODE_SUBAGENT_MODEL
+  export ANTHROPIC_DEFAULT_FABLE_MODEL=gpt-6-astra
+  export ANTHROPIC_DEFAULT_FABLE_MODEL_NAME='GPT-6 Astra'
+  export ANTHROPIC_DEFAULT_OPUS_MODEL=gpt-6-astra
+  export ANTHROPIC_DEFAULT_OPUS_MODEL_NAME='GPT-6 Astra'
+  export ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-6.1-sol
+  export ANTHROPIC_DEFAULT_SONNET_MODEL_NAME='GPT-6.1 Sol'
+  export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-6-luna
+  export ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME='GPT-6 Luna'
+  # GPT のモデルは再開時に自動復元されないため、既定を Sol にそろえる。
+  # ユーザー設定の Claude 用モデル一覧も、この起動だけ GPT 用に切り替える。
+  command claude --settings \
+    '{"model":"gpt-6.1-sol","availableModels":["gpt-6.1-sol","gpt-6-astra","gpt-6-luna","openai"]}' \
+    "$@"
 )
