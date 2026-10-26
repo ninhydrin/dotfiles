@@ -39,6 +39,10 @@ function lclaude() (
   export ANTHROPIC_DEFAULT_SONNET_MODEL_NAME='GPT-6.1 Sol'
   export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-6-luna
   export ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME='GPT-6 Luna'
+  # auto モードの安全判定は Claude Code から Sol に依頼する。
+  # ChatGPT 経由で使えないサーバー側判定を要求せず、従来方式を維持する。
+  export CLAUDE_CODE_AUTO_MODE_SERVER=0
+  export CLAUDE_CODE_AUTO_MODE_MODEL=gpt-6.1-sol
   # GPT のモデルは再開時に自動復元されないため、既定を Sol にそろえる。
   # ユーザー設定の Claude 用モデル一覧も、この起動だけ GPT 用に切り替える。
   command claude --settings \
