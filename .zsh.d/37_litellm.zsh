@@ -61,16 +61,16 @@ sys.stdout.write(key)
   export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-6-luna
   export ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME='GPT-6 Luna'
   # 未知のモデルの200K制限を補正。全モデル・サブエージェントに適用する。
-  # 272KはローカルCodexカタログの共通の既定容量。約5%を余裕として残す。
+  # 既定は1M。自動要約は95%で開始し、応答などに余裕を残す。
   # 必要なら LCLAUDE_CONTEXT_TOKENS=500000 lclaude のように起動する。
-  # 上限872Kは確認済みカタログ値であり、長文の実送信を保証するものではない。
-  local context_tokens="${LCLAUDE_CONTEXT_TOKENS:-272000}"
-  if [[ "$context_tokens" != <-> || ${#context_tokens} -gt 6 ]]; then
-    print -u2 'lclaude: LCLAUDE_CONTEXT_TOKENSには200000〜872000の整数を指定してください。'
+  # これはクライアントの管理設定。接続先での長文上限は別途検証が必要。
+  local context_tokens="${LCLAUDE_CONTEXT_TOKENS:-1000000}"
+  if [[ "$context_tokens" != <-> || ${#context_tokens} -gt 7 ]]; then
+    print -u2 'lclaude: LCLAUDE_CONTEXT_TOKENSには200000〜1000000の整数を指定してください。'
     return 1
   fi
-  if (( context_tokens < 200000 || context_tokens > 872000 )); then
-    print -u2 'lclaude: LCLAUDE_CONTEXT_TOKENSには200000〜872000の整数を指定してください。'
+  if (( context_tokens < 200000 || context_tokens > 1000000 )); then
+    print -u2 'lclaude: LCLAUDE_CONTEXT_TOKENSには200000〜1000000の整数を指定してください。'
     return 1
   fi
   export CLAUDE_CODE_MAX_CONTEXT_TOKENS="$context_tokens"
