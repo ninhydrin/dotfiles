@@ -79,6 +79,6 @@ sys.stdout.write(key)
   export CLAUDE_CODE_AUTO_MODE_SERVER=0
   export CLAUDE_CODE_AUTO_MODE_MODEL=gpt-6.1-sol
   command claude --settings \
-    '{"model":"gpt-6.1-sol","availableModels":["gpt-6.1-sol","gpt-6-astra","gpt-6-luna","openai"],"remoteControlAtStartup":false}' \
+    '{"model":"gpt-6.1-sol","availableModels":["gpt-6.1-sol","gpt-6-astra","gpt-6.1-terra","gpt-6-luna","openai"],"remoteControlAtStartup":false}' \
     "$@"
 )
