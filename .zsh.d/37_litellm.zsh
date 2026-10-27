@@ -60,6 +60,9 @@ sys.stdout.write(key)
   export ANTHROPIC_DEFAULT_SONNET_MODEL_NAME='GPT-6.1 Sol'
   export ANTHROPIC_DEFAULT_HAIKU_MODEL=gpt-6-luna
   export ANTHROPIC_DEFAULT_HAIKU_MODEL_NAME='GPT-6 Luna'
+  # availableModelsの許可に加え、/modelの選択肢にもTerraを表示する。
+  export ANTHROPIC_CUSTOM_MODEL_OPTION=gpt-6.1-terra
+  export ANTHROPIC_CUSTOM_MODEL_OPTION_NAME='GPT-6.1 Terra'
   # 未知のモデルの200K制限を補正。全モデル・サブエージェントに適用する。
   # 既定は1M。自動要約は95%で開始し、応答などに余裕を残す。
   # 必要なら LCLAUDE_CONTEXT_TOKENS=500000 lclaude のように起動する。
