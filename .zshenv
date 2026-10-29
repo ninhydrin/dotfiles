@@ -51,9 +51,6 @@ export PATH="$HOME/.opencode/bin:$PATH"
 
 # export PATH=$HOME/.nodebrew/current/bin:$PATH
 
-# ZPLUG
-export ZPLUG_HOME=${HOME}/dotfiles/.zplug
-
 export ZSH_VARIABLES=${HOME}/.zsh_variables
 export PATH="/opt/homebrew/bin:$PATH"
 

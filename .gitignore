@@ -5,7 +5,6 @@
 *#
 %*
 __pycache__
-.zplug
 .zsh_variables/*
 .zsh_history
 .claude.json
