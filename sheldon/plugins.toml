@@ -36,10 +36,6 @@ apply = ["defer"]
 # [plugins."z.lua"]
 # github = "skywind3000/z.lua"
 
-[plugins.enhancd]
-github = "b4b4r07/enhancd"
-apply = ["defer"]
-
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 apply = ["defer"]
